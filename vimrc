@@ -87,3 +87,21 @@ set statusline+=)
 " Line and column position and counts.
 set statusline+=\ (line\ %l\/%L,\ col\ %03c)
 " #########################################################################
+
+
+function! Setup()
+python << endpython
+import os, vim
+
+HOME = os.environ["HOME"]
+
+# Create the necessary directories for tempfiles, etc
+for dirname in ["undodir", "backupdir", "directory"]:
+  directory = vim.eval("&"+dirname)
+  try: os.makedirs(directory)
+  except: pass
+
+endpython
+endfunction
+autocmd VimEnter * call Setup()
+
