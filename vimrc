@@ -31,6 +31,13 @@ set fillchars=diff:⣿
 set autoread                   "Detect when open files have changed and reopen them
 set title
 set formatoptions=qn1          "See :help fo-table for options here
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=10
+set number
+
+syntax on
 
 "Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>=" 
@@ -105,3 +112,4 @@ endpython
 endfunction
 autocmd VimEnter * call Setup()
 
+command -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | pbcopy
