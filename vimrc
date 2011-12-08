@@ -16,6 +16,8 @@ filetype off                   " required!
 
 filetype plugin indent on     " required! 
 
+syntax on
+filetype on
 set encoding=utf-8
 set autochdir
 set ruler
@@ -51,6 +53,8 @@ set grepprg=grep\ -nH\ $*
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='pdflatex'
+let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_ViewRule_pdf='evince'
 
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 
@@ -74,9 +78,7 @@ set statusline=%f    " Path.
 set statusline+=%m   " Modified flag.
 set statusline+=%r   " Readonly flag.
 set statusline+=%w   " Preview window flag.
-
 set statusline+=\    " Space.
-
 set statusline+=%=   " Right align.
 
 " File format, encoding and type.  Ex: "(unix/utf-8/python)"
@@ -90,21 +92,42 @@ set statusline+=)
 
 " Line and column position and counts.
 set statusline+=\ (line\ %l\/%L,\ col\ %03c)
+
+" #########################################################################
+" #########################################################################
+" Miscellaneous Functions
+" #########################################################################
 " #########################################################################
 
+" #########################################################################
+" OpenOther() - Type ",o" to switch between whatever/include/wherever/myfile.H
+"             and whatever/src/wherever/myfile.C
+function! OpenOther()
+  if expand("%:e") == "C"
+    exe "tabe" fnameescape(expand("%:p:r:s?src?include?").".H")
+  elseif expand("%:e") == "H"
+    exe "tabe" fnameescape(expand("%:p:r:s?include?src?").".C")
+  endif
+endfunction
+nmap ,o :call OpenOther()<CR>
 
+" #########################################################################
+" Sprunge() - type :Sprunge to send the selected lines to sprunge.us.
+"           The sprunge URL will end up in your clipboard
+command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | xclip
+
+
+" #########################################################################
+" Setup() - Miscellaneous setup for this vimrc
 function! Setup()
 python << endpython
 import os, vim
-
 HOME = os.environ["HOME"]
-
 # Create the necessary directories for tempfiles, etc
 for dirname in ["undodir", "backupdir", "directory"]:
   directory = vim.eval("&"+dirname)
   try: os.makedirs(directory)
   except: pass
-
 endpython
 endfunction
 autocmd VimEnter * call Setup()
