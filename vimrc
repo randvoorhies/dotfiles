@@ -9,6 +9,10 @@ filetype off                   " required!
  " required! 
  Bundle 'gmarik/vundle'
  Bundle 'Arduino-syntax-file'
+ Bundle 'python.vim'
+ Bundle 'pythoncomplete'
+ Bundle 'pyflakes.vim'
+ Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
 
 filetype plugin indent on     " required! 
 
