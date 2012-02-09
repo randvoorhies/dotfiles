@@ -102,6 +102,7 @@ set statusline+=\ (line\ %l\/%L,\ col\ %03c)
 " #########################################################################
 " OpenOther() - Type ",o" to switch between whatever/include/wherever/myfile.H
 "             and whatever/src/wherever/myfile.C
+if has('python')
 function! OpenOther()
   if expand("%:e") == "C"
     exe "tabe" fnameescape(expand("%:p:r:s?src?include?").".H")
@@ -110,6 +111,7 @@ function! OpenOther()
   endif
 endfunction
 nmap ,o :call OpenOther()<CR>
+endif
 
 " #########################################################################
 " Sprunge() - type :Sprunge to send the selected lines to sprunge.us.
@@ -118,7 +120,27 @@ command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://spr
 
 
 " #########################################################################
+" AlignEq() - type ",p" to align a block of equals signs
+if has('python')
+function! AlignEq()
+python << endpython
+  import vim
+  maxspaces = 0
+  for line in vim.current.range:
+    maxspaces = max(maxspaces, line.find('='))
+
+  for index, line in enumerate(vim.current.range):
+    spaces = line.find('=')
+    if spaces == -1: continue
+    vim.current.range[index] = line[0:spaces] + ' '*(maxspaces-spaces) + line[spaces:]
+endpython
+endfunction
+vmap ,= :python AlignEq()<CR>
+endif
+
+" #########################################################################
 " Setup() - Miscellaneous setup for this vimrc
+if has('python')
 function! Setup()
 python << endpython
 import os, vim
@@ -131,4 +153,5 @@ for dirname in ["undodir", "backupdir", "directory"]:
 endpython
 endfunction
 autocmd VimEnter * call Setup()
+endif
 
