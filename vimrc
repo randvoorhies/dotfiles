@@ -122,8 +122,8 @@ command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://spr
 " #########################################################################
 " AlignEq() - type ",p" to align a block of equals signs
 if has('python')
-function! AlignEq()
 python << endpython
+def AlignEq():
   import vim
   maxspaces = 0
   for line in vim.current.range:
@@ -134,7 +134,6 @@ python << endpython
     if spaces == -1: continue
     vim.current.range[index] = line[0:spaces] + ' '*(maxspaces-spaces) + line[spaces:]
 endpython
-endfunction
 vmap ,= :python AlignEq()<CR>
 endif
 
