@@ -120,7 +120,7 @@ command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://spr
 
 
 " #########################################################################
-" AlignEq() - type ",p" to align a block of equals signs
+" AlignEq() - type ",=" to align a block of equals signs
 if has('python')
 python << endpython
 def AlignEq():
@@ -153,4 +153,3 @@ endpython
 endfunction
 autocmd VimEnter * call Setup()
 endif
-
