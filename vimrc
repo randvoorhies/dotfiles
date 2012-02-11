@@ -123,8 +123,13 @@ endif
 " #########################################################################
 " Sprunge() - type :Sprunge to send the selected lines to sprunge.us.
 "           The sprunge URL will end up in your clipboard
-command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | pbcopy
 
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Darwin"
+  command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | pbcopy
+elseif os == "Linux"
+  command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | xcopy 
+endif
 
 " #########################################################################
 " AlignEq() - type ",=" to align a block of equals signs
