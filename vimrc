@@ -121,7 +121,7 @@ nmap ,o :call OpenOther()<CR>
 " #########################################################################
 " Sprunge() - type :Sprunge to send the selected lines to sprunge.us.
 "           The sprunge URL will end up in your clipboard
-command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | xclip
+command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | pbcopy
 
 
 " #########################################################################
