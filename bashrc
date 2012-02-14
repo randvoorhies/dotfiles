@@ -38,5 +38,12 @@ xterm*|rxvt*)
     ;;
 esac
 
+# Run bash in vi mode
+set -o vi
+
 source ~/.envrc
 source ~/.aliasrc
+if [ ! -f ${HOME}/.pathrc ];
+then
+  source ~/.pathrc
+fi
