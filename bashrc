@@ -43,7 +43,7 @@ set -o vi
 
 source ~/.envrc
 source ~/.aliasrc
-if [ ! -f ${HOME}/.pathrc ];
+if [ -f ${HOME}/.pathrc ];
 then
   source ~/.pathrc
 fi

@@ -66,3 +66,7 @@ export PATH=/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 # source extra stuff
 source $HOME/.envrc
 source $HOME/.aliasrc
+if [ -f ${HOME}/.pathrc ];
+then
+  source ~/.pathrc
+fi
