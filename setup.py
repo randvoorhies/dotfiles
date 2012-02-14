@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-import shutil, os, inspect
+import os, inspect
 
-def installFile(filename):
+def installFile(filename, dest):
   source = os.path.abspath(os.path.join(dotfilesdir, filename))
-  destination = os.path.abspath(os.path.join(HOME, '.'+filename))
+  destination = os.path.abspath(os.path.join(dest, '.'+filename))
   if os.path.exists(destination):
     if os.path.islink(destination):
       print 'Removing old symlink: ' + destination
@@ -14,8 +14,8 @@ def installFile(filename):
   print 'Installing ' + destination
   os.symlink(source, destination)
 
-dotfilesdir = os.path.dirname(inspect.getfile(inspect.currentframe()))
-HOME = os.environ["HOME"]
+dotfilesdir = os.getcwd()
 
-installFile('vimrc')
-
+for dotfile in os.listdir(dotfilesdir):
+  if dotfile[-2:] == "rc":
+    installFile(dotfile, os.environ["HOME"])
