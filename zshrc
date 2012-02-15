@@ -69,7 +69,7 @@ zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle :compinstall filename '/Users/sagar/.zshrc'
 zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' cache-path $HOME/.zsh/cache
 
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*:descriptions' format '%B%d%b'
@@ -78,7 +78,7 @@ zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*' group-name 
 
 autoload -Uz compinit
-compinit
+compinit -d $HOME/.zsh/dumpfile 
 # End of lines added by compinstall
 
 # source extra stuff

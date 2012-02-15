@@ -20,8 +20,10 @@ if [ `uname` = 'Darwin' ]; then
   export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
   # extra
-  export COURSES="${HOME}/USC/Courses/"
   export PATH=~/Local/bin:$PATH
+
+  # easily cd into special dirs
+  cdpath=(~ ~/Projects ~/Projects/Github ~/USC/Courses)
 fi
 
 # special commands for my server
