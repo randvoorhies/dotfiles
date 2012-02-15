@@ -55,4 +55,21 @@ then
   source ~/.pathrc
 fi
 
+
+function nrtcd() 
+{
+  cd `find ${NRTMODULEPATH} -type d -name ${1}`
+}
+
+function nrtcdcompletion() {
+  reply=()
+  for directory in ${NRTMODULEPATH}/**/manifest.yaml
+  do
+    fulldirectory=`dirname ${directory}`
+    modulename=`basename ${fulldirectory}`
+    reply+=($modulename)
+  done
+}
+compctl -K nrtcdcompletion nrtcd
+
 # vim:syntax=zsh
