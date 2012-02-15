@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, inspect
+import os
 
 def installFile(filename, dest):
   source = os.path.abspath(os.path.join(dotfilesdir, filename))

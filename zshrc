@@ -1,3 +1,9 @@
+# first check that oh-my-zsh is installed
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Oh-my-zsh not installed! Installing now..."
+  git clone https://github.com/sagargp/oh-my-zsh.git $HOME/.oh-my-zsh
+fi
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -34,14 +40,6 @@ plugins=(osx cloudapp sprunge vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-
-# More extensive tab completion. 
-autoload -U compinit
-compinit
-
-# Better completion for killall.
-zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
-
 # Colors for ls
 if [[ -x "`whence -p dircolors`" ]]; then
   eval `dircolors`
@@ -61,7 +59,27 @@ setopt extendedhistory
 bindkey -M viins '^r' history-incremental-search-backward
 bindkey -M vicmd '^r' history-incremental-search-backward
 
-export PATH=/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+# extensions
+# better mv command
+autoload zmv
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle :compinstall filename '/Users/sagar/.zshrc'
+zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*' group-name 
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
 
 # source extra stuff
 source $HOME/.envrc
