@@ -47,3 +47,5 @@ if [ -f ${HOME}/.pathrc ];
 then
   source ~/.pathrc
 fi
+
+# vim:syntax=sh

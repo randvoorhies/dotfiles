@@ -165,3 +165,5 @@ endpython
 endfunction
 autocmd VimEnter * call Setup()
 endif
+
+" vim:syntax=vim
