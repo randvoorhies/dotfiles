@@ -33,9 +33,16 @@ setopt incappendhistory
 setopt sharehistory
 setopt extendedhistory
 
-# Ctrl-R backwards search
+# Fix some crappy vi-mode keybindings
 bindkey -M viins '^r' history-incremental-search-backward
 bindkey -M vicmd '^r' history-incremental-search-backward
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
+bindkey "${terminfo[kdch1]}" delete-char
+bindkey "${terminfo[kcuu1]}" up-line-or-history
+bindkey "${terminfo[kcud1]}" down-line-or-history
+bindkey '^[[A' up-line-or-history
+bindkey '^[[B' down-line-or-history
 
 # Re-load .zshrc
 alias rez="source ${HOME}/.zshrc"
