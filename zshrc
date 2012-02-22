@@ -4,6 +4,8 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
   git clone https://github.com/sagargp/oh-my-zsh.git $HOME/.oh-my-zsh
 fi
 
+DISABLE_AUTO_UPDATE=true
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -11,7 +13,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="sagar"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
@@ -19,7 +21,7 @@ COMPLETION_WAITING_DOTS="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(osx cloudapp sprunge vi-mode svn git)
+plugins=(osx cloudapp sprunge svn git)
 
 source $ZSH/oh-my-zsh.sh
 
