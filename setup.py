@@ -15,7 +15,8 @@ def installFile(filename, dest):
   os.symlink(source, destination)
 
 dotfilesdir = os.getcwd()
+hostname = os.uname()[1].split('.')[0]
 
 for dotfile in os.listdir(dotfilesdir):
-  if dotfile[-2:] == "rc":
+  if dotfile[-2:] == "rc" or dotfile[:-3] == hostname:
     installFile(dotfile, os.environ["HOME"])
