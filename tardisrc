@@ -1,0 +1,7 @@
+alias rvm-restart='rvm_reload_flag=1 source '\''/home/sagar/.rvm/scripts/rvm'\'''
+
+export PATH=$HOME/Library/bin:$PATH
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+
+cdpath=(~/Projects ~/Projects/Github $cdpath)
