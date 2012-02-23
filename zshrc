@@ -75,6 +75,7 @@ source $HOME/.envrc
 source $HOME/.aliasrc
 
 # source hostname specific configs
-if [ -f $HOME/$(hostname -s)rch ]; then
-  source $HOME/$(hostname -s)rch
+custom="$HOME/.$(hostname -s)rch"
+if [ -f $custom ]; then
+  source $custom
 fi
