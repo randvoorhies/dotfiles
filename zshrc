@@ -10,6 +10,8 @@ ZSH_THEME="robbyrussell"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
+export DISABLE_AUTO_UPDATE="true"
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -29,9 +31,8 @@ zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 # One history for all open shells; store 10,000 entires.
 HISTFILE=~/.zhistory
 HISTSIZE=SAVEHIST=10000
-setopt incappendhistory 
-setopt sharehistory
 setopt extendedhistory
+setopt APPEND_HISTORY
 
 # Fix some crappy vi-mode keybindings
 bindkey -M viins '^r' history-incremental-search-backward
