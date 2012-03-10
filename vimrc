@@ -13,6 +13,7 @@ filetype off                   " required!
  Bundle 'pythoncomplete'
  Bundle 'pyflakes.vim'
  Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+ Bundle 'visual-increment'
 
 filetype plugin indent on     " required! 
 
