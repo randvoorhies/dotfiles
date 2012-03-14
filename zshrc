@@ -29,10 +29,11 @@ compinit
 zstyle ':completion:*:killall:*' command 'ps -u $USER -o cmd'
 
 # One history for all open shells; store 10,000 entires.
-HISTFILE=~/.zhistory
-HISTSIZE=SAVEHIST=10000
-setopt extendedhistory
-setopt APPEND_HISTORY
+#HISTFILE=~/.zhistory
+#HISTSIZE=SAVEHIST=10000
+#setopt incappendhistory 
+#setopt sharehistory
+#setopt extendedhistory
 
 # Fix some crappy vi-mode keybindings
 bindkey -M viins '^r' history-incremental-search-backward
@@ -49,11 +50,13 @@ bindkey '^[[B' down-line-or-history
 alias rez="source ${HOME}/.zshrc"
 
 # source extra stuff
-source $HOME/.envrc
-source $HOME/.aliasrc
+source ${HOME}/.envrc 
+source ${HOME}/.aliasrc 
+
+# Source the optional pathrc file for machine specific paths
 if [ -f ${HOME}/.pathrc ];
 then
-  source ~/.pathrc
+  source ${HOME}/.pathrc
 fi
 
 
