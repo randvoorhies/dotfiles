@@ -139,13 +139,13 @@ def AlignEq():
   import vim
   maxspaces = 0
   for line in vim.current.range:
-    spaceIdx = line.find('=')
-    maxspaces = max(maxspaces, len(line[0:spaceIdx].rstrip()))
+    equals = line.find('=')
+    maxspaces = max(maxspaces, len(line[0:equals].rstrip()))
 
   for index, line in enumerate(vim.current.range):
     equals = line.find('=')
     if equals == -1: continue
-    vim.current.range[index] = line[0:equals].rstrip() + ' ' * (maxspaces - len(line[0:equals].rstrip())) + ' = ' + line[equals+1:]
+    vim.current.range[index] = line[0:equals].rstrip() + ' ' * (maxspaces - len(line[0:equals].rstrip())) + ' = ' + line[equals+1:].lstrip()
 
 endpython
 vmap ,= :python AlignEq()<CR>
