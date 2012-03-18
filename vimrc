@@ -1,5 +1,6 @@
 set nocompatible
 
+filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
 filetype off                   " required!
 
  set rtp+=~/.vim/bundle/vundle/
@@ -13,6 +14,7 @@ filetype off                   " required!
  Bundle 'pythoncomplete'
  Bundle 'pyflakes.vim'
  Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+ Bundle 'groenewege/vim-less' 
 
 filetype plugin indent on     " required! 
 
