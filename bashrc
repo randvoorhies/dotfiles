@@ -38,14 +38,13 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Run bash in vi mode
-set -o vi
+source $HOME/.envrc
+source $HOME/.aliasrc
 
-source ~/.envrc
-source ~/.aliasrc
-if [ -f ${HOME}/.pathrc ];
-then
-  source ~/.pathrc
+# source hostname specific configs
+custom="$HOME/.$(hostname -s)rch"
+if [ -f $custom ]; then
+  source $custom
 fi
 
-# vim:syntax=sh
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
