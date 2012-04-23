@@ -4,4 +4,4 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/X1
 export PYTHONSTARTUP="${HOME}/.pythonrc"
 
 # easily cd into special dirs
-cdpath=(~ $cdpath)
+cdpath=($cdpath ~)

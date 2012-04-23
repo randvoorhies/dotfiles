@@ -63,6 +63,8 @@ zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*' group-name 
 
+fpath=($fpath /home/sagar/workspace/nrt/scripts/nrtTools/)
+
 autoload -Uz compinit
 compinit -d $HOME/.zsh/dumpfile 
 # End of lines added by compinstall
