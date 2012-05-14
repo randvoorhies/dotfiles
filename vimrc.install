@@ -3,20 +3,26 @@ set nocompatible
 filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
 filetype off                   " required!
 
- set rtp+=~/.vim/bundle/vundle/
- call vundle#rc()
+autocmd VimEnter * :call PostSetup()
 
- " let Vundle manage Vundle
- " required! 
- Bundle 'gmarik/vundle'
- Bundle 'Arduino-syntax-file'
- Bundle 'python.vim'
- Bundle 'pythoncomplete'
- Bundle 'pyflakes.vim'
- Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
- Bundle 'groenewege/vim-less' 
+function! PostSetup()
+  if exists(":Bundle")
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
 
-filetype plugin indent on     " required! 
+    " let Vundle manage Vundle
+    " required! 
+    Bundle 'gmarik/vundle'
+    Bundle 'Arduino-syntax-file'
+    Bundle 'python.vim'
+    Bundle 'pythoncomplete'
+    Bundle 'pyflakes.vim'
+    Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+    Bundle 'groenewege/vim-less' 
+
+    filetype plugin indent on     " required! 
+ endif
+endfunction
 
 syntax on
 filetype on
