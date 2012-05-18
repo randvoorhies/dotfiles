@@ -52,4 +52,21 @@ then
   source ~/.pathrcc
 fi
 
+# ROS Utilities
+imageview (){
+  if [ -z "$1" ]
+  then
+    echo "Usage: imageview TopicName"
+  else
+    rosrun image_view image_view image:=$1
+  fi
+}
+_imageview()
+{
+  topics=`rostopic list -v | grep "sensor_msgs/.*Image" | cut -d' ' -f 3 | uniq`
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=( $(compgen -W "${topics}" -- $cur) )
+}
+complete -F _imageview imageview
+
 # vim:syntax=sh

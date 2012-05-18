@@ -72,6 +72,7 @@ let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_ViewRule_pdf='evince'
 
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
+autocmd! BufNewFile,BufRead *.launch setlocal ft=xml
 
 " ############################## WILD MENU ##############################
 set wildmenu
