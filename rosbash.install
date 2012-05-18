@@ -3,6 +3,7 @@ rosiv (){
   if [ -z "$1" ]
   then
     echo "Usage: rosiv TopicName"
+    echo " (Press [tab] for TopicName autocompletion)"
   else
     rosrun image_view image_view image:=$1
   fi

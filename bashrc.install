@@ -47,14 +47,11 @@ set -o vi
 
 source ~/.envrc
 source ~/.aliasrc
+source ~/.rosbash
 if [ -f ${HOME}/.pathrcc ];
 then
   source ~/.pathrcc
 fi
 
-if [ -f ${HOME}/.rosbash ];
-then
-  source ~/.rosbash
-fi
 
 # vim:syntax=sh
