@@ -2,7 +2,7 @@
 rosiv (){
   if [ -z "$1" ]
   then
-    echo "Usage: imageview TopicName"
+    echo "Usage: rosiv TopicName"
   else
     rosrun image_view image_view image:=$1
   fi
