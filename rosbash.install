@@ -37,7 +37,11 @@ _rosbag()
       topics=`rostopic list`
       COMPREPLY=( $(compgen -W "${topics}" -- $cur) )
       return 0
-    ;;
+      ;;
+    play)
+      COMPREPLY=( $(compgen -f ${cur}) )
+      return 0
+      ;;
   esac
 
     COMPREPLY=( $(compgen -W "check compress decompress filter fix help info play record reindex" -- $cur) )
