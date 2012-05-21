@@ -1,0 +1,8 @@
+[user]
+	name = Randolph Voorhies
+	email = rand.voorhies@gmail.com
+
+[diff]
+  tool = gvimdiff
+
+# vim:syntax=gitconfig

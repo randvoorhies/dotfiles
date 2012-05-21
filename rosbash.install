@@ -39,8 +39,12 @@ _rosbag()
       return 0
       ;;
     play)
-      COMPREPLY=( $(compgen -f ${cur}) )
-      return 0
+      if [ "${COMP_CWORD}" == "2" ]; then
+        COMPREPLY=( $(compgen -o plusdirs -o nospace -o filenames -f -X "\!*.bag" -- $cur) )
+        return 0
+      else
+        return 0
+      fi
       ;;
   esac
 
