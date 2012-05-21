@@ -1,4 +1,13 @@
-# ROS Utilities
+######################################################################
+# Randolph Voorhies' ROS Bash Utilities 
+#
+# The following are various command-line utility functions and bash
+# autocompletions for ROS.
+######################################################################
+
+######################################################################
+# rosiv: Launch an image_viewer node. Use tab completion to see all
+#        available image topics
 rosiv (){
   if [ -z "$1" ]
   then
@@ -16,6 +25,8 @@ _rosiv()
 }
 complete -F _rosiv rosiv
 
+######################################################################
+# rosbag completion
 _rosbag()
 {
   local cur=${COMP_WORDS[COMP_CWORD]}
@@ -32,4 +43,6 @@ _rosbag()
     COMPREPLY=( $(compgen -W "check compress decompress filter fix help info play record reindex" -- $cur) )
 }
 complete -F _rosbag rosbag
+
+
 # vim:syntax=sh
