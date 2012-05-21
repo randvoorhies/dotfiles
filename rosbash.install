@@ -16,4 +16,20 @@ _rosiv()
 }
 complete -F _rosiv rosiv
 
+_rosbag()
+{
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  local command=${COMP_WORDS[1]}
+
+  case "${command}" in
+    record)
+      topics=`rostopic list`
+      COMPREPLY=( $(compgen -W "${topics}" -- $cur) )
+      return 0
+    ;;
+  esac
+
+    COMPREPLY=( $(compgen -W "check compress decompress filter fix help info play record reindex" -- $cur) )
+}
+complete -F _rosbag rosbag
 # vim:syntax=sh
