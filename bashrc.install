@@ -54,6 +54,7 @@ then
 fi
 
 source ~/.rosbash
+source ~/.bashfunctions
 
 
 # vim:syntax=sh

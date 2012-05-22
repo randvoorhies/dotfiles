@@ -1,0 +1,7 @@
+
+udev_info()
+{
+  udevadm info -a -p  $(udevadm info -q path -n ${1})
+}
+
+# vim:syntax=sh

@@ -52,5 +52,12 @@ _rosbag()
 }
 complete -F _rosbag rosbag
 
+######################################################################
+# rosconfig: just a shortcut for dynamic_reconfigure reconfigure_gui
+alias rosconfig='rosrun dynamic_reconfigure reconfigure_gui'
+
+######################################################################
+# rviz: just a shortcut for rviz rviz
+alias rviz='rosrun rviz rviz'
 
 # vim:syntax=sh

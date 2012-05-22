@@ -16,9 +16,9 @@ def installFile(filename, dest):
 dotfilesdir = os.getcwd()
 
 # Install oh-my-zsh if it doesnt already exist
-if not os.path.exists(os.path.join(os.environ["HOME"], '.oh-my-zsh')):
-  print 'Installing oh-my-zsh'
-  os.system('curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh')
+#if not os.path.exists(os.path.join(os.environ["HOME"], '.oh-my-zsh')):
+#  print 'Installing oh-my-zsh'
+#  os.system('curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh')
 
 # Install every file that ends with '.install' 
 for dotfile in os.listdir(dotfilesdir):

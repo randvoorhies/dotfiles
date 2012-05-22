@@ -74,6 +74,10 @@ let g:Tex_ViewRule_pdf='evince'
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.launch setlocal ft=xml
 
+" Don't expand tabs when editing makefiles
+autocmd! FileType make setlocal noexpandtab
+
+
 " ############################## WILD MENU ##############################
 set wildmenu
 set wildmode=list:longest
