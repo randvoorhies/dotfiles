@@ -6,6 +6,30 @@
 ######################################################################
 
 ######################################################################
+# _rostopic_list_cache: Just like 'rostopic list -v', except the
+#                       results are cached for 10 seconds. Nice for
+#                       <tab> completion!
+_rostopic_list_cache()
+{
+  local cache_file="/tmp/rosbash.cache"
+
+  if [ -f ${cache_file} ]; then
+    local mod_time=$(date --utc --reference=${cache_file} +%s)
+    local now_time=$(date +%s)
+    local del_time=$((${now_time}-${mod_time}))
+
+    if [ ${del_time} -lt 10 ]; then
+      cat ${cache_file}
+      return 0
+    fi
+  fi
+
+  rostopic list -v > ${cache_file}
+  cat ${cache_file}
+  return 0
+}
+
+######################################################################
 # rosiv: Launch an image_viewer node. Use tab completion to see all
 #        available image topics
 rosiv (){
@@ -19,7 +43,7 @@ rosiv (){
 }
 _rosiv()
 {
-  topics=`rostopic list -v | grep "sensor_msgs/.*Image" | cut -d' ' -f 3 | uniq`
+  topics=`_rostopic_list_cache | grep "sensor_msgs/.*Image" | cut -d' ' -f 3 | uniq`
   local cur=${COMP_WORDS[COMP_CWORD]}
   COMPREPLY=( $(compgen -W "${topics}" -- $cur) )
 }
@@ -34,7 +58,7 @@ _rosbag()
 
   case "${command}" in
     record)
-      topics=`rostopic list`
+      topics=`_rostopic_list_cache | cut -d' ' -f 3 | sed '/^$/d'`
       COMPREPLY=( $(compgen -W "${topics}" -- $cur) )
       return 0
       ;;
