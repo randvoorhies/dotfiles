@@ -53,6 +53,22 @@ _rosbag()
 complete -F _rosbag rosbag
 
 ######################################################################
+# rxplot completion
+_rxplot()
+{
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  topics=`rostopic list`
+
+  #if echo "$topics" | grep -x "$cur" ; then
+  #  COMPREPLY=( $(compgen -W "" -- $cur) )
+  #else
+    COMPREPLY=( $(compgen -W "${topics}" -- $cur) )
+  #fi
+
+}
+complete -F _rxplot rxplot
+
+######################################################################
 # rosconfig: just a shortcut for dynamic_reconfigure reconfigure_gui
 alias rosconfig='rosrun dynamic_reconfigure reconfigure_gui'
 
