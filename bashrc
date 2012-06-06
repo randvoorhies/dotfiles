@@ -38,6 +38,11 @@ xterm*|rxvt*)
     ;;
 esac
 
+# awesome bash completion
+if [ -f /etc/bash_completion ]; then
+  source /etc/bash_completion
+fi
+
 source $HOME/.envrc
 source $HOME/.aliasrc
 
