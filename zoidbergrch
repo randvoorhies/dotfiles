@@ -1,0 +1,3 @@
+PATH=$PATH:/opt/matlab/R2012a/bin
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
