@@ -1,3 +1,6 @@
+[core]
+  excludesfile = ~/.gitignore
+
 [user]
 	name = Randolph Voorhies
 	email = rand.voorhies@gmail.com

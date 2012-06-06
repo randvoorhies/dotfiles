@@ -4,6 +4,10 @@
 *.so
 *.pyc
 
+# Temp files #
+######################
+*.swp
+
 # OS generated files #
 ######################
 .DS_Store
