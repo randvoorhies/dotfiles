@@ -1,0 +1,28 @@
+# Compiled Source #
+###################
+*.o
+*.so
+*.pyc
+
+# Logs and Backups#
+###################
+*.log
+*~
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS X Generated Crap #
+#######################
+.DS_Store*
+Thumbs.db
+Icon?
+
