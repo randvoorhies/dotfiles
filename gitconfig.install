@@ -1,10 +1,29 @@
 [core]
   excludesfile = ~/.gitignore
+
 [user]
 	name = Randolph Voorhies
 	email = rand.voorhies@gmail.com
 
 [diff]
   tool = gvimdiff
+
+[color]
+  ui = true
+[color "branch"]
+  current = yellow black bold
+  local = yellow
+  remote = magenta
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red reverse
+  new = green reverse
+  whitespace = white reverse
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan reverse
+  branch = magenta
 
 # vim:syntax=gitconfig

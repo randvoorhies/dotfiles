@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 # Compiled Source #
+=======
+# Compiled source #
+>>>>>>> 27bc970cb54a471974dc0506303b9bac240c9651
 ###################
 *.o
 *.so
 *.pyc
 
+<<<<<<< HEAD
 # Logs and Backups#
 ###################
 *.log
@@ -28,3 +33,21 @@
 Thumbs.db
 Icon?
 
+=======
+# Temp files #
+######################
+*.swp
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# vim:syntax=gitconfig
+>>>>>>> 27bc970cb54a471974dc0506303b9bac240c9651

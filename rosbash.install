@@ -64,7 +64,7 @@ _rosbag()
       ;;
     play)
       if [ "${COMP_CWORD}" == "2" ]; then
-        COMPREPLY=( $(compgen -o plusdirs -o nospace -o filenames -f -X "\!*.bag" -- $cur) )
+        COMPREPLY=( $(compgen -o plusdirs -o nospace -o filenames -f -X "!*.bag" -- $cur) )
         return 0
       else
         return 0
@@ -74,7 +74,23 @@ _rosbag()
 
     COMPREPLY=( $(compgen -W "check compress decompress filter fix help info play record reindex" -- $cur) )
 }
-complete -F _rosbag rosbag
+complete -F _rosbag -o filenames rosbag
+
+######################################################################
+# rxplot completion
+_rxplot()
+{
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  topics=`rostopic list`
+
+  #if echo "$topics" | grep -x "$cur" ; then
+  #  COMPREPLY=( $(compgen -W "" -- $cur) )
+  #else
+    COMPREPLY=( $(compgen -W "${topics}" -- $cur) )
+  #fi
+
+}
+complete -F _rxplot rxplot
 
 ######################################################################
 # rosconfig: just a shortcut for dynamic_reconfigure reconfigure_gui
@@ -83,5 +99,21 @@ alias rosconfig='rosrun dynamic_reconfigure reconfigure_gui'
 ######################################################################
 # rviz: just a shortcut for rviz rviz
 alias rviz='rosrun rviz rviz'
+
+######################################################################
+# roslaunch completion: Now with .xml completion!
+function _roslaunch {
+  _roscomplete_search_dir "-type f -regex .*\.launch$\|.*\.test$\|.*\.xml$"
+   if [[ $COMP_CWORD == 1 ]]; then
+       arg="${COMP_WORDS[COMP_CWORD]}"
+       COMPREPLY=($(compgen -o plusdirs -f -X "!*.launch" -- ${arg}) \
+                  $(compgen -o plusdirs -f -X "!*.xml" -- ${arg}) \
+                  ${COMPREPLY[@]} \
+                  $(compgen -o plusdirs -f -X "!*.test" -- ${arg})
+                  )
+  fi
+}
+complete -F _roslaunch roslaunch
+
 
 # vim:syntax=sh
