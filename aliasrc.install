@@ -1,4 +1,4 @@
-alias ls='ls --color'
+#alias ls='ls --color'
 alias axel='axel -a'
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
 alias vim='vim -p'

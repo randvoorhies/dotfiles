@@ -1,14 +1,14 @@
 set nocompatible
 
-filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
+"filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
 filetype off                   " required!
 
-autocmd VimEnter * :call PostSetup()
+"autocmd VimEnter * :call PostSetup()
 
-function! PostSetup()
-  if exists(":Bundle")
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
+"function! PostSetup()
+  set rtp+=~/.vim/bundle/vundle/
+  call vundle#rc()
+  "if exists(":Bundle")
 
     " let Vundle manage Vundle
     " required! 
@@ -18,11 +18,13 @@ function! PostSetup()
     Bundle 'pythoncomplete'
     Bundle 'pyflakes.vim'
     Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+    Bundle 'Lokaltog/vim-powerline'
     Bundle 'groenewege/vim-less' 
+    Bundle 'fugitive.vim' 
 
     filetype plugin indent on     " required! 
- endif
-endfunction
+ "endif
+"endfunction
 
 syntax on
 filetype on
@@ -70,6 +72,18 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor='pdflatex'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_ViewRule_pdf='evince'
+
+set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
+let g:Powerline_symbols = 'fancy'
+"let g:Powerline_theme = 'skwp'
+"let g:Powerline_colorscheme = 'skwp'
+"if has('gui_running')
+"  set guifont=Monaco:h12    " set fonts for gui vim
+"  set transparency=5        " set transparent window
+"  set guioptions=egmrt  " hide the gui menubar
+"  let g:Powerline_symbols = 'fancy'
+"endif
+
 
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.launch setlocal ft=xml
