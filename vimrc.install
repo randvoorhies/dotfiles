@@ -1,35 +1,28 @@
 set nocompatible
 
-""filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
-"
-autocmd VimEnter * :call PostSetup()
+filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
 
-function! PostSetup()
-  if has("user_commands")
-    set rtp+=~/.vim/bundle/vundle/
-    runtime autoload/vundle.vim
-  endif
+if has("user_commands")
+  set rtp+=~/.vim/bundle/vundle/
+  runtime autoload/vundle.vim
+endif
+if exists("*vundle#rc")
+  filetype off                   " required!
 
-  if exists("*vundle#rc")
-    filetype off                   " required!
+  call vundle#rc()
 
-    call vundle#rc()
+  Bundle 'gmarik/vundle'
+  Bundle 'Arduino-syntax-file'
+  Bundle 'python.vim'
+  Bundle 'pythoncomplete'
+  Bundle 'pyflakes.vim'
+  Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+  Bundle 'Lokaltog/vim-powerline'
+  Bundle 'groenewege/vim-less' 
+  Bundle 'fugitive.vim' 
 
-    " let Vundle manage Vundle
-    " required! 
-    Bundle 'gmarik/vundle'
-    Bundle 'Arduino-syntax-file'
-    Bundle 'python.vim'
-    Bundle 'pythoncomplete'
-    Bundle 'pyflakes.vim'
-    Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
-    Bundle 'Lokaltog/vim-powerline'
-    Bundle 'groenewege/vim-less' 
-    Bundle 'fugitive.vim' 
-
-    filetype plugin indent on     " required! 
- endif
-endfunction
+  filetype plugin indent on     " required! 
+endif
 
 syntax on
 filetype on
@@ -80,8 +73,6 @@ let g:Tex_ViewRule_pdf='evince'
 
 "set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
 "let g:Powerline_symbols = 'fancy'
-"let g:Powerline_theme = 'skwp'
-"let g:Powerline_colorscheme = 'skwp'
 "if has('gui_running')
 "  set guifont=Monaco:h12    " set fonts for gui vim
 "  set transparency=5        " set transparent window

@@ -1,4 +1,7 @@
-#alias ls='ls --color'
+if [[ `uname` == 'Linux' ]]; then
+  alias ls='ls --color'
+fi
+
 alias axel='axel -a'
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
 alias vim='vim -p'
