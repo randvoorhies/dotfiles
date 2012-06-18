@@ -1,14 +1,19 @@
 set nocompatible
 
-"filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
-filetype off                   " required!
+""filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
+"
+autocmd VimEnter * :call PostSetup()
 
-"autocmd VimEnter * :call PostSetup()
+function! PostSetup()
+  if has("user_commands")
+    set rtp+=~/.vim/bundle/vundle/
+    runtime autoload/vundle.vim
+  endif
 
-"function! PostSetup()
-  set rtp+=~/.vim/bundle/vundle/
-  call vundle#rc()
-  "if exists(":Bundle")
+  if exists("*vundle#rc")
+    filetype off                   " required!
+
+    call vundle#rc()
 
     " let Vundle manage Vundle
     " required! 
@@ -23,8 +28,8 @@ filetype off                   " required!
     Bundle 'fugitive.vim' 
 
     filetype plugin indent on     " required! 
- "endif
-"endfunction
+ endif
+endfunction
 
 syntax on
 filetype on
@@ -73,8 +78,8 @@ let g:tex_flavor='pdflatex'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_ViewRule_pdf='evince'
 
-set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
-let g:Powerline_symbols = 'fancy'
+"set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
+"let g:Powerline_symbols = 'fancy'
 "let g:Powerline_theme = 'skwp'
 "let g:Powerline_colorscheme = 'skwp'
 "if has('gui_running')
