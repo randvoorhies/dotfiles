@@ -20,6 +20,9 @@ shopt -s histappend
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Turn off XON/XOFF flow control so that ctrl-s works
+stty -ixon
+
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 if [ "$(whoami)" = root ]; then
