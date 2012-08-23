@@ -50,6 +50,7 @@ set foldnestmax=10
 set nofoldenable
 set foldlevel=10
 set number
+set switchbuf=useopen,usetab,newtab
 
 syntax on
 
@@ -173,6 +174,22 @@ def AlignEq():
 endpython
 vmap ,= :python AlignEq()<CR>
 endif
+
+" ######################################################################
+fun! SetMkfile()
+  let filemk = "Makefile"
+  let pathmk = "./"
+  let depth = 1
+  while depth < 10
+    if filereadable(pathmk . filemk)
+      return pathmk
+    endif
+    let depth += 1
+    let pathmk = "../" . pathmk
+  endwhile
+  return "."
+endf
+command! -nargs=* Make | let $mkpath = SetMkfile() | make <args> -C $mkpath | cwindow 10
 
 " #########################################################################
 " Setup() - Miscellaneous setup for this vimrc
