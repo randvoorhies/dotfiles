@@ -51,6 +51,7 @@ set nofoldenable
 set foldlevel=10
 set number
 set switchbuf=useopen,usetab,newtab
+set diffopt+=iwhite
 
 syntax on
 

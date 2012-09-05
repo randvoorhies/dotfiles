@@ -6,7 +6,7 @@
 	email = rand.voorhies@gmail.com
 
 [diff]
-  tool = gvimdiff
+	tool = gvimdiff
 
 [color]
   ui = true
@@ -27,3 +27,5 @@
   branch = magenta
 
 # vim:syntax=gitconfig
+[merge]
+	tool = gvimdiff

@@ -60,5 +60,6 @@ fi
 
 source ~/.rosbash
 source ~/.bashfunctions
+source ~/.git-completion.bash
 
 # vim:syntax=sh
