@@ -47,6 +47,13 @@ fi
 # Run bash in vi mode
 set -o vi
 
+# ROS setup
+if [ -f /opt/ros/electric/setup.bash ]
+then
+  source /opt/ros/electric/setup.bash 
+  export OGRE_RTT_MODE=FBO
+fi
+
 source ~/.envrc
 source ~/.aliasrc
 
