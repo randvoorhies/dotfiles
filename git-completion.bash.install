@@ -1057,7 +1057,10 @@ _git_add ()
 			"
 		return
 	esac
-	COMPREPLY=()
+	#COMPREPLY=()
+  files=`git status --short | /bin/grep ?? | cut -d' ' -f 2`
+  COMPREPLY=( $(compgen -W "${files}" -- $cur) )
+  
 }
 
 _git_archive ()
