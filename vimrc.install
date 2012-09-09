@@ -1,33 +1,28 @@
 set nocompatible
 
-"filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
-filetype off                   " required!
+filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
 
-"autocmd VimEnter * :call PostSetup()
-"
-
-"function! PostSetup()
+if has("user_commands")
   set rtp+=~/.vim/bundle/vundle/
+  runtime autoload/vundle.vim
+endif
+if exists("*vundle#rc")
+  filetype off                   " required!
+
   call vundle#rc()
-  "if exists(":Bundle")
 
-    " let Vundle manage Vundle
-    " required! 
-    Bundle 'gmarik/vundle'
-    Bundle 'Arduino-syntax-file'
-    Bundle 'python.vim'
-    Bundle 'pythoncomplete'
-    Bundle 'pyflakes.vim'
-    Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
-    Bundle 'Lokaltog/vim-powerline'
-    Bundle 'groenewege/vim-less' 
-    Bundle 'fugitive.vim' 
-    Bundle 'Command-T' 
-    Bundle 'surround.vim' 
+  Bundle 'gmarik/vundle'
+  Bundle 'Arduino-syntax-file'
+  Bundle 'python.vim'
+  Bundle 'pythoncomplete'
+  Bundle 'pyflakes.vim'
+  Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+  Bundle 'Lokaltog/vim-powerline'
+  Bundle 'groenewege/vim-less' 
+  Bundle 'fugitive.vim' 
 
-    filetype plugin indent on     " required! 
- "endif
-"endfunction
+  filetype plugin indent on     " required! 
+endif
 
 syntax on
 filetype on
@@ -55,6 +50,8 @@ set foldnestmax=10
 set nofoldenable
 set foldlevel=10
 set number
+set switchbuf=useopen,usetab,newtab
+set diffopt+=iwhite
 
 syntax on
 
@@ -78,8 +75,6 @@ let g:Tex_ViewRule_pdf='evince'
 
 "set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
 let g:Powerline_symbols = 'fancy'
-"let g:Powerline_theme = 'skwp'
-"let g:Powerline_colorscheme = 'skwp'
 "if has('gui_running')
 "  set guifont=Monaco:h12    " set fonts for gui vim
 "  set transparency=5        " set transparent window
@@ -180,6 +175,22 @@ def AlignEq():
 endpython
 vmap ,= :python AlignEq()<CR>
 endif
+
+" ######################################################################
+fun! SetMkfile()
+  let filemk = "Makefile"
+  let pathmk = "./"
+  let depth = 1
+  while depth < 10
+    if filereadable(pathmk . filemk)
+      return pathmk
+    endif
+    let depth += 1
+    let pathmk = "../" . pathmk
+  endwhile
+  return "."
+endf
+command! -nargs=* Make | let $mkpath = SetMkfile() | make <args> -C $mkpath | cwindow 10
 
 " #########################################################################
 " Setup() - Miscellaneous setup for this vimrc

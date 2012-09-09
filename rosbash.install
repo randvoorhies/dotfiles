@@ -101,6 +101,10 @@ alias rosconfig='rosrun dynamic_reconfigure reconfigure_gui'
 alias rviz='rosrun rviz rviz'
 
 ######################################################################
+# dynparam: just a shortcut for dynamic_reconfigure dynparam
+alias dynparam='rosrun dynamic_reconfigure dynparam'
+
+######################################################################
 # roslaunch completion: Now with .xml completion!
 function _roslaunch {
   _roscomplete_search_dir "-type f -regex .*\.launch$\|.*\.test$\|.*\.xml$"
