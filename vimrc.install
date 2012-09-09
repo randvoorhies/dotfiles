@@ -4,6 +4,7 @@ set nocompatible
 filetype off                   " required!
 
 "autocmd VimEnter * :call PostSetup()
+"
 
 "function! PostSetup()
   set rtp+=~/.vim/bundle/vundle/
@@ -21,6 +22,8 @@ filetype off                   " required!
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'groenewege/vim-less' 
     Bundle 'fugitive.vim' 
+    Bundle 'Command-T' 
+    Bundle 'surround.vim' 
 
     filetype plugin indent on     " required! 
  "endif
@@ -73,7 +76,7 @@ let g:tex_flavor='pdflatex'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_ViewRule_pdf='evince'
 
-set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
+"set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
 let g:Powerline_symbols = 'fancy'
 "let g:Powerline_theme = 'skwp'
 "let g:Powerline_colorscheme = 'skwp'
