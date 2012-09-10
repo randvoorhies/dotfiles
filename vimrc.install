@@ -74,7 +74,7 @@ let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_ViewRule_pdf='evince'
 
 "set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
-"let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'fancy'
 "if has('gui_running')
 "  set guifont=Monaco:h12    " set fonts for gui vim
 "  set transparency=5        " set transparent window
