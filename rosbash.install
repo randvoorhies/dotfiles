@@ -50,6 +50,26 @@ _rosiv()
 complete -F _rosiv rosiv
 
 ######################################################################
+# rosdv: Launch an disparity_viewer node. Use tab completion to see all
+#        available disparity topics
+rosdv (){
+  if [ -z "$1" ]
+  then
+    echo "Usage: rosdv TopicName"
+    echo " (Press [tab] for TopicName autocompletion)"
+  else
+    rosrun image_view disparity_view image:=$1
+  fi
+}
+_rosdv()
+{
+  topics=`_rostopic_list_cache | grep "stereo_msgs/DisparityImage" | cut -d' ' -f 3 | uniq`
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=( $(compgen -W "${topics}" -- $cur) )
+}
+complete -F _rosdv rosdv
+
+######################################################################
 # rosbag completion
 _rosbag()
 {
