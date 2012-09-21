@@ -14,8 +14,8 @@ if exists("*vundle#rc")
 
   Bundle 'gmarik/vundle'
   Bundle 'Arduino-syntax-file'
-  Bundle 'python.vim'
-  Bundle 'pythoncomplete'
+  "Bundle 'python.vim'
+  "Bundle 'pythoncomplete'
   Bundle 'pyflakes.vim'
   "Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
   Bundle 'Lokaltog/vim-powerline'
@@ -38,6 +38,7 @@ set shiftwidth=2
 set tabstop=2
 set expandtab
 set showmatch
+set hlsearch                   "Highlight searches
 set guioptions-=T
 set showmode                   "Tell me when I'm in insert mode
 set ttyfast                    "We're on a fast connection, it's ok to send lots of bytes
@@ -54,19 +55,22 @@ set relativenumber
 set switchbuf=useopen,usetab,newtab
 set diffopt+=iwhite
 set nobackup "Backup off, since most stuff is in SVN, git et.c anyway...
-set nowb
+set nowritebackup
 syntax on
 
 "Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>=" 
 
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
 set grepprg=grep\ -nH\ $*
+set grepformat=%f:%l:%m
+
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
 " }}}
 " Wild Menu -------------------- {{{
 set wildmenu
@@ -172,10 +176,16 @@ augroup filetype_vim
 augroup END
 " }}}
 " Latex file settings -------------------- {{{
-augroup latex_vim
+augroup filetype_latex
   let g:tex_flavor='pdflatex'
   let g:Tex_DefaultTargetFormat='pdf'
-"let g:Tex_ViewRule_pdf='evince'
+  "let g:Tex_ViewRule_pdf='evince'
+augroup END
+" }}}
+" Text file settings -------------------- {{{
+augroup filetype_txt
+  autocmd BufNewFile,BufRead *.txt setlocal ft=none
+  autocmd BufNewFile,BufRead *.txt setlocal spell
 augroup END
 " }}}
 " }}}
@@ -242,7 +252,55 @@ fun! SetMkfile()
 endf
 command! -nargs=* Make | let $mkpath = SetMkfile() | make <args> -C $mkpath | cwindow 10
 "}}}
+" Functional Programming ------------------------------  {{{
+  function! Sorted(l)
+    let new_list = deepcopy(a:l)
+    call sort(new_list)
+    return new_list
+  endfunction
 
+  function! Reversed(l)
+    let new_list = deepcopy(a:l)
+    call reverse(new_list)
+    return new_list
+  endfunction
+
+  function! Append(l, val)
+    let new_list = deepcopy(a:l)
+    call add(new_list, a:val)
+    return new_list
+  endfunction
+
+  function! Assoc(l, i, val)
+    let new_list = deepcopy(a:l)
+    let new_list[a:i] = a:val
+    return new_list
+  endfunction
+
+  function! Pop(l, i)
+    let new_list = deepcopy(a:l)
+    call remove(new_list, a:i)
+    return new_list
+  endfunction
+
+  function! Mapped(fn, l)
+    let new_list = deepcopy(a:l)
+    call map(new_list, string(a:fn) . '(v:val)')
+    return new_list
+  endfunction
+
+  function! Filtered(fn, l)
+    let new_list = deepcopy(a:l)
+    call filter(new_list, string(a:fn) . '(v:val)')
+    return new_list
+  endfunction
+
+  function! Removed(fn, l)
+    let new_list = deepcopy(a:l)
+    call filter(new_list, '!' . string(a:fn) . '(v:val)')
+    return new_list
+  endfunction
+" }}}
 "}}}
 
 " vim:syntax=vim
