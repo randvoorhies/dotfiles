@@ -5,10 +5,16 @@ def installFile(filename, dest):
   source = os.path.abspath(os.path.join(dotfilesdir, filename))
   destination = os.path.abspath(os.path.join(dest, '.'+filename[:-8]))
 
+  ispath = None
+  try:
+    ispath = os.path.ispath(destination)
+  except AttributeError:
+    ispath = os.path.exists(destination)
+
   if os.path.islink(destination):
     print 'Removing old symlink: ' + destination
     os.remove(destination)
-  elif os.path.ispath(destination):
+  elif ispath:
     print 'Backing up old file: ' + destination + ' to ' + destination + '.bak'
     os.rename(destination, destination + '.bak')
 
