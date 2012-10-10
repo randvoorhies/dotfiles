@@ -7,4 +7,9 @@ alias pid='ps -o pid --no-header -C'
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
 alias vim='vim -p'
 alias gvim='gvim -p'
-alias ls='ls --color'
+
+if [ "$(uname)" = "Darwin" ]; then 
+  alias ls='ls -FG'
+else
+  alias ls='ls -F --color'
+fi
