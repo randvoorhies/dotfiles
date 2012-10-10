@@ -13,3 +13,5 @@ if [ "$(uname)" = "Darwin" ]; then
 else
   alias ls='ls -F --color'
 fi
+
+alias fixgitbranch='git config branch.master.remote origin; git config branch.master.merge refs/heads/master'
