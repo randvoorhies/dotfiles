@@ -1,26 +1,27 @@
 " #################### Vundle Plugins #################### {{{
 set nocompatible
 
-filetype on                    " Fix vim exiting with bad error code if filetype is already off (git commit problems)
+filetype on " Fix vim exiting with bad error code if filetype is already off (git commit problems)
 
 if has("user_commands")
   set rtp+=~/.vim/bundle/vundle/
   runtime autoload/vundle.vim
 endif
 if exists("*vundle#rc")
-  filetype off                   " required!
+  " $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+  filetype off " required!
 
   call vundle#rc()
 
   Bundle 'gmarik/vundle'
   Bundle 'Arduino-syntax-file'
-  "Bundle 'python.vim'
-  "Bundle 'pythoncomplete'
   Bundle 'pyflakes.vim'
-  "Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
   Bundle 'Lokaltog/vim-powerline'
   Bundle 'groenewege/vim-less' 
   Bundle 'fugitive.vim' 
+  Bundle 'gmarik/sudo-gui.vim'
+  Bundle 'matlab.vim'
+  Bundle 'Tabular'
 
   filetype plugin indent on     " required! 
 endif
@@ -135,16 +136,17 @@ inoremap jk <esc>
 
 " Let's train the fingers to stay away from <esc>
 inoremap <esc> <nop>
+
+" Tabularize shortcuts
+nnoremap <leader>a= :Tabularize /=<cr>
+nnoremap <leader>a: :Tabularize /:<cr>
+nnoremap <leader>a, :Tabularize /[^,]\+,<cr>
 " }}}
 " #################### Powerline Settings ####################  {{{
+set laststatus=2
 "set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
-let g:Powerline_symbols = 'fancy'
-"if has('gui_running')
-"  set guifont=Monaco:h12    " set fonts for gui vim
-"  set transparency=5        " set transparent window
-"  set guioptions=egmrt  " hide the gui menubar
-"  let g:Powerline_symbols = 'fancy'
-"endif
+"let g:Powerline_symbols = 'fancy'
+"set guioptions=egmrt  " hide the gui menubar
 " }}}
 " #################### Filetype Settings ####################  {{{
 " Arduino file settings -------------------- {{{
@@ -172,7 +174,7 @@ augroup END
 augroup filetype_vim
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
-  set foldlevelstart=0
+  autocmd FileType vim set foldlevelstart=0
 augroup END
 " }}}
 " Latex file settings -------------------- {{{
@@ -186,6 +188,13 @@ augroup END
 augroup filetype_txt
   autocmd BufNewFile,BufRead *.txt setlocal ft=none
   autocmd BufNewFile,BufRead *.txt setlocal spell
+  autocmd BufNewFile,BufRead *.txt setlocal foldmethod=marker
+augroup END
+" }}}
+" CMakeLists.txt file settings -------------------- {{{
+augroup filetype_cmake
+  autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
+  autocmd BufNewFile,BufRead CMakeLists.txt setlocal nospell
 augroup END
 " }}}
 " }}}
