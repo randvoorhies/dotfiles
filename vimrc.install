@@ -1,22 +1,33 @@
+" #################### Vundle Plugins #################### {{{
 set nocompatible
 
-filetype off                   " required!
+filetype on " Fix vim exiting with bad error code if filetype is already off (git commit problems)
 
- set rtp+=~/.vim/bundle/vundle/
- call vundle#rc()
+if has("user_commands")
+  set rtp+=~/.vim/bundle/vundle/
+  runtime autoload/vundle.vim
+endif
+if exists("*vundle#rc")
+  " $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+  filetype off " required!
 
- " let Vundle manage Vundle
- " required! 
- Bundle 'gmarik/vundle'
- Bundle 'Arduino-syntax-file'
- Bundle 'python.vim'
- Bundle 'pythoncomplete'
- Bundle 'pyflakes.vim'
- Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
- Bundle 'visual-increment'
+  call vundle#rc()
 
-filetype plugin indent on     " required! 
+  Bundle 'gmarik/vundle'
+  Bundle 'Arduino-syntax-file'
+  Bundle 'pyflakes.vim'
+  Bundle 'Lokaltog/vim-powerline'
+  Bundle 'groenewege/vim-less' 
+  Bundle 'fugitive.vim' 
+  Bundle 'gmarik/sudo-gui.vim'
+  Bundle 'matlab.vim'
+  Bundle 'Tabular'
 
+  filetype plugin indent on     " required! 
+endif
+" }}}
+" #################### Miscellaneous Settings #################### {{{
+" Basic Settings ------------------------------ {{{
 syntax on
 filetype on
 set encoding=utf-8
@@ -28,11 +39,10 @@ set shiftwidth=2
 set tabstop=2
 set expandtab
 set showmatch
+set hlsearch                   "Highlight searches
 set guioptions-=T
 set showmode                   "Tell me when I'm in insert mode
 set ttyfast                    "We're on a fast connection, it's ok to send lots of bytes
-set undofile
-set undoreload=10000
 set showbreak=↪
 set fillchars=diff:⣿
 set autoread                   "Detect when open files have changed and reopen them
@@ -42,31 +52,28 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=10
-set number
-
+set relativenumber
+set switchbuf=useopen,usetab,newtab
+set diffopt+=iwhite
+set nobackup "Backup off, since most stuff is in SVN, git et.c anyway...
+set nowritebackup
 syntax on
 
 "Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>=" 
 
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
 set grepprg=grep\ -nH\ $*
+set grepformat=%f:%l:%m
 
-" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='pdflatex'
-let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_ViewRule_pdf='evince'
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
-
-" ############################## WILD MENU ##############################
+" }}}
+" Wild Menu -------------------- {{{
 set wildmenu
 set wildmode=list:longest
 set wildignore+=*.git,*.svn
@@ -75,41 +82,126 @@ set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png,*.pdf
 set wildignore+=*.o
 set wildignore+=*.DS_Store
 set wildignore+=*.pyc
-" ############################## TMP DIRECTORIES ##############################
-set undodir=~/.vim/tmp/undo//
-set backupdir=~/.vim/tmp/backup//
-set directory=~/.vim/tmp/swap//
-set backup
-" ############################## STATUS LINE ##############################
+" }}}
+" Temporary Directories -------------------- {{{
+" set undodir=~/.vim/tmp/undo//
+" set backupdir=~/.vim/tmp/backup//
+" set directory=~/.vim/tmp/swap//
+" set backup
+" }}}
+" Status Line -------------------- {{{
+"set laststatus=2
+"set statusline=%f    " Path.
+"set statusline+=%m   " Modified flag.
+"set statusline+=%r   " Readonly flag.
+"set statusline+=%w   " Preview window flag.
+"set statusline+=\    " Space.
+"set statusline+=%=   " Right align.
+"" File format, encoding and type.  Ex: "(unix/utf-8/python)"
+"set statusline+=(
+"set statusline+=%{&ff}                        " Format (unix/DOS).
+"set statusline+=/
+"set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
+"set statusline+=/
+"set statusline+=%{&ft}                        " Type (python).
+"set statusline+=)
+"
+"" Line and column position and counts.
+"set statusline+=\ (line\ %l\/%L,\ col\ %03c)
+" }}}
+" }}}
+" #################### Key Mappings #################### {{{
+let mapleader=","
+
+" -: Move current line down
+nnoremap - ddp
+
+" _: Move current line up
+nnoremap _ ddkP
+
+" Edit Vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
+" Source Vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Beginning of line
+nnoremap H 0
+
+" End of line
+nnoremap L $
+
+" Always use jk to return to normal mode
+inoremap jk <esc>
+
+" Let's train the fingers to stay away from <esc>
+inoremap <esc> <nop>
+
+" Tabularize shortcuts
+nnoremap <leader>a= :Tabularize /=<cr>
+nnoremap <leader>a: :Tabularize /:<cr>
+nnoremap <leader>a, :Tabularize /[^,]\+,<cr>
+" }}}
+" #################### Powerline Settings ####################  {{{
 set laststatus=2
-set statusline=%f    " Path.
-set statusline+=%m   " Modified flag.
-set statusline+=%r   " Readonly flag.
-set statusline+=%w   " Preview window flag.
-set statusline+=\    " Space.
-set statusline+=%=   " Right align.
-
-" File format, encoding and type.  Ex: "(unix/utf-8/python)"
-set statusline+=(
-set statusline+=%{&ff}                        " Format (unix/DOS).
-set statusline+=/
-set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
-set statusline+=/
-set statusline+=%{&ft}                        " Type (python).
-set statusline+=)
-
-" Line and column position and counts.
-set statusline+=\ (line\ %l\/%L,\ col\ %03c)
-
-" #########################################################################
-" #########################################################################
-" Miscellaneous Functions
-" #########################################################################
-" #########################################################################
-
-" #########################################################################
-" OpenOther() - Type ",o" to switch between whatever/include/wherever/myfile.H
-"             and whatever/src/wherever/myfile.C
+"set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
+"let g:Powerline_symbols = 'fancy'
+"set guioptions=egmrt  " hide the gui menubar
+" }}}
+" #################### Filetype Settings ####################  {{{
+" Arduino file settings -------------------- {{{
+augroup filetype_pde
+  autocmd!
+  " Set filetype for arduino files
+  autocmd BufNewFile,BufRead *.pde setlocal ft=arduino
+augroup END
+" }}}
+" ROS Launchfile settings -------------------- {{{
+augroup filetype_launch
+  autocmd!
+  " Set filetype for ROS launch files
+  autocmd BufNewFile,BufRead *.launch setlocal ft=xml
+augroup END
+" }}}
+" Makefile file settings -------------------- {{{
+augroup filetype_make
+  autocmd!
+  " Don't expand tabs when editing makefiles
+  autocmd! FileType make setlocal noexpandtab
+augroup END
+" }}}
+" Vimscript file settings -------------------- {{{
+augroup filetype_vim
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+  autocmd FileType vim set foldlevelstart=0
+augroup END
+" }}}
+" Latex file settings -------------------- {{{
+augroup filetype_latex
+  let g:tex_flavor='pdflatex'
+  let g:Tex_DefaultTargetFormat='pdf'
+  "let g:Tex_ViewRule_pdf='evince'
+augroup END
+" }}}
+" Text file settings -------------------- {{{
+augroup filetype_txt
+  autocmd BufNewFile,BufRead *.txt setlocal ft=none
+  autocmd BufNewFile,BufRead *.txt setlocal spell
+  autocmd BufNewFile,BufRead *.txt setlocal foldmethod=marker
+augroup END
+" }}}
+" CMakeLists.txt file settings -------------------- {{{
+augroup filetype_cmake
+  autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
+  autocmd BufNewFile,BufRead CMakeLists.txt setlocal nospell
+augroup END
+" }}}
+" }}}
+" #################### Miscellaneous Functions ####################  {{{
+" OpenOther() ------------------------------ {{{
+" Type ",o" to switch between whatever/include/wherever/myfile.H
+" and whatever/src/wherever/myfile.C
 if has('python')
 function! OpenOther()
   if expand("%:e") == "C"
@@ -120,51 +212,104 @@ function! OpenOther()
 endfunction
 nmap ,o :call OpenOther()<CR>
 endif
-
-" #########################################################################
-" Sprunge() - type :Sprunge to send the selected lines to sprunge.us.
-"           The sprunge URL will end up in your clipboard
-
+"}}}
+" Sprunge() ------------------------------ {{{
+"  type :Sprunge to send the selected lines to sprunge.us.
+"  The sprunge URL will end up in your clipboard
 let os = substitute(system('uname'), "\n", "", "")
 if os == "Darwin"
   command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | pbcopy
 elseif os == "Linux"
   command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | xcopy 
 endif
-
-" #########################################################################
-" AlignEq() - type ",=" to align a block of equals signs
+" }}}
+" AlignEq() ------------------------------ {{{
+" type ",=" to align a block of equals signs
 if has('python')
 python << endpython
 def AlignEq():
   import vim
   maxspaces = 0
   for line in vim.current.range:
-    maxspaces = max(maxspaces, line.find('='))
+    equals = line.find('=')
+    maxspaces = max(maxspaces, len(line[0:equals].rstrip()))
 
   for index, line in enumerate(vim.current.range):
-    spaces = line.find('=')
-    if spaces == -1: continue
-    vim.current.range[index] = line[0:spaces] + ' '*(maxspaces-spaces) + line[spaces:]
+    equals = line.find('=')
+    if equals == -1: continue
+    vim.current.range[index] = line[0:equals].rstrip() + ' ' * (maxspaces - len(line[0:equals].rstrip())) + ' = ' + line[equals+1:].lstrip()
+
 endpython
 vmap ,= :python AlignEq()<CR>
 endif
+"}}}
+" SetMkfile() ------------------------------ {{{
+" ######################################################################
+" SetMkfile() - Recursively look down the directory tree to find a makefile
+fun! SetMkfile()
+  let filemk = "Makefile"
+  let pathmk = "./"
+  let depth = 1
+  while depth < 10
+    if filereadable(pathmk . filemk)
+      return pathmk
+    endif
+    let depth += 1
+    let pathmk = "../" . pathmk
+  endwhile
+  return "."
+endf
+command! -nargs=* Make | let $mkpath = SetMkfile() | make <args> -C $mkpath | cwindow 10
+"}}}
+" Functional Programming ------------------------------  {{{
+  function! Sorted(l)
+    let new_list = deepcopy(a:l)
+    call sort(new_list)
+    return new_list
+  endfunction
 
-" #########################################################################
-" Setup() - Miscellaneous setup for this vimrc
-if has('python')
-function! Setup()
-python << endpython
-import os, vim
-HOME = os.environ["HOME"]
-# Create the necessary directories for tempfiles, etc
-for dirname in ["undodir", "backupdir", "directory"]:
-  directory = vim.eval("&"+dirname)
-  try: os.makedirs(directory)
-  except: pass
-endpython
-endfunction
-autocmd VimEnter * call Setup()
-endif
+  function! Reversed(l)
+    let new_list = deepcopy(a:l)
+    call reverse(new_list)
+    return new_list
+  endfunction
+
+  function! Append(l, val)
+    let new_list = deepcopy(a:l)
+    call add(new_list, a:val)
+    return new_list
+  endfunction
+
+  function! Assoc(l, i, val)
+    let new_list = deepcopy(a:l)
+    let new_list[a:i] = a:val
+    return new_list
+  endfunction
+
+  function! Pop(l, i)
+    let new_list = deepcopy(a:l)
+    call remove(new_list, a:i)
+    return new_list
+  endfunction
+
+  function! Mapped(fn, l)
+    let new_list = deepcopy(a:l)
+    call map(new_list, string(a:fn) . '(v:val)')
+    return new_list
+  endfunction
+
+  function! Filtered(fn, l)
+    let new_list = deepcopy(a:l)
+    call filter(new_list, string(a:fn) . '(v:val)')
+    return new_list
+  endfunction
+
+  function! Removed(fn, l)
+    let new_list = deepcopy(a:l)
+    call filter(new_list, '!' . string(a:fn) . '(v:val)')
+    return new_list
+  endfunction
+" }}}
+"}}}
 
 " vim:syntax=vim
