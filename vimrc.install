@@ -14,7 +14,7 @@ if exists("*vundle#rc")
 
   call vundle#rc()
 
-  Bundle 'pathogen'
+  Bundle 'pathogen.vim'
   Bundle 'gmarik/vundle'
   Bundle 'Arduino-syntax-file'
   Bundle 'pyflakes.vim'
