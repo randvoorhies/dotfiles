@@ -48,6 +48,7 @@ set tabstop=2
 set expandtab
 set showmatch
 set hlsearch                   "Highlight searches
+nnoremap <esc> :noh<return><esc>
 set guioptions-=T
 set showmode                   "Tell me when I'm in insert mode
 set ttyfast                    "We're on a fast connection, it's ok to send lots of bytes
