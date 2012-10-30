@@ -112,9 +112,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# vi mode keybindings for bash
-set -o vi
-
 # rebind ctrl-l to clear the screen (old habits die hard...)
 bind -m vi-insert "\C-l":clear-screen
 
