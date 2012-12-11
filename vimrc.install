@@ -22,6 +22,7 @@ if exists("*vundle#rc")
   Bundle 'gmarik/sudo-gui.vim'
   Bundle 'matlab.vim'
   Bundle 'Tabular'
+  Bundle 'https://github.com/davidhalter/jedi-vim'
 
   filetype plugin indent on     " required! 
 endif
@@ -195,6 +196,11 @@ augroup END
 augroup filetype_cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal nospell
+augroup END
+" }}}
+" Python file settings -------------------- {{{
+augroup filetype_python
+  let g:jedi#popup_on_dot = 0
 augroup END
 " }}}
 " }}}
