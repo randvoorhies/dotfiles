@@ -4,30 +4,16 @@ alias seq='gseq'
 
 export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/2.7/bin
 
-# for some reason gpg is installed here 
-export CPATH=$CPATH:/opt/usr/include
-export LIBRARY_PATH=$LIBRARY_PATH:/opt/usr/lib
-export PATH=$PATH:/opt/usr/bin
-
-# macports
-export CPATH=/opt/local/include:$CPATH
-export DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH:/opt/local/lib
-export LIBRARY_PATH=/opt/local/lib:$LIBRARY_PATH
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export PKG_CONFIG_PATH=/usr/lib/pkgconfig
-
-# extra
+# my binaries/scripts
 export PATH=~/Local/bin:$PATH
 
-# easily cd into special dirs
-cdpath=(~/Projects ~/Projects/Github ~/USC/Courses $cdpath)
-
 # nvidia compiler
-export PATH=$PATH:/usr/local/cuda/bin/
+export PATH=$PATH:/usr/local/cuda/bin
 export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
-
-# for some reason, git is here
-export PATH=$PATH:/usr/local/git/bin
 
 # matlab path
 export PATH=$PATH:/opt/matlab/R2012a/bin
+
+# homebrew 
+export PATH=/usr/local/bin:$PATH
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"

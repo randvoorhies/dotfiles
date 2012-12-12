@@ -28,6 +28,7 @@ if exists("*vundle#rc")
   Bundle 'Tagbar'
   Bundle 'nerdtree'
   Bundle 'Wombat'
+  Bundle 'davidhalter/jedi-vim'
 
   colorscheme wombat
 
