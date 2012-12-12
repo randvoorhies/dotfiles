@@ -26,7 +26,6 @@ if exists("*vundle#rc")
   Bundle 'Tabular'
   Bundle 'Syntastic'
   Bundle 'Tagbar'
-  Bundle 'nerdtree'
   Bundle 'Wombat'
   Bundle 'davidhalter/jedi-vim'
   Bundle 'scrooloose/nerdtree'
