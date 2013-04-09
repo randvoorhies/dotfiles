@@ -1,6 +1,5 @@
-" #################### Vundle Plugins #################### {{{
+" #################### Vundle Plugins #################### 
 set nocompatible
-
 filetype on " Fix vim exiting with bad error code if filetype is already off (git commit problems)
 
 if has("user_commands")
@@ -16,8 +15,6 @@ if exists("*vundle#rc")
 
   Bundle 'pathogen.vim'
   Bundle 'gmarik/vundle'
-  Bundle 'Arduino-syntax-file'
-  Bundle 'pyflakes.vim'
   Bundle 'Lokaltog/vim-powerline'
   Bundle 'groenewege/vim-less' 
   Bundle 'fugitive.vim' 
@@ -25,20 +22,21 @@ if exists("*vundle#rc")
   Bundle 'matlab.vim'
   Bundle 'Tabular'
   Bundle 'Syntastic'
-  Bundle 'Tagbar'
   Bundle 'Wombat'
-  Bundle 'davidhalter/jedi-vim'
   Bundle 'scrooloose/nerdtree'
+  "Bundle 'Tagbar'
+  "Bundle 'Arduino-syntax-file'
+  "Bundle 'pyflakes.vim'
+  "Bundle 'davidhalter/jedi-vim'
 
   colorscheme wombat
 
   filetype plugin indent on     " required! 
 endif
-" }}}
-" #################### Miscellaneous Settings #################### {{{
-" Basic Settings ------------------------------ {{{
+" 
+" #################### Miscellaneous Settings #################### 
+" Basic Settings ------------------------------ 
 syntax on
-filetype on
 set encoding=utf-8
 set autochdir
 set ruler
@@ -49,7 +47,6 @@ set tabstop=2
 set expandtab
 set showmatch
 set hlsearch                   "Highlight searches
-nnoremap <esc> :noh<return><esc>
 set guioptions-=T
 set showmode                   "Tell me when I'm in insert mode
 set ttyfast                    "We're on a fast connection, it's ok to send lots of bytes
@@ -58,21 +55,18 @@ set fillchars=diff:⣿
 set autoread                   "Detect when open files have changed and reopen them
 set title
 set formatoptions=qn1          "See :help fo-table for options here
-set foldmethod=indent
-set foldnestmax=10
-set nofoldenable
-set foldlevel=10
-" NO set relativenumber
 set number
-set switchbuf=useopen,usetab,newtab
 set diffopt+=iwhite
 set nobackup "Backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup
+set guifont=Consolas\ 14
 syntax on
 
-"Resize splits when the window is resized
-au VimResized * exe "normal! \<c-w>=" 
+" <Ctrl-l> redraws the screen and removes search highlighting.
+nnoremap <silent> <C-l> :nohl<CR><C-l>
 
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>=" 
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
@@ -83,45 +77,7 @@ set grepformat=%f:%l:%m
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-" }}}
-" Wild Menu -------------------- {{{
-set wildmenu
-set wildmode=list:longest
-set wildignore+=*.git,*.svn
-set wildignore+=*.aux,*.out,*.toc
-set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png,*.pdf
-set wildignore+=*.o
-set wildignore+=*.DS_Store
-set wildignore+=*.pyc
-" }}}
-" Temporary Directories -------------------- {{{
-" set undodir=~/.vim/tmp/undo//
-" set backupdir=~/.vim/tmp/backup//
-" set directory=~/.vim/tmp/swap//
-" set backup
-" }}}
-" Status Line -------------------- {{{
-"set laststatus=2
-"set statusline=%f    " Path.
-"set statusline+=%m   " Modified flag.
-"set statusline+=%r   " Readonly flag.
-"set statusline+=%w   " Preview window flag.
-"set statusline+=\    " Space.
-"set statusline+=%=   " Right align.
-"" File format, encoding and type.  Ex: "(unix/utf-8/python)"
-"set statusline+=(
-"set statusline+=%{&ff}                        " Format (unix/DOS).
-"set statusline+=/
-"set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
-"set statusline+=/
-"set statusline+=%{&ft}                        " Type (python).
-"set statusline+=)
-"
-"" Line and column position and counts.
-"set statusline+=\ (line\ %l\/%L,\ col\ %03c)
-" }}}
-" }}}
-" #################### Key Mappings #################### {{{
+" #################### Key Mappings #################### 
 let mapleader=","
 
 " -: Move current line down
@@ -143,100 +99,36 @@ nnoremap H 0
 nnoremap L $
 
 " Remap Esc to JK...
-" NO.
-"
 " Always use jk to return to normal mode
-" inoremap jk <esc>
-" Let's train the fingers to stay away from <esc>
-" inoremap <esc> <nop>
+inoremap jk <esc>
 
-" Tabularize shortcuts
-nnoremap <leader>a= :Tabularize /=<cr>
-nnoremap <leader>a: :Tabularize /:<cr>
-nnoremap <leader>a, :Tabularize /[^,]\+,<cr>
-" }}}
-" #################### Powerline Settings ####################  {{{
+" #################### powerline settings ####################  
 set laststatus=2
-"set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
-"let g:Powerline_symbols = 'fancy'
-"set guioptions=egmrt  " hide the gui menubar
-" }}}
-" #################### Filetype Settings ####################  {{{
-" Arduino file settings -------------------- {{{
-augroup filetype_pde
-  autocmd!
-  " Set filetype for arduino files
-  autocmd BufNewFile,BufRead *.pde setlocal ft=arduino
-augroup END
-" }}}
-" ROS Launchfile settings -------------------- {{{
-augroup filetype_launch
-  autocmd!
-  " Set filetype for ROS launch files
-  autocmd BufNewFile,BufRead *.launch setlocal ft=xml
-augroup END
-" }}}
-" Makefile file settings -------------------- {{{
+" #################### Filetype Settings ####################  
+" Makefile file settings -------------------- 
 augroup filetype_make
   autocmd!
   " Don't expand tabs when editing makefiles
   autocmd! FileType make setlocal noexpandtab
 augroup END
-" }}}
-" Vimscript file settings -------------------- {{{
+
+" Vimscript file settings -------------------- 
 augroup filetype_vim
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
   autocmd FileType vim set foldlevelstart=0
 augroup END
-" }}}
-" Latex file settings -------------------- {{{
-augroup filetype_latex
-  let g:tex_flavor='pdflatex'
-  let g:Tex_DefaultTargetFormat='pdf'
-  "let g:Tex_ViewRule_pdf='evince'
-augroup END
-" }}}
-" Text file settings -------------------- {{{
+" 
+" Text file settings -------------------- 
 augroup filetype_txt
   autocmd BufNewFile,BufRead *.txt setlocal ft=none
   autocmd BufNewFile,BufRead *.txt setlocal spell
   autocmd BufNewFile,BufRead *.txt setlocal foldmethod=marker
 augroup END
-" }}}
-" CMakeLists.txt file settings -------------------- {{{
-augroup filetype_cmake
-  autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
-  autocmd BufNewFile,BufRead CMakeLists.txt setlocal nospell
-augroup END
-" }}}
-" }}}
-" #################### Miscellaneous Functions ####################  {{{
-" OpenOther() ------------------------------ {{{
-" Type ",o" to switch between whatever/include/wherever/myfile.H
-" and whatever/src/wherever/myfile.C
-if has('python')
-function! OpenOther()
-  if expand("%:e") == "C"
-    exe "tabe" fnameescape(expand("%:p:r:s?src?include?").".H")
-  elseif expand("%:e") == "H"
-    exe "tabe" fnameescape(expand("%:p:r:s?include?src?").".C")
-  endif
-endfunction
-nmap ,o :call OpenOther()<CR>
-endif
-"}}}
-" Sprunge() ------------------------------ {{{
-"  type :Sprunge to send the selected lines to sprunge.us.
-"  The sprunge URL will end up in your clipboard
-let os = substitute(system('uname'), "\n", "", "")
-if os == "Darwin"
-  command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | pbcopy
-elseif os == "Linux"
-  command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | xcopy 
-endif
-" }}}
-" AlignEq() ------------------------------ {{{
+" 
+" 
+" #################### Miscellaneous Functions ####################  
+" AlignEq() ------------------------------ 
 " type ",=" to align a block of equals signs
 if has('python')
 python << endpython
@@ -255,26 +147,8 @@ def AlignEq():
 endpython
 vmap ,= :python AlignEq()<CR>
 endif
-"}}}
-" SetMkfile() ------------------------------ {{{
-" ######################################################################
-" SetMkfile() - Recursively look down the directory tree to find a makefile
-fun! SetMkfile()
-  let filemk = "Makefile"
-  let pathmk = "./"
-  let depth = 1
-  while depth < 10
-    if filereadable(pathmk . filemk)
-      return pathmk
-    endif
-    let depth += 1
-    let pathmk = "../" . pathmk
-  endwhile
-  return "."
-endf
-command! -nargs=* Make | let $mkpath = SetMkfile() | make <args> -C $mkpath | cwindow 10
-"}}}
-" Functional Programming ------------------------------  {{{
+"
+" Functional Programming ------------------------------  
   function! Sorted(l)
     let new_list = deepcopy(a:l)
     call sort(new_list)
@@ -322,7 +196,7 @@ command! -nargs=* Make | let $mkpath = SetMkfile() | make <args> -C $mkpath | cw
     call filter(new_list, '!' . string(a:fn) . '(v:val)')
     return new_list
   endfunction
-" }}}
-"}}}
+" 
+"
 
 " vim:syntax=vim
