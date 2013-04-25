@@ -1,4 +1,4 @@
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/X11/bin
+export PATH=$PATH:/sbin:/usr/local/sbin:/usr/sbin
 
 # python startup rc 
 export PYTHONSTARTUP="${HOME}/.pythonrc"
