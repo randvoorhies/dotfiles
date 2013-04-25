@@ -112,6 +112,10 @@ nnoremap H 0
 " End of line
 nnoremap L $
 
+" j and k jump wrapped lines
+nmap j gj
+nmap k gk
+
 " Remap Esc to JK...
 " Always use jk to return to normal mode
 inoremap jk <esc>
