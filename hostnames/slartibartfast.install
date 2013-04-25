@@ -7,10 +7,6 @@ export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/2.7/bin
 # my binaries/scripts
 export PATH=~/Local/bin:$PATH
 
-# nvidia compiler
-export PATH=$PATH:/usr/local/cuda/bin
-export DYLD_LIBRARY_PATH=/usr/local/cuda/lib:$DYLD_LIBRARY_PATH
-
 # matlab path
 export PATH=$PATH:/opt/matlab/R2012a/bin
 
