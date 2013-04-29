@@ -1,5 +1,4 @@
 alias vim='vim -p'
-alias gvim='mvim -p'
 alias seq='gseq'
 
 export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/2.7/bin
