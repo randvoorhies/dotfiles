@@ -124,7 +124,7 @@ source $HOME/.envrc
 source $HOME/.aliasrc
 
 # source hostname specific configs
-custom="$HOME/.$(hostname -s)"
+custom="$HOME/.$(hostname)"
 if [ -f $custom ]; then
   source $custom
 fi
