@@ -94,13 +94,6 @@ set foldminlines=3
 set foldcolumn=0
 let g:foldcolumn=3
 
-" Automatically insert "\v" at the start of a search.  This causes regular
-" expressions to be interpreted as they would be in Perl.
-nnoremap / /\v
-vnoremap / /\v
-nnoremap ? /\v
-vnoremap ? /\v
-
 " Disable F1.
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
