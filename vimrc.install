@@ -24,13 +24,21 @@ if exists("*vundle#rc")
   set rtp+=~/.vim/bundle/vundle/powerline/bindings/vim
 
   " Syntax checking
-  Bundle 'Syntastic'
+  " Bundle 'Syntastic'
 
   " Explore the filesystem in a tree
   Bundle 'scrooloose/nerdtree'
 
   " Browse tags
   Bundle 'Tagbar'
+  nnoremap tt :TagbarToggle<CR>
+
+  " Complete everything with tabs
+  Bundle 'SuperTab'
+
+  " Better completion
+  Bundle 'neocomplcache'
+  let g:neocomplcache_enable_at_startup = 1
 
   " Color scheme
   Bundle 'Wombat'
@@ -43,7 +51,11 @@ if exists("*vundle#rc")
   "Bundle 'fugitive.vim' 
 
   " Align text (Using AlignEq (defined below) for aligning on =)
-  "Bundle 'Tabular'
+  Bundle 'Tabular'
+  
+  " Table mode for drawing tables in vim
+  Bundle 'dhruvasagar/vim-table-mode'
+
 
   filetype plugin indent on     " required! 
 endif
@@ -63,8 +75,6 @@ set showmatch " briefly show the matching bracket when you type it (won't scroll
 set guioptions-=T " no toolbar
 set showmode " tell me when I'm in insert mode
 set ttyfast " we're on a fast connection, it's ok to send lots of bytes
-set showbreak=↪ " character to show on a line wrap
-set fillchars=diff:⣿ " for splits 
 set autoread " detect when open files have changed and reopen them
 set title " set the title bar
 set formatoptions=qn1 " see :help fo-table for options here
@@ -74,6 +84,7 @@ set nobackup " backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup
 set dir=~/.vim/swp
 set guifont=Consolas\ 14
+set backspace=indent,eol,start " backspace before insertion point
 
 " Search
 set hlsearch                    " highlight all search matches
@@ -86,13 +97,13 @@ set magic
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 " Folding
-set foldenable
-set foldmethod=syntax
-set foldlevel=0
-set foldlevelstart=0
-set foldminlines=3
-set foldcolumn=0
-let g:foldcolumn=3
+"set foldenable
+"set foldmethod=syntax
+"set foldlevel=0
+"set foldlevelstart=0
+"set foldminlines=3
+"set foldcolumn=0
+"let g:foldcolumn=3
 
 " Disable F1.
 inoremap <F1> <ESC>

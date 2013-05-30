@@ -21,7 +21,7 @@ def installFile(filename, dest):
 
 if __name__ == '__main__':
   dotfilesdir = os.getcwd()
-  hostname = os.uname()[1].split('.')[0]
+  hostname = os.uname()[1]#.split('.')[0]
 
   for dotfile in os.listdir(dotfilesdir):
     if dotfile[-7:] == "install":
