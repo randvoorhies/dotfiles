@@ -9,6 +9,10 @@ export PATH=~/Local/bin:$PATH
 # matlab path
 export PATH=$PATH:/opt/matlab/R2012a/bin
 
+# cuda
+export PATH=$PATH:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib
+
 # homebrew 
 export PATH=/usr/local/bin:$PATH
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
