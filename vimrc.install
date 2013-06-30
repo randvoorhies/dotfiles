@@ -21,7 +21,6 @@ if exists("*vundle#rc")
 
   " cool status line 
   Bundle 'Lokaltog/powerline'
-  set rtp+=~/.vim/bundle/vundle/powerline/bindings/vim
 
   " Syntax checking
   " Bundle 'Syntastic'
@@ -63,6 +62,7 @@ endif
 " #################### Miscellaneous Settings #################### 
 " Basic Settings ------------------------------ 
 syntax on
+au BufRead, BufNewFile *.ino set filetype=arduino
 set encoding=utf-8
 set autochdir " set cwd to the current file's dir
 set ruler " show line, col, line% in bottom right corner
