@@ -7,4 +7,6 @@ alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
 alias vim='vim -p'
 alias gvim='gvim -p'
 alias grep='grep --color -n'
+
+alias matlab='matlab -nodesktop'
 # vim:syntax=sh

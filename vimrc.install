@@ -23,6 +23,9 @@ if exists("*vundle#rc")
   Bundle 'matlab.vim'
   Bundle 'Tabular'
   Bundle 'https://github.com/davidhalter/jedi-vim'
+  Bundle 'Gundo'
+  Bundle 'Cpp11-Syntax-Support'
+  Bundle 'https://github.com/Valloric/YouCompleteMe'
 
   filetype plugin indent on     " required! 
 endif
@@ -53,7 +56,8 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=10
-set relativenumber
+"set relativenumber
+set number
 set switchbuf=useopen,usetab,newtab
 set diffopt+=iwhite
 set nobackup "Backup off, since most stuff is in SVN, git et.c anyway...
@@ -142,12 +146,18 @@ inoremap <esc> <nop>
 nnoremap <leader>a= :Tabularize /=<cr>
 nnoremap <leader>a: :Tabularize /:<cr>
 nnoremap <leader>a, :Tabularize /[^,]\+,<cr>
+
+" Gundo shortcuts
+nnoremap <F5> :GundoToggle<CR>
 " }}}
 " #################### Powerline Settings ####################  {{{
 set laststatus=2
 "set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
 "let g:Powerline_symbols = 'fancy'
 "set guioptions=egmrt  " hide the gui menubar
+" }}}
+" #################### You Complete Me Settings ####################  {{{
+let g:ycm_confirm_extra_conf = 0
 " }}}
 " #################### Filetype Settings ####################  {{{
 " Arduino file settings -------------------- {{{
@@ -201,6 +211,14 @@ augroup END
 " Python file settings -------------------- {{{
 augroup filetype_python
   let g:jedi#popup_on_dot = 0
+augroup END
+" }}}
+" C++ file settings -------------------- {{{
+augroup filetype_cpp
+  "autocmd BufNewFile,BufRead *.cpp setlocal ft=cpp11
+  "autocmd BufNewFile,BufRead *.hpp setlocal ft=cpp11
+  "autocmd BufNewFile,BufRead *.C setlocal ft=cpp11
+  "autocmd BufNewFile,BufRead *.H setlocal ft=cpp11
 augroup END
 " }}}
 " }}}
