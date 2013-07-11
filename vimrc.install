@@ -26,12 +26,23 @@ if exists("*vundle#rc")
   Bundle 'Gundo'
   Bundle 'Cpp11-Syntax-Support'
   Bundle 'https://github.com/Valloric/YouCompleteMe'
+  Bundle 'vim-coffee-script'
+  Bundle 'flazz/vim-colorschemes'
+  Bundle 'Conque-Shell'
+  Bundle 'Handlebars'
 
   filetype plugin indent on     " required! 
 endif
 " }}}
 " #################### Miscellaneous Settings #################### {{{
 " Basic Settings ------------------------------ {{{
+if has('gui_running')
+  colorscheme solarized
+else
+  colorscheme solarized
+end
+set background=dark
+
 syntax on
 filetype on
 set encoding=utf-8
@@ -147,6 +158,8 @@ nnoremap <leader>a= :Tabularize /=<cr>
 nnoremap <leader>a: :Tabularize /:<cr>
 nnoremap <leader>a, :Tabularize /,\zs \+/l0<cr>
 nnoremap <leader>a\ :Tabularize /\\<cr>
+nnoremap <leader>a{ :Tabularize /{<cr>
+nnoremap <leader>a} :Tabularize /}<cr>
 
 " Gundo shortcuts
 nnoremap <F5> :GundoToggle<CR>
@@ -214,6 +227,10 @@ augroup filetype_python
   let g:jedi#popup_on_dot = 0
 augroup END
 " }}}
+" Handlebars file settings -------------------- {{{
+augroup filetype_python
+  autocmd BufNewFile,BufRead *.handlebars setlocal ft=handlebars
+augroup END
 " C++ file settings -------------------- {{{
 augroup filetype_cpp
   "autocmd BufNewFile,BufRead *.cpp setlocal ft=cpp11
