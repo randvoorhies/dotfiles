@@ -16,35 +16,37 @@ if exists("*vundle#rc")
   Bundle 'gmarik/vundle'
   Bundle 'Arduino-syntax-file'
   Bundle 'pyflakes.vim'
-  Bundle 'Lokaltog/vim-powerline'
   Bundle 'groenewege/vim-less' 
-  Bundle 'fugitive.vim' 
   Bundle 'gmarik/sudo-gui.vim'
   Bundle 'matlab.vim'
   Bundle 'Tabular'
-  Bundle 'https://github.com/davidhalter/jedi-vim'
   Bundle 'Gundo'
-  Bundle 'Cpp11-Syntax-Support'
   Bundle 'https://github.com/Valloric/YouCompleteMe'
-  Bundle 'vim-coffee-script'
   Bundle 'flazz/vim-colorschemes'
-  Bundle 'Conque-Shell'
   Bundle 'Handlebars'
+  Bundle 'html5.vim'
+  Bundle 'fugitive.vim' 
+  Bundle 'matchit.zip'
+  Bundle 'vim-coffee-script'
+  Bundle 'https://github.com/scrooloose/nerdtree'
+  Bundle 'https://github.com/jistr/vim-nerdtree-tabs'
+  "Bundle 'Syntastic'
 
-  filetype plugin indent on     " required! 
+  "Bundle 'Lokaltog/vim-powerline'
+  "Bundle 'https://github.com/davidhalter/jedi-vim'
+  "Bundle 'Conque-Shell'
+  "Bundle 'Cpp11-Syntax-Support'
 endif
+filetype plugin indent on     " required! 
+
 " }}}
 " #################### Miscellaneous Settings #################### {{{
 " Basic Settings ------------------------------ {{{
-if has('gui_running')
-  colorscheme solarized
-else
-  colorscheme solarized
-end
-set background=dark
 
 syntax on
 filetype on
+set t_Co=256                  " Let vim know we're using a 256 color terminal
+set tabpagemax=100            " Open up to 100 tabs
 set encoding=utf-8
 set autochdir
 set ruler
@@ -74,6 +76,22 @@ set diffopt+=iwhite
 set nobackup "Backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup
 syntax on
+
+" Keybinds/remapping 
+" makes it so up and down work on wrapped lines 
+"nnoremap j gj 
+"nnoremap k gk 
+
+
+" Color Settings ------------------------------ {{{
+if has('gui_running')
+  colorscheme badwolf
+else
+  colorscheme badwolf
+  set background=light
+end
+"}}}
+
 
 "Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>=" 
@@ -150,9 +168,6 @@ nnoremap L $
 " Always use jk to return to normal mode
 inoremap jk <esc>
 
-" Let's train the fingers to stay away from <esc>
-inoremap <esc> <nop>
-
 " Tabularize shortcuts
 nnoremap <leader>a= :Tabularize /=<cr>
 nnoremap <leader>a: :Tabularize /:<cr>
@@ -172,6 +187,11 @@ set laststatus=2
 " }}}
 " #################### You Complete Me Settings ####################  {{{
 let g:ycm_confirm_extra_conf = 0
+"let g:ycm_filetype_specific_completion_to_disable = {'html' : 0, 
+"                                                     'js' : 0,
+"                                                     'coffee' : 0}
+let g:ycm_filetype_whitelist = {'cpp': 1}
+                                
 " }}}
 " #################### Filetype Settings ####################  {{{
 " Arduino file settings -------------------- {{{
@@ -231,6 +251,13 @@ augroup END
 augroup filetype_python
   autocmd BufNewFile,BufRead *.handlebars setlocal ft=handlebars
 augroup END
+"}}}
+" Coffescript file settings -------------------- {{{
+augroup filetype_coffee
+  let g:syntastic_coffee_coffeelint_args="--indentation=4"
+  au BufNewFile,BufReadPost *.coffee setl shiftwidth=4 expandtab
+augroup END
+"}}}
 " C++ file settings -------------------- {{{
 augroup filetype_cpp
   "autocmd BufNewFile,BufRead *.cpp setlocal ft=cpp11
@@ -353,5 +380,38 @@ command! -nargs=* Make | let $mkpath = SetMkfile() | make <args> -C $mkpath | cw
   endfunction
 " }}}
 "}}}
+"
+function! Wipeout()
+  " list of *all* buffer numbers
+  let l:buffers = range(1, bufnr('$'))
+
+  " what tab page are we in?
+  let l:currentTab = tabpagenr()
+  try
+    " go through all tab pages
+    let l:tab = 0
+    while l:tab < tabpagenr('$')
+      let l:tab += 1
+
+      " go through all windows
+      let l:win = 0
+      while l:win < winnr('$')
+        let l:win += 1
+        " whatever buffer is in this window in this tab, remove it from
+        " l:buffers list
+        let l:thisbuf = winbufnr(l:win)
+        call remove(l:buffers, index(l:buffers, l:thisbuf))
+      endwhile
+    endwhile
+
+    " if there are any buffers left, delete them
+    if len(l:buffers)
+      execute 'bwipeout' join(l:buffers)
+    endif
+  finally
+    " go back to our original tab page
+    execute 'tabnext' l:currentTab
+  endtry
+endfunction
 
 " vim:syntax=vim
