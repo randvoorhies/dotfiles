@@ -38,6 +38,7 @@ if exists("*vundle#rc")
   " Better completion
   Bundle 'neocomplcache'
   let g:neocomplcache_enable_at_startup = 1
+  set completeopt-=preview
 
   " Color scheme
   Bundle 'Wombat'
@@ -54,7 +55,6 @@ if exists("*vundle#rc")
   
   " Table mode for drawing tables in vim
   Bundle 'dhruvasagar/vim-table-mode'
-
 
   filetype plugin indent on     " required! 
 endif
