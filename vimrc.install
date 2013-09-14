@@ -19,12 +19,6 @@ if exists("*vundle#rc")
   " vundle
   Bundle 'gmarik/vundle'
 
-  " cool status line 
-  Bundle 'Lokaltog/powerline'
-
-  " Syntax checking
-  " Bundle 'Syntastic'
-
   " Explore the filesystem in a tree
   Bundle 'scrooloose/nerdtree'
 
@@ -43,12 +37,6 @@ if exists("*vundle#rc")
   " Color scheme
   Bundle 'Wombat'
   colorscheme wombat
-
-  " Python autocompletion
-  "Bundle 'davidhalter/jedi-vim'
-
-  " Git wrapper
-  "Bundle 'fugitive.vim' 
 
   " Align text (Using AlignEq (defined below) for aligning on =)
   Bundle 'Tabular'
@@ -96,15 +84,6 @@ set magic
 " <Ctrl-l> redraws the screen and removes search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-" Folding
-"set foldenable
-"set foldmethod=syntax
-"set foldlevel=0
-"set foldlevelstart=0
-"set foldminlines=3
-"set foldcolumn=0
-"let g:foldcolumn=3
-
 " Disable F1.
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
@@ -128,12 +107,6 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " #################### Key Mappings #################### 
 let mapleader=","
 
-" -: Move current line down
-nnoremap - ddp
-
-" _: Move current line up
-nnoremap _ ddkP
-
 " Edit Vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
@@ -154,8 +127,8 @@ nmap k gk
 " Always use jk to return to normal mode
 inoremap jk <esc>
 
-" #################### powerline settings ####################  
-set laststatus=2
+" Ctrl-\ jumps to tag definition in new tab
+map <C-\> :tab split<cr>:exec("tag ".expand("<cword>"))<CR>
 
 " #################### Filetype Settings ####################  
 " Makefile file settings -------------------- 
@@ -243,5 +216,4 @@ def AlignEq():
 endpython
 vmap <leader>= :python AlignEq()<CR>
 endif
-
 " vim:syntax=vim
