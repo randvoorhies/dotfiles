@@ -19,13 +19,6 @@ if exists("*vundle#rc")
   " vundle
   Bundle 'gmarik/vundle'
 
-  " cool status line 
-  Bundle 'Lokaltog/powerline'
-  set rtp+=~/.vim/bundle/vundle/powerline/bindings/vim
-
-  " Syntax checking
-  " Bundle 'Syntastic'
-
   " Explore the filesystem in a tree
   Bundle 'scrooloose/nerdtree'
 
@@ -52,9 +45,6 @@ if exists("*vundle#rc")
 
   " Align text (Using AlignEq (defined below) for aligning on =)
   Bundle 'Tabular'
-  
-  " Table mode for drawing tables in vim
-  Bundle 'dhruvasagar/vim-table-mode'
 
 
   filetype plugin indent on     " required! 
@@ -83,7 +73,7 @@ set diffopt+=iwhite " ignore whitespace in diffs
 set nobackup " backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup
 set dir=~/.vim/swp
-set guifont=Consolas\ 14
+set guifont=Deja\ Vu\ Sans\ Mono\ 14
 set backspace=indent,eol,start " backspace before insertion point
 
 " Search
