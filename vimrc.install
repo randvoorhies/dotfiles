@@ -32,20 +32,14 @@ if exists("*vundle#rc")
   " Better completion
   Bundle 'neocomplcache'
   let g:neocomplcache_enable_at_startup = 1
+  set completeopt-=preview
 
   " Color scheme
   Bundle 'Wombat'
   colorscheme wombat
 
-  " Python autocompletion
-  "Bundle 'davidhalter/jedi-vim'
-
-  " Git wrapper
-  "Bundle 'fugitive.vim' 
-
   " Align text (Using AlignEq (defined below) for aligning on =)
   Bundle 'Tabular'
-
 
   filetype plugin indent on     " required! 
 endif
@@ -53,6 +47,7 @@ endif
 " #################### Miscellaneous Settings #################### 
 " Basic Settings ------------------------------ 
 syntax on
+au BufRead, BufNewFile *.ino set filetype=arduino
 set encoding=utf-8
 set autochdir " set cwd to the current file's dir
 set ruler " show line, col, line% in bottom right corner
@@ -86,15 +81,6 @@ set magic
 " <Ctrl-l> redraws the screen and removes search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-" Folding
-"set foldenable
-"set foldmethod=syntax
-"set foldlevel=0
-"set foldlevelstart=0
-"set foldminlines=3
-"set foldcolumn=0
-"let g:foldcolumn=3
-
 " Disable F1.
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
@@ -118,12 +104,6 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " #################### Key Mappings #################### 
 let mapleader=","
 
-" -: Move current line down
-nnoremap - ddp
-
-" _: Move current line up
-nnoremap _ ddkP
-
 " Edit Vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
@@ -144,8 +124,8 @@ nmap k gk
 " Always use jk to return to normal mode
 inoremap jk <esc>
 
-" #################### powerline settings ####################  
-set laststatus=2
+" Ctrl-\ jumps to tag definition in new tab
+map <C-\> :tab split<cr>:exec("tag ".expand("<cword>"))<CR>
 
 " #################### Filetype Settings ####################  
 " Makefile file settings -------------------- 
@@ -233,5 +213,4 @@ def AlignEq():
 endpython
 vmap <leader>= :python AlignEq()<CR>
 endif
-
 " vim:syntax=vim
