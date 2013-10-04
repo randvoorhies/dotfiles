@@ -1,2 +1,3 @@
-export NRTMODULEPATH=$HOME/workspace/nrt-modules
-source /home/sagar/workspace/nrt/scripts/nrtTools/nrtshell
+#export NRTMODULEPATH=$HOME/workspace/nrt-modules
+#source /home/sagar/workspace/nrt/scripts/nrtTools/nrtshell
+source /opt/ros/groovy/setup.bash

@@ -40,9 +40,6 @@ if exists("*vundle#rc")
 
   " Align text (Using AlignEq (defined below) for aligning on =)
   Bundle 'Tabular'
-  
-  " Table mode for drawing tables in vim
-  Bundle 'dhruvasagar/vim-table-mode'
 
   filetype plugin indent on     " required! 
 endif
@@ -71,7 +68,7 @@ set diffopt+=iwhite " ignore whitespace in diffs
 set nobackup " backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup
 set dir=~/.vim/swp
-set guifont=Consolas\ 14
+set guifont=Deja\ Vu\ Sans\ Mono\ 14
 set backspace=indent,eol,start " backspace before insertion point
 
 " Search
