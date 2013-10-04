@@ -44,6 +44,9 @@ if exists("*vundle#rc")
   " Table mode for drawing tables in vim
   Bundle 'dhruvasagar/vim-table-mode'
 
+  " Visualize markdown in Marked.app
+  Bundle 'itspriddle/vim-marked'
+
   filetype plugin indent on     " required! 
 endif
 " 
