@@ -21,7 +21,6 @@ if exists("*vundle#rc")
   Bundle 'matlab.vim'
   Bundle 'Tabular'
   Bundle 'Gundo'
-  Bundle 'https://github.com/Valloric/YouCompleteMe'
   Bundle 'flazz/vim-colorschemes'
   Bundle 'Handlebars'
   Bundle 'html5.vim'
@@ -30,7 +29,9 @@ if exists("*vundle#rc")
   Bundle 'vim-coffee-script'
   Bundle 'https://github.com/scrooloose/nerdtree'
   Bundle 'https://github.com/jistr/vim-nerdtree-tabs'
-  "Bundle 'Syntastic'
+  Bundle 'https://github.com/Valloric/YouCompleteMe'
+  Bundle 'Syntastic'
+  Bundle 'scons.vim'
 
   "Bundle 'Lokaltog/vim-powerline'
   "Bundle 'https://github.com/davidhalter/jedi-vim'
@@ -76,6 +77,14 @@ set diffopt+=iwhite
 set nobackup "Backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup
 syntax on
+
+let g:nerdtree_tabs_open_on_gui_startup = 0
+
+" open each buffer in its own tabpage
+"au BufNewFile,BufRead * nested
+"  \ if &buftype != "help" |
+"  \   tab sball |
+"  \ endif
 
 " Keybinds/remapping 
 " makes it so up and down work on wrapped lines 
@@ -256,6 +265,16 @@ augroup END
 augroup filetype_coffee
   let g:syntastic_coffee_coffeelint_args="--indentation=4"
   au BufNewFile,BufReadPost *.coffee setl shiftwidth=4 expandtab
+augroup END
+"}}}
+" SConstruct file settings -------------------- {{{
+augroup filetype_scons
+  autocmd BufNewFile,BufRead SConstruct setlocal ft=scons
+augroup END
+"}}}
+" Markdown file settings -------------------- {{{
+augroup filetype_markdown
+  autocmd BufNewFile,BufRead *.mk setlocal ft=markdown
 augroup END
 "}}}
 " C++ file settings -------------------- {{{
