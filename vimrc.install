@@ -180,7 +180,7 @@ inoremap jk <esc>
 " Tabularize shortcuts
 nnoremap <leader>a= :Tabularize /=<cr>
 nnoremap <leader>a: :Tabularize /:<cr>
-nnoremap <leader>a, :Tabularize /,\zs \+/l0<cr>
+nnoremap <leader>a, :Tabularize /,\zs<cr>
 nnoremap <leader>a\ :Tabularize /\\<cr>
 nnoremap <leader>a{ :Tabularize /{<cr>
 nnoremap <leader>a} :Tabularize /}<cr>

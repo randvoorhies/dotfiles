@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-# Compiled Source #
-=======
-# Compiled source #
->>>>>>> 27bc970cb54a471974dc0506303b9bac240c9651
 ###################
 *.o
 *.so
 *.pyc
+*.os
 
-<<<<<<< HEAD
 # Logs and Backups#
 ###################
 *.log
@@ -33,7 +28,6 @@
 Thumbs.db
 Icon?
 
-=======
 # Temp files #
 ######################
 *.swp
@@ -50,4 +44,3 @@ ehthumbs.db
 Thumbs.db
 
 # vim:syntax=gitconfig
->>>>>>> 27bc970cb54a471974dc0506303b9bac240c9651
