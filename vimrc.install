@@ -21,6 +21,11 @@ if exists("*vundle#rc")
 
   " Explore the filesystem in a tree
   Bundle 'scrooloose/nerdtree'
+  nnoremap <C-n> :NERDTreeToggle<CR>
+  " Open NERDTree automatically when no files were specified
+  autocmd vimenter * if !argc() | NERDTree | endif
+  " Close Vim when the only window open is NERDTree
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
   " Browse tags
   Bundle 'Tagbar'
@@ -73,6 +78,8 @@ set nowritebackup
 set dir=~/.vim/swp
 set guifont=Deja\ Vu\ Sans\ Mono\ 14
 set backspace=indent,eol,start " backspace before insertion point
+set switchbuf=usetab,newtab " switch to an existing tab if a buffer is open, or create a new one if not
+set hidden " don't unload buffer when it is abandoned
 
 " Search
 set hlsearch                    " highlight all search matches
@@ -106,6 +113,9 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " #################### Key Mappings #################### 
 let mapleader=","
+
+" toggle linewrap
+nnoremap <leader>w :set wrap!<cr>
 
 " Edit Vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -216,4 +226,26 @@ def AlignEq():
 endpython
 vmap <leader>= :python AlignEq()<CR>
 endif
-" vim:syntax=vim
+
+" Swap splits
+function! MarkWindowSwap()
+    let g:markedWinNum = winnr()
+endfunction
+
+function! DoWindowSwap()
+    "Mark destination
+    let curNum = winnr()
+    let curBuf = bufnr( "%" )
+    exe g:markedWinNum . "wincmd w"
+    "Switch to source and shuffle dest->source
+    let markedBuf = bufnr( "%" )
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' curBuf
+    "Switch to dest and shuffle source->dest
+    exe curNum . "wincmd w"
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' markedBuf 
+endfunction
+
+nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
+nmap <silent> <leader>pw :call DoWindowSwap()<CR>
