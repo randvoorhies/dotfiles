@@ -180,7 +180,8 @@ nnoremap L $
 inoremap jk <esc>
 
 " Make sure you have to hit jk within a short window (100ms) to trigger normal mode
-set timeout timeoutlen=100
+"set timeout timeoutlen=100
+set timeout timeoutlen=1000 ttimeoutlen=100
 
 " Tabularize shortcuts
 nnoremap <leader>a= :Tabularize /=<cr>
