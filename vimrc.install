@@ -32,6 +32,8 @@ if exists("*vundle#rc")
   Bundle 'https://github.com/Valloric/YouCompleteMe'
   Bundle 'Syntastic'
   Bundle 'scons.vim'
+  Bundle 'https://github.com/randvoorhies/vim-multimarkdown'
+  Bundle 'syntaxm4.vim'
 
   "Bundle 'Lokaltog/vim-powerline'
   "Bundle 'https://github.com/davidhalter/jedi-vim'
@@ -177,10 +179,14 @@ nnoremap L $
 " Always use jk to return to normal mode
 inoremap jk <esc>
 
+" Make sure you have to hit jk within a short window (100ms) to trigger normal mode
+set timeout timeoutlen=100
+
 " Tabularize shortcuts
 nnoremap <leader>a= :Tabularize /=<cr>
 nnoremap <leader>a: :Tabularize /:<cr>
 nnoremap <leader>a, :Tabularize /,\zs<cr>
+nnoremap <leader>a; :Tabularize /;\zs<cr>
 nnoremap <leader>a\ :Tabularize /\\<cr>
 nnoremap <leader>a{ :Tabularize /{<cr>
 nnoremap <leader>a} :Tabularize /}<cr>
@@ -274,7 +280,7 @@ augroup END
 "}}}
 " Markdown file settings -------------------- {{{
 augroup filetype_markdown
-  autocmd BufNewFile,BufRead *.mk setlocal ft=markdown
+  autocmd BufNewFile,BufRead *.md setlocal ft=mmd
 augroup END
 "}}}
 " C++ file settings -------------------- {{{
