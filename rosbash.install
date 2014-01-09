@@ -126,18 +126,18 @@ alias dynparam='rosrun dynamic_reconfigure dynparam'
 
 ######################################################################
 # roslaunch completion: Now with .xml completion!
-function _roslaunch {
-  _roscomplete_search_dir "-type f -regex .*\.launch$\|.*\.test$\|.*\.xml$"
-   if [[ $COMP_CWORD == 1 ]]; then
-       arg="${COMP_WORDS[COMP_CWORD]}"
-       COMPREPLY=($(compgen -o plusdirs -f -X "!*.launch" -- ${arg}) \
-                  $(compgen -o plusdirs -f -X "!*.xml" -- ${arg}) \
-                  ${COMPREPLY[@]} \
-                  $(compgen -o plusdirs -f -X "!*.test" -- ${arg})
-                  )
-  fi
-}
-complete -F _roslaunch roslaunch
+#function _roslaunch {
+#  _roscomplete_search_dir "-type f -regex .*\.launch$\|.*\.test$\|.*\.xml$"
+#   if [[ $COMP_CWORD == 1 ]]; then
+#       arg="${COMP_WORDS[COMP_CWORD]}"
+#       COMPREPLY=($(compgen -o plusdirs -f -X "!*.launch" -- ${arg}) \
+#                  $(compgen -o plusdirs -f -X "!*.xml" -- ${arg}) \
+#                  ${COMPREPLY[@]} \
+#                  $(compgen -o plusdirs -f -X "!*.test" -- ${arg})
+#                  )
+#  fi
+#}
+#complete -F _roslaunch roslaunch
 
 
 # vim:syntax=sh
