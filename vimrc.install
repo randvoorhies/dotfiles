@@ -35,6 +35,7 @@ if exists("*vundle#rc")
   Bundle 'https://github.com/randvoorhies/vim-multimarkdown'
   Bundle 'syntaxm4.vim'
   Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+  Bundle 'bash-support.vim'
   "Bundle 'vimlatex'
 
   "Bundle 'Lokaltog/vim-powerline'
@@ -45,6 +46,7 @@ endif
 filetype plugin indent on     " required! 
 
 " }}}
+
 " #################### Miscellaneous Settings #################### {{{
 " Basic Settings ------------------------------ {{{
 
@@ -83,6 +85,12 @@ set nowritebackup
 syntax on
 
 let g:nerdtree_tabs_open_on_gui_startup = 0
+
+let g:load_doxygen_syntax=1
+let g:doxygen_enhanced_color=1
+let g:doxygen_end_punctuation=1
+
+"let g:doxygen_my_rendering=0
 
 " open each buffer in its own tabpage
 "au BufNewFile,BufRead * nested
@@ -157,6 +165,7 @@ set wildignore+=*.pyc
 "set statusline+=\ (line\ %l\/%L,\ col\ %03c)
 " }}}
 " }}}
+
 " #################### Key Mappings #################### {{{
 let mapleader=","
 
@@ -196,13 +205,16 @@ nnoremap <leader>a} :Tabularize /}<cr>
 
 " Gundo shortcuts
 nnoremap <F5> :GundoToggle<CR>
+
 " }}}
+
 " #################### Powerline Settings ####################  {{{
 set laststatus=2
 "set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
 "let g:Powerline_symbols = 'fancy'
 "set guioptions=egmrt  " hide the gui menubar
 " }}}
+
 " #################### You Complete Me Settings ####################  {{{
 let g:ycm_confirm_extra_conf = 0
 "let g:ycm_filetype_specific_completion_to_disable = {'html' : 0, 
@@ -211,12 +223,20 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_filetype_whitelist = {'cpp': 1}
                                 
 " }}}
+
 " #################### Filetype Settings ####################  {{{
 " Arduino file settings -------------------- {{{
 augroup filetype_pde
   autocmd!
   " Set filetype for arduino files
   autocmd BufNewFile,BufRead *.pde setlocal ft=arduino
+augroup END
+" }}}
+" xacro file settings -------------------- {{{
+augroup filetype_xacro
+  autocmd!
+  " Set filetype for arduino files
+  autocmd BufNewFile,BufRead *.xacro setlocal ft=xml
 augroup END
 " }}}
 " ROS Launchfile settings -------------------- {{{
@@ -286,6 +306,11 @@ augroup filetype_markdown
   autocmd BufNewFile,BufRead *.md setlocal ft=mmd
 augroup END
 "}}}
+" Arduino file settings -------------------- {{{
+augroup filetype_arduino
+  autocmd BufNewFile,BufRead *.ino setlocal ft=Arduino
+augroup END
+"}}}
 " C++ file settings -------------------- {{{
 augroup filetype_cpp
   "autocmd BufNewFile,BufRead *.cpp setlocal ft=cpp11
@@ -295,6 +320,7 @@ augroup filetype_cpp
 augroup END
 " }}}
 " }}}
+
 " #################### Miscellaneous Functions ####################  {{{
 " OpenOther() ------------------------------ {{{
 " Type ",o" to switch between whatever/include/wherever/myfile.H
@@ -310,6 +336,7 @@ endfunction
 nmap ,o :call OpenOther()<CR>
 endif
 "}}}
+
 " Sprunge() ------------------------------ {{{
 "  type :Sprunge to send the selected lines to sprunge.us.
 "  The sprunge URL will end up in your clipboard
@@ -320,6 +347,7 @@ elseif os == "Linux"
   command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | xcopy 
 endif
 " }}}
+
 " AlignEq() ------------------------------ {{{
 " type ",=" to align a block of equals signs
 if has('python')
@@ -358,6 +386,7 @@ fun! SetMkfile()
 endf
 command! -nargs=* Make | let $mkpath = SetMkfile() | make <args> -C $mkpath | cwindow 10
 "}}}
+
 " Functional Programming ------------------------------  {{{
   function! Sorted(l)
     let new_list = deepcopy(a:l)
@@ -408,7 +437,7 @@ command! -nargs=* Make | let $mkpath = SetMkfile() | make <args> -C $mkpath | cw
   endfunction
 " }}}
 "}}}
-"
+
 function! Wipeout()
   " list of *all* buffer numbers
   let l:buffers = range(1, bufnr('$'))
