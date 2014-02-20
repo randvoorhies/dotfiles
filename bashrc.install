@@ -66,4 +66,31 @@ source ~/.bashfunctions
 source ~/.git-completion.bash
 source ~/.git-prompt.sh
 
+declare -A ros_masters=(["localhost"]="http://localhost:11311" ["iris"]="http://IRIS1:11311")
+ros_master_select()
+{
+  if [ -z "$1" ]
+  then
+    echo "Available masters: ${!ros_masters[@]}"
+  else
+    selected_master=${ros_masters[$1]}
+    if [ -z "${selected_master}" ]
+    then
+      echo "ROS Master '${1}' not found. Available masters: ${!ros_masters[@]}"
+      return
+    fi
+
+    export ROS_MASTER_URI=${selected_master}
+
+  fi
+}
+_ros_master_select()
+{
+  local masters=${!ros_masters[@]}
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=( $(compgen -W "$masters" -- $cur) )
+}
+complete -F _ros_master_select ros_master_select
+#export ROS_MASTER_URI=http://IRIS1:11311
+
 # vim:syntax=sh
