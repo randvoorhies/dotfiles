@@ -34,8 +34,11 @@ if exists("*vundle#rc")
   Bundle 'scons.vim'
   Bundle 'https://github.com/randvoorhies/vim-multimarkdown'
   Bundle 'syntaxm4.vim'
-  Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
   Bundle 'bash-support.vim'
+  Bundle 'https://github.com/jansenm/vim-cmake'
+  Bundle 'neocomplcache'
+  Bundle 'unite.vim'
+  "Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
   "Bundle 'vimlatex'
 
   "Bundle 'Lokaltog/vim-powerline'
@@ -221,7 +224,11 @@ set laststatus=2
 "                                                     'js' : 0,
 "                                                     'coffee' : 0}
 "let g:ycm_filetype_whitelist = {'cpp': 1}
+let g:ycm_filetype_blacklist = {'cmake': 1}
 
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_warning_symbol = '->'
+let g:ycm_key_invoke_completion = '<C-Space>'
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
                                 
 " }}}
@@ -280,6 +287,7 @@ augroup END
 augroup filetype_cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal nospell
+  autocmd BufNewFile,BufRead CMakeLists.txt NeoComplCacheEnable
 augroup END
 " }}}
 " Python file settings -------------------- {{{
