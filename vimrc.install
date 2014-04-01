@@ -55,7 +55,7 @@ filetype plugin indent on     " required!
 
 syntax on
 filetype on
-set t_Co=256                  " Let vim know we're using a 256 color terminal
+"set t_Co=256                  " Let vim know we're using a 256 color terminal
 set tabpagemax=100            " Open up to 100 tabs
 set encoding=utf-8
 set autochdir
@@ -219,7 +219,6 @@ set laststatus=2
 " }}}
 
 " #################### You Complete Me Settings ####################  {{{
-"let g:ycm_confirm_extra_conf = 0
 "let g:ycm_filetype_specific_completion_to_disable = {'html' : 0, 
 "                                                     'js' : 0,
 "                                                     'coffee' : 0}
@@ -229,6 +228,8 @@ let g:ycm_filetype_blacklist = {'cmake': 1}
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_warning_symbol = '->'
 let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_confirm_extra_conf = 0
+
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
                                 
 " }}}
