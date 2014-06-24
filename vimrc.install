@@ -13,38 +13,36 @@ if exists("*vundle#rc")
 
   call vundle#rc()
 
-  Bundle 'gmarik/vundle'
-  Bundle 'Arduino-syntax-file'
-  Bundle 'pyflakes.vim'
-  Bundle 'groenewege/vim-less' 
-  Bundle 'gmarik/sudo-gui.vim'
-  Bundle 'matlab.vim'
-  Bundle 'Tabular'
-  Bundle 'Gundo'
-  Bundle 'flazz/vim-colorschemes'
-  Bundle 'Handlebars'
-  Bundle 'html5.vim'
-  Bundle 'fugitive.vim' 
-  Bundle 'matchit.zip'
-  Bundle 'vim-coffee-script'
-  Bundle 'https://github.com/scrooloose/nerdtree'
-  Bundle 'https://github.com/jistr/vim-nerdtree-tabs'
-  Bundle 'https://github.com/Valloric/YouCompleteMe'
-  Bundle 'Syntastic'
-  Bundle 'scons.vim'
-  Bundle 'https://github.com/randvoorhies/vim-multimarkdown'
-  Bundle 'syntaxm4.vim'
-  Bundle 'bash-support.vim'
-  Bundle 'https://github.com/jansenm/vim-cmake'
-  Bundle 'neocomplcache'
-  Bundle 'unite.vim'
-  "Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
-  "Bundle 'vimlatex'
+  Plugin 'gmarik/vundle'
 
-  "Bundle 'Lokaltog/vim-powerline'
-  "Bundle 'https://github.com/davidhalter/jedi-vim'
-  "Bundle 'Conque-Shell'
-  "Bundle 'Cpp11-Syntax-Support'
+  " Highlighting Plugins
+  Plugin 'Arduino-syntax-file'
+  Plugin 'matlab.vim'
+  Plugin 'groenewege/vim-less' 
+  Plugin 'html5.vim'
+  Plugin 'scons.vim'
+  Plugin 'https://github.com/randvoorhies/vim-multimarkdown'
+  Plugin 'bash-support.vim'
+  Plugin 'https://github.com/jansenm/vim-cmake'
+
+  " Syntax Plugins
+  Plugin 'pyflakes.vim'
+  Plugin 'https://github.com/Valloric/YouCompleteMe'
+  Plugin 'rhysd/vim-clang-format'
+  "Plugin 'Syntastic'
+
+  " Theme plugins
+  Plugin 'flazz/vim-colorschemes'
+  Plugin 'bling/vim-airline'
+
+  " Miscellaneous Plugins
+  Plugin 'matchit.zip'
+  Plugin 'Tabular'
+  Plugin 'Gundo'
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'https://github.com/scrooloose/nerdtree'
+  Plugin 'https://github.com/jistr/vim-nerdtree-tabs'
+
 endif
 filetype plugin indent on     " required! 
 
@@ -55,7 +53,7 @@ filetype plugin indent on     " required!
 
 syntax on
 filetype on
-"set t_Co=256                  " Let vim know we're using a 256 color terminal
+set t_Co=256                  " Let vim know we're using a 256 color terminal
 set tabpagemax=100            " Open up to 100 tabs
 set encoding=utf-8
 set autochdir
@@ -148,6 +146,11 @@ set wildignore+=*.pyc
 " set backup
 " }}}
 " Status Line -------------------- {{{
+
+set guifont=Dejavu\ Sans\ Mono\ for\ Powerline
+let g:airline_powerline_fonts=1
+
+
 "set laststatus=2
 "set statusline=%f    " Path.
 "set statusline+=%m   " Modified flag.
@@ -211,6 +214,18 @@ nnoremap <F5> :GundoToggle<CR>
 
 " }}}
 
+" #################### Clang Format Settings ####################  {{{
+let g:clang_format#style_options = {
+            \ "AccessModifierOffset" : -4,
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11",
+            \ "DerivePointerBinding" : "true",
+            \ "AllowShortIfStatementsOnASingleLine" : "true",
+            \ "AllowShortLoopsOnASingleLine" : "true",
+            \ "NamespaceIndentation" : "All",
+            \ "BreakBeforeBraces" : "Allman"}
+"}}}
+
 " #################### Powerline Settings ####################  {{{
 set laststatus=2
 "set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
@@ -223,10 +238,10 @@ set laststatus=2
 "                                                     'js' : 0,
 "                                                     'coffee' : 0}
 "let g:ycm_filetype_whitelist = {'cpp': 1}
-let g:ycm_filetype_blacklist = {'cmake': 1}
-
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_warning_symbol = '->'
+"let g:ycm_filetype_blacklist = {'cmake': 1}
+"
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_warning_symbol = '->'
 let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_confirm_extra_conf = 0
 
