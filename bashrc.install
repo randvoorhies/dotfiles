@@ -110,7 +110,7 @@ xterm*|rxvt*)
 esac
 
 # rebind ctrl-l to clear the screen (old habits die hard...)
-bind -m vi-insert "\C-l":clear-screen
+#bind -m vi-insert "\C-l":clear-screen
 
 # awesome bash completion
 if [ -f /etc/bash_completion ]; then
