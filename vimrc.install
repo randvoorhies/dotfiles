@@ -41,7 +41,7 @@ if exists("*vundle#rc")
   " colorscheme wombat
   Bundle 'w0ng/vim-hybrid'
   Bundle 'chriskempson/base16-vim'
-  colorscheme base16-default
+  colorscheme hybrid
 
   " Align text (Using AlignEq (defined below) for aligning on =)
   Bundle 'godlygeek/tabular'
@@ -56,15 +56,12 @@ if exists("*vundle#rc")
   set laststatus=2
 
   " Indent lines
-  " Bundle 'Yggdroot/indentLine'
-  Bundle 'Indent-Guides'
+  Bundle 'Yggdroot/indentLine'
 
   " Easy motion
   Bundle 'EasyMotion'
 
-  " Tmuxline
-  Bundle 'edkolev/tmuxline.vim'
-
+  " Git stuff
   Bundle 'fugitive.vim'
   Bundle 'gitv'
 
