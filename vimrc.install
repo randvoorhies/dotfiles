@@ -1,6 +1,7 @@
 " #################### Vundle Plugins #################### 
 set nocompatible
 filetype on " Fix vim exiting with bad error code if filetype is already off (git commit problems)
+
 let mapleader=","
 
 if has("user_commands")
@@ -43,8 +44,14 @@ if exists("*vundle#rc")
   Bundle 'chriskempson/base16-vim'
   colorscheme hybrid
 
-  " Align text (Using AlignEq (defined below) for aligning on =)
+  " Align text
   Bundle 'godlygeek/tabular'
+  imap <leader>= :Tab /=<CR>
+  nmap <leader>= :Tab /=<CR>
+  vmap <leader>= :Tab /=<CR>
+  imap <leader>: :Tab /:<CR>
+  nmap <leader>: :Tab /:<CR>
+  vmap <leader>: :Tab /:<CR>
 
   " Show marks
   Bundle 'ShowMarks7'
@@ -71,37 +78,46 @@ endif
 " #################### Miscellaneous Settings #################### 
 " Basic Settings ------------------------------ 
 syntax on
+
+" Filetype for arduino files
 au BufRead, BufNewFile *.ino set filetype=arduino
+
+" Filetype for markdown
+au BufRead,BufNewFile *.md set filetype=markdown
+
+" Filetype for my notes files
+au BufRead,BufNewFile *.note set filetype=notes
+
 set encoding=utf-8
-set autochdir " set cwd to the current file's dir
-set ruler " show line, col, line% in bottom right corner
+set autochdir                        " set cwd to the current file's dir
+set ruler                            " show line, col, line% in bottom right corner
 set autoindent
 set smartindent
-set expandtab " spaces instead of tabs
-set tabstop=2 " cols per tab
-set shiftwidth=2 " cols per shift (>> and <<)
-set showmatch " briefly show the matching bracket when you type it (won't scroll)
-set guioptions-=T " no toolbar
-set showmode " tell me when I'm in insert mode
-set ttyfast " we're on a fast connection, it's ok to send lots of bytes
-set autoread " detect when open files have changed and reopen them
-set title " set the title bar
-set formatoptions=qn1 " see :help fo-table for options here
-set number " line numbers
-set diffopt+=iwhite " ignore whitespace in diffs
-set nobackup " backup off, since most stuff is in SVN, git et.c anyway...
+set expandtab                        " spaces instead of tabs
+set tabstop=2                        " cols per tab
+set shiftwidth=2                     " cols per shift (>> and <<)
+set showmatch                        " briefly show the matching bracket when you type it (won't scroll)
+set guioptions-=T                    " no toolbar
+set showmode                         " tell me when I'm in insert mode
+set ttyfast                          " we're on a fast connection, it's ok to send lots of bytes
+set autoread                         " detect when open files have changed and reopen them
+set title                            " set the title bar
+set formatoptions=qn1                " see :help fo-table for options here
+set number                           " line numbers
+set diffopt+=iwhite                  " ignore whitespace in diffs
+set nobackup                         " backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup
 set dir=~/.vim/swp
 set guifont=Deja\ Vu\ Sans\ Mono\ 14
-set backspace=indent,eol,start " backspace before insertion point
-set switchbuf=usetab,newtab " switch to an existing tab if a buffer is open, or create a new one if not
-set hidden " don't unload buffer when it is abandoned
+set backspace=indent,eol,start       " backspace before insertion point
+set switchbuf=usetab,newtab          " switch to an existing tab if a buffer is open, or create a new one if not
+set hidden                           " don't unload buffer when it is abandoned
 
 " Search
-set hlsearch                    " highlight all search matches
-set incsearch                   " indicate next search match as the pattern is being entered
-set ignorecase                  " ignore case when searching
-set smartcase                   " do not ignore case when the search pattern contains upper case
+set hlsearch   " highlight all search matches
+set incsearch  " indicate next search match as the pattern is being entered
+set ignorecase " ignore case when searching
+set smartcase  " do not ignore case when the search pattern contains upper case
 set magic
 
 " <Ctrl-l> redraws the screen and removes search highlighting.
@@ -191,23 +207,3 @@ function! InsertTabWrapper(direction)
         return "\<c-n>"
     endif
 endfunction
-
-" AlignEq() ------------------------------ 
-" type ",=" to align a block of equals signs
-if has('python')
-python << endpython
-def AlignEq():
-  import vim
-  maxspaces = 0
-  for line in vim.current.range:
-    equals = line.find('=')
-    maxspaces = max(maxspaces, len(line[0:equals].rstrip()))
-
-  for index, line in enumerate(vim.current.range):
-    equals = line.find('=')
-    if equals == -1: continue
-    vim.current.range[index] = line[0:equals].rstrip() + ' ' * (maxspaces - len(line[0:equals].rstrip())) + ' = ' + line[equals+1:].lstrip()
-
-endpython
-vmap <leader>= :python AlignEq()<CR>
-endif
