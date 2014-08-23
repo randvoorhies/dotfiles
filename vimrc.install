@@ -115,7 +115,7 @@ set hidden                           " don't unload buffer when it is abandoned
 if has("mac")
   set guifont=Consolas:h16
 else
-  set guifont=Deja\ Vu\ Sans\ Mono 16
+  set guifont=Deja\ Vu\ Sans\ Mono\ 16
 endif
 
 " Search
