@@ -38,10 +38,7 @@ if exists("*vundle#rc")
   set completeopt-=preview
 
   " Color scheme
-  " Bundle 'Wombat'
-  " colorscheme wombat
   Bundle 'w0ng/vim-hybrid'
-  Bundle 'chriskempson/base16-vim'
   colorscheme hybrid
 
   " Align text
@@ -111,11 +108,14 @@ set dir=~/.vim/swp
 set backspace=indent,eol,start       " backspace before insertion point
 set switchbuf=usetab,newtab          " switch to an existing tab if a buffer is open, or create a new one if not
 set hidden                           " don't unload buffer when it is abandoned
+set guifont=Deja\ Vu\ Sans\ Mono\ 16
 
-if has("mac")
-  set guifont=Consolas:h16
-else
-  set guifont=Deja\ Vu\ Sans\ Mono\ 16
+if has("unix")
+  if system('uname')=~'Darwin'
+    echo "Foo"
+    set guifont=Consolas:h16
+    let g:hybrid_use_iTerm_colors = 1
+  endif
 endif
 
 " Search
