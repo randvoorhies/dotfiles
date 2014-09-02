@@ -39,7 +39,7 @@ if exists("*vundle#rc")
 
   " Color scheme
   Bundle 'w0ng/vim-hybrid'
-  colorscheme hybrid
+  Bundle 'chriskempson/vim-tomorrow-theme'
 
   " Align text
   Bundle 'godlygeek/tabular'
@@ -56,7 +56,7 @@ if exists("*vundle#rc")
 
   " Airline
   Bundle 'bling/vim-airline'
-  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#enabled=1
   set laststatus=2
 
   " Indent lines
@@ -95,6 +95,10 @@ set tabstop=2                        " cols per tab
 set shiftwidth=2                     " cols per shift (>> and <<)
 set showmatch                        " briefly show the matching bracket when you type it (won't scroll)
 set guioptions-=T                    " no toolbar
+set guioptions-=l                    " no left scrollbar
+set guioptions-=L                    " 
+set guioptions-=R                    " no right scrollbar
+set guioptions-=r                    " 
 set showmode                         " tell me when I'm in insert mode
 set ttyfast                          " we're on a fast connection, it's ok to send lots of bytes
 set autoread                         " detect when open files have changed and reopen them
@@ -108,14 +112,19 @@ set dir=~/.vim/swp
 set backspace=indent,eol,start       " backspace before insertion point
 set switchbuf=usetab,newtab          " switch to an existing tab if a buffer is open, or create a new one if not
 set hidden                           " don't unload buffer when it is abandoned
-set guifont=Deja\ Vu\ Sans\ Mono\ 16
 
-if has("unix")
-  if system('uname')=~'Darwin'
-    echo "Foo"
-    set guifont=Consolas:h16
-    let g:hybrid_use_iTerm_colors = 1
-  endif
+if has("unix") && system('uname')=~'Darwin'
+  set guifont=Consolas:h16
+  let g:hybrid_use_iTerm_colors=1
+else
+  set guifont=Deja\ Vu\ Sans\ Mono\ 16
+endif
+
+" because tomorrow-night looks stupid in a terminal
+if has("gui")
+  colorscheme tomorrow-night-bright
+else
+  colorscheme hybrid
 endif
 
 " Search

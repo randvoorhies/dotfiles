@@ -49,7 +49,7 @@ syn match hline       "-\{3,}"
 syn match label       "^\s*\<\w\+\>:"
 syn match refer       "(\(see:\).*)"
 syn region shell      start=/\$ / end=/\n\n/
-syn match fixme       ".*FIXME.*"
+syn match fixme       "\(.*FIXME.*\)\|\(\s+!!!\)"
 
 " Todo list items
 syn region itemTodo       contains=refer start=/^\[ \].*/         end=/\n\n\|\n\[\@=/
