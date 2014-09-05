@@ -95,6 +95,7 @@ set tabstop=2                        " cols per tab
 set shiftwidth=2                     " cols per shift (>> and <<)
 set showmatch                        " briefly show the matching bracket when you type it (won't scroll)
 set guioptions-=T                    " no toolbar
+set guioptions-=M                    " no menu bar
 set guioptions-=l                    " no left scrollbar
 set guioptions-=L                    " 
 set guioptions-=R                    " no right scrollbar
