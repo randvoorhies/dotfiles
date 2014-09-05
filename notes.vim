@@ -49,7 +49,7 @@ syn match hline       "-\{3,}"
 syn match label       "^\s*\<\w\+\>:"
 syn match refer       "(\(see:\).*)"
 syn region shell      start=/\$ / end=/\n\n/
-syn match fixme       ".*FIXME.*"
+syn match fixme       "\(.*FIXME.*\)\|\(\s+!!!\)"
 
 " Todo list items
 syn region itemTodo       contains=refer start=/^\[ \].*/         end=/\n\n\|\n\[\@=/
@@ -59,8 +59,8 @@ syn region itemDunno      contains=refer start=/^\[?\].*/         end=/\n\n\|\n\
 syn region itemImportant  contains=refer start=/^\[!\].*/         end=/\n\n\|\n\[\@=/
 
 " Tables
-syn match tableHeadingText contained "\(\w\|#\)\+"
-syn match tableRowText     contained "\(\w\|#\)\+"
+syn match tableHeadingText contained "\(\w\|\d\|\.\|\*\|\s\|?\)\+"
+syn match tableRowText     contained "\(\w\|\d\|\.\|\*\|\s\|?\)\+"
 syn match tableRow         contains=tableRowText "|.\+|"
 syn region tableHeading    contains=tableHeadingText start=/\(|\n\)\@<!\(\s*\)+-\+[+-]\++\n\2|\@=/ end=/\(|\n\)\@<=\(\s*\)+-\+\(+\|-\)\++\n\2|\@=/
 syn match tableEnd         "\(|\n\)\@<=\(\s*\)+-\+\(+\|-\)\++"
@@ -85,11 +85,11 @@ hi link itemDone      NonText
 hi link itemDunno     Function
 hi link itemImportant WarningMsg
 
-hi tableHeadingText   gui=bold cterm=bold term=bold
-hi link tableRowText  Special
-hi link tableHeading  Statement
-hi link tableRow      Statement
-hi link tableEnd      Statement
+hi link tableHeadingText   Identifier
+hi link tableRowText       Statement
+hi tableHeading            gui=bold
+hi tableRow                gui=bold
+hi tableEnd                gui=bold
 
 call TextEnableCodeSnip("basic",  ":::",       ":::", "SpecialComment")
 call TextEnableCodeSnip("c",      ":::c",      ":::", "SpecialComment")

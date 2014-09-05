@@ -58,7 +58,7 @@ if exists("*vundle#rc")
 
   " Airline
   Bundle 'bling/vim-airline'
-  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#enabled=1
   set laststatus=2
 
   " Indent lines
@@ -97,6 +97,11 @@ set tabstop=2                        " cols per tab
 set shiftwidth=2                     " cols per shift (>> and <<)
 set showmatch                        " briefly show the matching bracket when you type it (won't scroll)
 set guioptions-=T                    " no toolbar
+set guioptions-=M                    " no menu bar
+set guioptions-=l                    " no left scrollbar
+set guioptions-=L                    " 
+set guioptions-=R                    " no right scrollbar
+set guioptions-=r                    " 
 set showmode                         " tell me when I'm in insert mode
 set ttyfast                          " we're on a fast connection, it's ok to send lots of bytes
 set autoread                         " detect when open files have changed and reopen them
@@ -107,10 +112,23 @@ set diffopt+=iwhite                  " ignore whitespace in diffs
 set nobackup                         " backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup
 set dir=~/.vim/swp
-set guifont=Deja\ Vu\ Sans\ Mono\ 14
 set backspace=indent,eol,start       " backspace before insertion point
 set switchbuf=usetab,newtab          " switch to an existing tab if a buffer is open, or create a new one if not
 set hidden                           " don't unload buffer when it is abandoned
+
+if has("unix") && system('uname')=~'Darwin'
+  set guifont=Consolas:h16
+  let g:hybrid_use_iTerm_colors=1
+else
+  set guifont=Deja\ Vu\ Sans\ Mono\ 16
+endif
+
+" because tomorrow-night looks stupid in a terminal
+if has("gui")
+  colorscheme tomorrow-night-bright
+else
+  colorscheme hybrid
+endif
 
 " Search
 set hlsearch   " highlight all search matches
