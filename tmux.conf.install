@@ -2,21 +2,42 @@
 set -g utf8
 set-window-option -g utf8 on
 
+# Use Ctrl-f for <prefix>
+unbind-key C-b
+set-option -g prefix C-f
+bind-key f send-prefix
+
+# automatically set window titles
+set-window-option -g automatic-rename on
+set-option -g set-titles on
+
+# vi mode
+set -g status-keys vi
+set -g mode-keys vi
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'c' copy-selection
+
+# misc
+set -g history-limit 10000
+
 # colours
 set -g default-terminal "screen-256color"
 
 # shorten command delay
-set -sg escape-time 1
+set -sg escape-time 0
 
 # reload the config with <prefix>r
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
 
 # <prefix>s splits horizontally, <prefix>v splits vertically
-bind s split-window -h
-bind v split-window -v
+bind s split-window -v
+bind v split-window -h
 
-# <prefix>T moves this window to the first spot
-bind T swap-window -t 0
+# <prefix>( moves this window to the first spot
+bind ( swap-window -t 0
+
+# <prefix>T tiles all the panes
+bind-key T select-layout tiled
 
 # move between panes with Vi movement keys
 bind h select-pane -L
@@ -29,6 +50,9 @@ bind H resize-pane -L 5
 bind J resize-pane -D 5
 bind K resize-pane -U 5
 bind L resize-pane -R 5
+
+# Zoom panes
+bind-key | resize-pane -Z \; display-message "Zoom pane"
 
 # enable mouse usage
 setw -g mode-mouse on
@@ -59,9 +83,6 @@ set-option -g message-fg black
 set-option -g display-panes-active-colour colour20
 set-option -g display-panes-colour colour196
 
-# clock
-set-window-option -g clock-mode-colour colour40
-
 # status colours
 set-option -g status-bg black
 set-option -g status-fg white
@@ -79,8 +100,8 @@ set-window-option -g window-status-current-attr bright
 
 # show hostname on left side of status bar
 set -g status-left-length 70
-set -g status-left "#[fg=colour3][%H:%M] #[fg=white]["
+set -g status-left "#[fg=colour3][%H:%M] #[fg=white]"
 
 # show session name, window & pane number, date and time on right side of status bar
 set -g status-right-length 60
-set -g status-right "#[fg=white]] [#[fg=colour13]\#S\ #[fg=colour2]:#P#[fg=white]]"
+set -g status-right "#[fg=white] [#[fg=colour13]\#S\ #[fg=colour2]:#P#[fg=white]]"
