@@ -41,6 +41,7 @@ if exists("*vundle#rc")
   Bundle 'w0ng/vim-hybrid'
   Bundle 'Wombat'
   Bundle 'chriskempson/vim-tomorrow-theme'
+  Bundle 'molokai'
 
   " Align text
   Bundle 'godlygeek/tabular'
@@ -126,7 +127,7 @@ endif
 if has("gui")
   colorscheme tomorrow-night-bright
 else
-  colorscheme Wombat
+  colorscheme molokai
 endif
 
 " Search
