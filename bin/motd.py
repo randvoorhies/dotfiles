@@ -21,9 +21,12 @@ except ImportError:
   sys.exit(1)
 
 def run_cmd(what):
-  p = subprocess.Popen(what.split(), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
-  out, err = p.communicate()
-  return {"returncode": p.returncode, "output": out.strip(), "error": err}
+  try:
+    p = subprocess.Popen(what.split(), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    out, err = p.communicate()
+    return {"returncode": p.returncode, "output": out.strip(), "error": err}
+  except OSError:
+    return {"returncode": 127, "output": "", "error": ""}
 
 def get_platform_info():
   stats = OrderedDict([
