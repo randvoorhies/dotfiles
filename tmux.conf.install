@@ -2,6 +2,12 @@
 set -g utf8
 set-window-option -g utf8 on
 
+# colours
+set -g default-terminal "xterm-256color"
+
+# default shell (non-login)
+set -g default-command "bash"
+
 # Use Ctrl-f for <prefix>
 unbind-key C-b
 set-option -g prefix C-f
@@ -19,9 +25,6 @@ bind-key -t vi-copy 'c' copy-selection
 
 # misc
 set -g history-limit 10000
-
-# colours
-set -g default-terminal "screen-256color"
 
 # shorten command delay
 set -sg escape-time 0

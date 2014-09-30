@@ -1,17 +1,17 @@
-alias axel='axel -a'
-alias diff='diff -y --suppress-common-lines'
-alias find='LC_ALL="C" find'
-alias grep='LC_ALL="C" grep --color'
-alias mkdir='mkdir -p'
-alias pid='ps -o pid --no-header -C'
-alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
-alias vim='vim -p'
-alias gvim='gvim -p'
-
 if [ "$(uname)" = "Darwin" ]; then 
   alias ls='ls -FG'
 else
   alias ls='ls -F --color'
 fi
 
-alias fixgitbranch='git config branch.master.remote origin; git config branch.master.merge refs/heads/master'
+alias axel='axel -a'
+alias diff='diff -y --suppress-common-lines'
+alias find='LC_ALL="C" find'
+alias grep='LC_ALL="C" grep --color'
+alias gvim='gvim -p'
+alias mkdir='mkdir -p'
+alias tmux='tmux -2'
+alias vim='vim -p'
+
+alias pid='ps -o pid --no-header -C'
+alias sprunge='curl -F "sprunge=<-" http://sprunge.us'

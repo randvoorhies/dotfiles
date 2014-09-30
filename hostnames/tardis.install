@@ -1,7 +1,6 @@
-alias rvm-restart='rvm_reload_flag=1 source '\''/home/sagar/.rvm/scripts/rvm'\'''
+export PLEX="$HOME/.plex"
 
-export PATH=$HOME/Library/bin:$PATH:/opt/crosstool/bin
-export TV=/srv/media/television
-export NZBS=/srv/media/p2p/newsgroups/complete
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+if [ -f "$DOTFILESDIR/bin/motd.py" ];
+then
+  $DOTFILESDIR/bin/motd.py
+fi

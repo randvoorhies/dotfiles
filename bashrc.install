@@ -109,9 +109,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# rebind ctrl-l to clear the screen (old habits die hard...)
-#bind -m vi-insert "\C-l":clear-screen
-
 # awesome bash completion
 if [ -f /etc/bash_completion ]; then
   source /etc/bash_completion
@@ -122,13 +119,3 @@ source $HOME/.git-prompt.sh
 
 source $HOME/.envrc
 source $HOME/.aliasrc
-
-# source hostname specific configs
-custom="$HOME/.$(hostname)"
-if [ -f $custom ]; then
-  source $custom
-fi
-
-# source the dotfiles update checker
-source $HOME/.dotfiles
-(check_dotfiles ${HOME}/workspace/dotfiles &) 

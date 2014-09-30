@@ -1,4 +1,3 @@
-" #################### Vundle Plugins #################### 
 set nocompatible
 filetype on " Fix vim exiting with bad error code if filetype is already off (git commit problems)
 
@@ -91,33 +90,38 @@ au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.note set filetype=notes
 
 set encoding=utf-8
-set autochdir                        " set cwd to the current file's dir
-set ruler                            " show line, col, line% in bottom right corner
+set autochdir                  " set cwd to the current file's dir
+set ruler                      " show line, col, line% in bottom right corner
 set autoindent
 set smartindent
-set expandtab                        " spaces instead of tabs
-set tabstop=2                        " cols per tab
-set shiftwidth=2                     " cols per shift (>> and <<)
-set showmatch                        " briefly show the matching bracket when you type it (won't scroll)
-set guioptions-=T                    " no toolbar
-set guioptions-=M                    " no menu bar
-set guioptions-=l                    " no left scrollbar
-set guioptions-=L                    " 
-set guioptions-=R                    " no right scrollbar
-set guioptions-=r                    " 
-set showmode                         " tell me when I'm in insert mode
-set ttyfast                          " we're on a fast connection, it's ok to send lots of bytes
-set autoread                         " detect when open files have changed and reopen them
-set title                            " set the title bar
-set formatoptions=qn1                " see :help fo-table for options here
-set number                           " line numbers
-set diffopt+=iwhite                  " ignore whitespace in diffs
-set nobackup                         " backup off, since most stuff is in SVN, git et.c anyway...
+set expandtab                  " spaces instead of tabs
+set tabstop=2                  " cols per tab
+set shiftwidth=2               " cols per shift (>> and <<)
+set showmatch                  " briefly show the matching bracket when you type it (won't scroll)
+set guioptions-=T              " no toolbar
+set guioptions-=M              " no menu bar
+set guioptions-=l              " no left scrollbar
+set guioptions-=L              
+set guioptions-=R              " no right scrollbar
+set guioptions-=r              
+set showmode                   " tell me when I'm in insert mode
+set ttyfast                    " we're on a fast connection, it's ok to send lots of bytes
+set autoread                   " detect when open files have changed and reopen them
+set title                      " set the title bar
+set formatoptions=qn1          " see :help fo-table for options here
+set number                     " line numbers
+set diffopt+=iwhite            " ignore whitespace in diffs
+set nobackup                   " backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup
 set dir=~/.vim/swp
-set backspace=indent,eol,start       " backspace before insertion point
-set switchbuf=usetab,newtab          " switch to an existing tab if a buffer is open, or create a new one if not
-set hidden                           " don't unload buffer when it is abandoned
+set backspace=indent,eol,start " backspace before insertion point
+set switchbuf=usetab,newtab    " switch to an existing tab if a buffer is open, or create a new one if not
+set hidden                     " don't unload buffer when it is abandoned
+set hlsearch                   " highlight all search matches
+set incsearch                  " indicate next search match as the pattern is being entered
+set ignorecase                 " ignore case when searching
+set smartcase                  " do not ignore case when the search pattern contains upper case
+set magic
 
 if has("unix") && system('uname')=~'Darwin'
   set guifont=Consolas:h16
@@ -126,19 +130,7 @@ else
   set guifont=Deja\ Vu\ Sans\ Mono\ 16
 endif
 
-" because tomorrow-night looks stupid in a terminal
-if has("gui_running")
-  colorscheme tomorrow-night-bright
-else
-  colorscheme hybrid
-endif
-
-" Search
-set hlsearch   " highlight all search matches
-set incsearch  " indicate next search match as the pattern is being entered
-set ignorecase " ignore case when searching
-set smartcase  " do not ignore case when the search pattern contains upper case
-set magic
+colorscheme Tomorrow-Night-Bright
 
 " <Ctrl-l> redraws the screen and removes search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
@@ -187,6 +179,7 @@ nmap k gk
 " Remap Esc to JK...
 " Always use jk to return to normal mode
 inoremap jk <esc>
+inoremap kj <esc>
 
 " Ctrl-\ jumps to tag definition in new tab
 map <C-\> :tab split<cr>:exec("tag ".expand("<cword>"))<CR>
