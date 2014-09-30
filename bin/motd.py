@@ -107,6 +107,11 @@ def print_tmux_sessions():
         print "%12s   %s" % (session, num_windows)
 
 if __name__ == "__main__":
+  import argparse
+  parser = argparse.ArgumentParser()
+  parser.add_argument("--no-services", "-s", action="store_true", default=False, help="Don't show the services (like Dropbox, etc)")
+  args = parser.parse_args()
+
   # platform 
   pl_info = get_platform_info()
   print Figlet(font="standard").renderText(pl_info['hostname']).strip()
@@ -119,10 +124,11 @@ if __name__ == "__main__":
   print
   
   # services
-  services = get_services_info()
-  for key,val in services.iteritems():
-    print "%s   %s" % (colored(key.rjust(12), "cyan"), val) 
-  print
+  if not args.no_services:
+    services = get_services_info()
+    for key,val in services.iteritems():
+      print "%s   %s" % (colored(key.rjust(12), "cyan"), val) 
+    print
   
   # tmux info
   print_tmux_sessions()
