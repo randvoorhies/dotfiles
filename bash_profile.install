@@ -1,0 +1,10 @@
+# source my bashrc
+if [ -f "$HOME/.bashrc" ];
+then
+  source "$HOME/.bashrc"
+fi
+
+if [ -f "$DOTFILESDIR/bin/motd.py" ];
+then
+  $DOTFILESDIR/bin/motd.py
+fi

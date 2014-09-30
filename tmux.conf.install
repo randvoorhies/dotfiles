@@ -21,7 +21,7 @@ bind-key -t vi-copy 'c' copy-selection
 set -g history-limit 10000
 
 # colours
-set -g default-terminal "screen-256color"
+set -g default-terminal "xterm-256color"
 
 # shorten command delay
 set -sg escape-time 0

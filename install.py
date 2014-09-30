@@ -20,13 +20,13 @@ def symlink(dry_run, what, where):
     os.symlink(what, where)
 
 def install_file(dry_run, filename, dest):
-  filename = os.path.basename(filename)
+  file = os.path.basename(filename)
 
-  if filename in special:
-    destination = special[filename]
+  if file in special:
+    destination = special[file]
 
-  elif filename.endswith(".install"):
-    destination = os.path.abspath(os.path.join(dest, "."+filename[:-8]))
+  elif file.endswith(".install"):
+    destination = os.path.abspath(os.path.join(dest, "."+file[:-8]))
 
   if os.path.islink(destination):
     remove(dry_run, destination)
@@ -56,4 +56,4 @@ if __name__ == "__main__":
 
   for dotfile in os.listdir(os.path.join(dotfilesdir, "hostnames")):
     if dotfile.endswith("install") and dotfile.startswith(hostname):
-      install_file(options.dry_run, os.path.join("hostnames" ,dotfile), os.path.join(os.environ["HOME"]))
+      install_file(options.dry_run, os.path.join(dotfilesdir, "hostnames", dotfile), os.path.join(os.environ["HOME"]))
