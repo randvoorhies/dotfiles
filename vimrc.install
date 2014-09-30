@@ -43,6 +43,9 @@ if exists("*vundle#rc")
   Bundle 'chriskempson/vim-tomorrow-theme'
   Bundle 'molokai'
 
+  " Semantic highlighting
+  Bundle 'jaxbot/semantic-highlight.vim'
+
   " Align text
   Bundle 'godlygeek/tabular'
   imap <leader>= :Tab /=<CR>
@@ -124,10 +127,10 @@ else
 endif
 
 " because tomorrow-night looks stupid in a terminal
-if has("gui")
+if has("gui_running")
   colorscheme tomorrow-night-bright
 else
-  colorscheme molokai
+  colorscheme hybrid
 endif
 
 " Search
