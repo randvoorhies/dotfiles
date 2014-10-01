@@ -9,15 +9,21 @@ from datetime import datetime
 from datetime import timedelta
 
 try:
+  from uptime import uptime
+except ImportError:
+  print "You need python-uptime to continue!"
+  sys.exit(1)
+
+try:
   from pyfiglet import Figlet
 except ImportError:
-  print "You need pyfiglet to continue!"
+  print "You need python-pyfiglet to continue!"
   sys.exit(1)
 
 try:
   from termcolor import colored
 except ImportError:
-  print "You need termcolor to continue!"
+  print "You need python-termcolor to continue!"
   sys.exit(1)
 
 def run_cmd(what):
@@ -33,16 +39,9 @@ def get_platform_info():
     ('hostname',     platform.node()),
     ('Distribution', " ".join(platform.dist())),
     ('Kernel',       platform.uname()[2]),
-    ('Uptime',       "???"),
+    ('Uptime',       str(timedelta(seconds=uptime()))),
     ('Load avg',     ", ".join([str(k) for k in os.getloadavg()]))
     ])
-  
-  # get the uptime
-  with open('/proc/uptime', 'r') as f:
-    uptime_seconds  = float(f.readline().split()[0])
-    uptime_delta    = timedelta(seconds=int(uptime_seconds))
-    stats['Uptime'] = str(uptime_delta)
-  
   return stats
 
 def get_services_info():
