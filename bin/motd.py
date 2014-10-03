@@ -36,7 +36,7 @@ def run_cmd(what):
 
 def get_platform_info():
   stats = OrderedDict([
-    ('hostname',     platform.node()),
+    ('Hostname',     platform.node()),
     ('Distribution', " ".join(platform.dist())),
     ('Kernel',       platform.uname()[2]),
     ('Uptime',       str(timedelta(seconds=uptime()))),
@@ -113,12 +113,10 @@ if __name__ == "__main__":
 
   # platform 
   pl_info = get_platform_info()
-  print Figlet(font="standard").renderText(pl_info['hostname']).strip()
-  print
+  #print Figlet(font="standard").renderText(pl_info['hostname']).strip()
+  #print
   
   for key,val in pl_info.iteritems():
-    if key == "hostname":
-      continue
     print "%s   %s" % (colored(key.rjust(12), "cyan"), val)
   print
   
