@@ -1,6 +1,6 @@
 set nocompatible
-filetype on " Fix vim exiting with bad error code if filetype is already off (git commit problems)
-
+syntax on
+filetype on
 let mapleader=","
 
 if has("user_commands")
@@ -69,25 +69,8 @@ if exists("*vundle#rc")
   " Easy motion
   Bundle 'EasyMotion'
 
-  " Git stuff
-  Bundle 'fugitive.vim'
-  Bundle 'gitv'
-
-  filetype plugin indent on     " required! 
+  filetype plugin indent on
 endif
-" 
-" #################### Miscellaneous Settings #################### 
-" Basic Settings ------------------------------ 
-syntax on
-
-" Filetype for arduino files
-au BufRead, BufNewFile *.ino set filetype=arduino
-
-" Filetype for markdown
-au BufRead,BufNewFile *.md set filetype=markdown
-
-" Filetype for my notes files
-au BufRead,BufNewFile *.note set filetype=notes
 
 set encoding=utf-8
 set autochdir                  " set cwd to the current file's dir
@@ -124,10 +107,11 @@ set smartcase                  " do not ignore case when the search pattern cont
 set magic
 
 if has("unix") && system('uname')=~'Darwin'
-  set guifont=Consolas:h16
+  set guifont=Source\ Code\ Pro:h16
   let g:hybrid_use_iTerm_colors=1
+  let g:airline_powerline_fonts=1
 else
-  set guifont=Deja\ Vu\ Sans\ Mono\ 16
+  set guifont=Deja\ Vu\ Sans\ Mono\ For\ Powerline\ 16
 endif
 
 colorscheme Tomorrow-Night-Bright
@@ -185,6 +169,15 @@ inoremap kj <esc>
 map <C-\> :tab split<cr>:exec("tag ".expand("<cword>"))<CR>
 
 " #################### Filetype Settings ####################  
+" arduino files
+au BufRead, BufNewFile *.ino set filetype=arduino
+
+" markdown
+au BufRead,BufNewFile *.md set filetype=markdown
+
+" my notes files
+au BufRead,BufNewFile *.note set filetype=notes
+
 " Makefile file settings -------------------- 
 augroup filetype_make
   autocmd!
