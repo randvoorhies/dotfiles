@@ -9,9 +9,9 @@ set -g default-terminal "xterm-256color"
 set -g default-command "bash"
 
 # Use Ctrl-f for <prefix>
-unbind-key C-b
+unbind C-b
 set-option -g prefix C-f
-bind-key f send-prefix
+bind f send-prefix
 
 # automatically set window titles
 set-window-option -g automatic-rename on
@@ -20,8 +20,9 @@ set-option -g set-titles on
 # vi mode
 set -g status-keys vi
 set -g mode-keys vi
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'c' copy-selection
+bind -t vi-copy 'v' begin-selection
+bind -t vi-copy 'c' copy-selection
+bind -t vi-copy 'y' copy-selection
 
 # misc
 set -g history-limit 10000
@@ -40,22 +41,27 @@ bind v split-window -h
 bind ( swap-window -t 0
 
 # <prefix>T tiles all the panes
-bind-key T select-layout tiled
+bind T select-layout tiled
+
+# Window navigation
+bind n new-window
+bind -r < previous-window
+bind -r > next-window
 
 # move between panes with Vi movement keys
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
+bind -r h select-pane -L
+bind -r j select-pane -D
+bind -r k select-pane -U
+bind -r l select-pane -R
 
 # resize panes using H, J, K, L
-bind H resize-pane -L 5
-bind J resize-pane -D 5
-bind K resize-pane -U 5
-bind L resize-pane -R 5
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
 
 # Zoom panes
-bind-key | resize-pane -Z \; display-message "Zoom pane"
+bind | resize-pane -Z \; display-message "Zoom pane"
 
 # enable mouse usage
 setw -g mode-mouse on
