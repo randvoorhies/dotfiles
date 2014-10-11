@@ -34,7 +34,7 @@ if [ "$(whoami)" = root ]; then
 	PS1='[\[\033[01;31m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]# '
 else
   # Show the path, but replace the middle with ellipses if it is too long.
-  export MYPS='$(echo -n "${PWD/#$HOME/~}" | awk -F "/" '"'"'{
+  export MYPS='$(echo -n "${PWD/#$HOME/\~}" | awk -F "/" '"'"'{
   if (length($0) > 14) { if (NF>4) print $1 "/" $2 "/.../" $(NF-1) "/" $NF;
     else if (NF>3) print $1 "/" $2 "/.../" $NF;
     else print $1 "/.../" $NF; }
