@@ -37,11 +37,16 @@ if exists("*vundle#rc")
 
   " Miscellaneous Plugins
   Plugin 'matchit.zip'
-  Plugin 'Tabular'
+  Plugin 'junegunn/vim-easy-align'
+  "Plugin 'Tabular'
   Plugin 'Gundo'
   Plugin 'tpope/vim-fugitive'
   Plugin 'https://github.com/scrooloose/nerdtree'
   Plugin 'https://github.com/jistr/vim-nerdtree-tabs'
+  Plugin 'scrooloose/nerdcommenter'
+
+  " Language Plugins
+  Plugin 'slimv.vim'
 
 endif
 filetype plugin indent on     " required! 
@@ -149,6 +154,8 @@ set wildignore+=*.pyc
 
 set guifont=Dejavu\ Sans\ Mono\ for\ Powerline
 let g:airline_powerline_fonts=1
+"set guifont=Dejavu\ Sans\ Mono\ for\ Powerline
+"let g:airline_powerline_fonts=1
 
 
 "set laststatus=2
@@ -201,13 +208,20 @@ inoremap jk <esc>
 set timeout timeoutlen=1000 ttimeoutlen=100
 
 " Tabularize shortcuts
-nnoremap <leader>a= :Tabularize /=<cr>
-nnoremap <leader>a: :Tabularize /:<cr>
-nnoremap <leader>a, :Tabularize /,\zs<cr>
-nnoremap <leader>a; :Tabularize /;\zs<cr>
-nnoremap <leader>a\ :Tabularize /\\<cr>
-nnoremap <leader>a{ :Tabularize /{<cr>
-nnoremap <leader>a} :Tabularize /}<cr>
+"nnoremap <leader>a= :Tabularize /=<cr>
+"nnoremap <leader>a: :Tabularize /:<cr>
+"nnoremap <leader>a, :Tabularize /,\zs<cr>
+"nnoremap <leader>a; :Tabularize /;\zs<cr>
+"nnoremap <leader>a\ :Tabularize /\\<cr>
+"nnoremap <leader>a{ :Tabularize /{<cr>
+"nnoremap <leader>a} :Tabularize /}<cr>
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>a <Plug>(EasyAlign)
+
 
 " Gundo shortcuts
 nnoremap <F5> :GundoToggle<CR>
@@ -330,6 +344,8 @@ augroup END
 " Markdown file settings -------------------- {{{
 augroup filetype_markdown
   autocmd BufNewFile,BufRead *.md setlocal ft=mmd
+  autocmd BufNewFile,BufRead *.md nnoremap <leader>ll :!multimarkdown % > /tmp/%.html<cr>
+  autocmd BufNewFile,BufRead *.md nnoremap <leader>lv :!google-chrome /tmp/%.html<cr>
 augroup END
 "}}}
 " Arduino file settings -------------------- {{{
@@ -374,25 +390,6 @@ elseif os == "Linux"
 endif
 " }}}
 
-" AlignEq() ------------------------------ {{{
-" type ",=" to align a block of equals signs
-if has('python')
-python << endpython
-def AlignEq():
-  import vim
-  maxspaces = 0
-  for line in vim.current.range:
-    equals = line.find('=')
-    maxspaces = max(maxspaces, len(line[0:equals].rstrip()))
-
-  for index, line in enumerate(vim.current.range):
-    equals = line.find('=')
-    if equals == -1: continue
-    vim.current.range[index] = line[0:equals].rstrip() + ' ' * (maxspaces - len(line[0:equals].rstrip())) + ' = ' + line[equals+1:].lstrip()
-
-endpython
-vmap ,= :python AlignEq()<CR>
-endif
 "}}}
 " SetMkfile() ------------------------------ {{{
 " ######################################################################
