@@ -23,6 +23,7 @@ flags = [
 '-isystem', '/usr/include/clang/3.0/include/',
 '-isystem', '/usr/lib/gcc/x86_64-linux-gnu/4.6/include/',
 '-isystem', '/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/',
+'-isystem', '/home/rand/workspace/ilab/nrt/trunk/nrt/include',
 ]
 
 
@@ -48,6 +49,7 @@ def FlagsForFile( filename, **kwargs ):
   log.flush()
 
   # If there was a CMakeLists.txt file, then try to find a build directory
+  foundcmakelists = False
   builddir = os.path.join(cmakelistsdir, 'build')
   if cmakelistsdir != '/' and os.path.exists(builddir):
       # If we found a build directory, then look for any 'flags.make' files
@@ -57,6 +59,7 @@ def FlagsForFile( filename, **kwargs ):
               flagsfiles.append(os.path.join(root, filename))
 
       # Grab any CXX_FLAGS from our flags.make files, and add them onto our global flags
+      foundcmakelists = True
       cmakeflags = []
       for flagsfile in flagsfiles:
           with open(flagsfile, 'r') as ff:
@@ -68,6 +71,11 @@ def FlagsForFile( filename, **kwargs ):
 
       log.write('Appending some flags\n')
       flags += list(set(cmakeflags))
+
+  if not foundcmakelists:
+      log.write('No CMakeLists.txt found... using CPPFLAGS')
+      flags += os.environ['CPPFLAGS']
+
 
   log.write("\n:::::::::::::::: Final Flags :::::::::::::::::\n")
   log.write(str(flags))
