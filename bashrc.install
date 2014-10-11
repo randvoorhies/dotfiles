@@ -30,13 +30,18 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
-##if [ "$(whoami)" = root ]; then
-#	PS1='[\[\033[01;31m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]# '
-#else
-#  PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
-#fi
-#
-##PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
+if [ "$(whoami)" = root ]; then
+	PS1='[\[\033[01;31m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]# '
+else
+  # Show the path, but replace the middle with ellipses if it is too long.
+  export MYPS='$(echo -n "${PWD/#$HOME/~}" | awk -F "/" '"'"'{
+  if (length($0) > 14) { if (NF>4) print $1 "/" $2 "/.../" $(NF-1) "/" $NF;
+    else if (NF>3) print $1 "/" $2 "/.../" $NF;
+    else print $1 "/.../" $NF; }
+    else print $0;}'"'"')'
+  PS1='$(eval "echo ${MYPS}")$ '
+  PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]$(eval "echo ${MYPS}")\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+fi
 
 export LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
 export CLICOLOR=1
@@ -50,6 +55,12 @@ fi
 if [ -f /opt/ros/electric/setup.bash ]
 then
   source /opt/ros/electric/setup.bash 
+  export OGRE_RTT_MODE=FBO
+fi
+
+if [ -f /opt/ros/indigo/setup.bash ]
+then
+  source /opt/ros/indigo/setup.bash 
   export OGRE_RTT_MODE=FBO
 fi
 
@@ -94,3 +105,6 @@ complete -F _ros_master_select ros_master_select
 #export ROS_MASTER_URI=http://IRIS1:11311
 
 # vim:syntax=sh
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
