@@ -63,11 +63,13 @@ if exists("*vundle#rc")
   let g:airline#extensions#tabline#enabled=1
   set laststatus=2
 
-  " Indent lines
-  " Bundle 'Yggdroot/indentLine'
-
   " Easy motion
   Bundle 'EasyMotion'
+
+  " tmuxline
+  Bundle 'edkolev/tmuxline.vim'
+  "let g:airline#extensions#tmuxline#enabled=0
+  "let g:tmuxline_theme='jellybeans'
 
   filetype plugin indent on
 endif
