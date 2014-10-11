@@ -4,7 +4,7 @@ fi
 
 alias axel='axel -a'
 alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
-alias grep='grep --color -n'
+alias cgrep='grep --color -n'
 
 alias matlab='matlab -nodesktop'
 # vim:syntax=sh
