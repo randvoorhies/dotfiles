@@ -4,3 +4,9 @@ if [ -f "$DOTFILESDIR/bin/motd.py" ];
 then
   $DOTFILESDIR/bin/motd.py
 fi
+
+export PATH=$HOME/Library/bin:$PATH
+
+#
+export NZBS="/srv/media/p2p/nzbs/complete"
+export TELEVISION="/srv/media/television"
