@@ -39,7 +39,6 @@ filetype plugin indent on
 syntax on                                        " syntax highlighting
 let mapleader=","                                " Maps <leader> to ,
 colorscheme Tomorrow-Night-Bright                " Nice theme
-au VimResized * exe "normal! \<c-w>="            " Resize splits when the window is resized
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' " Highlight VCS conflict markers
 set nocompatible                                 " I don't need Vim to be Vi compatible
 set mouse=a                                      " Mouse support in terminal Vim
@@ -77,6 +76,10 @@ set ignorecase                                   " Ignore case when searching
 set smartcase                                    " Do not ignore case when the search pattern contains upper case
 set magic                                        " Magic
 set tags=./tags,tags;/                           " Look for tag files recursively up to the root directory.
+set t_ut=                                        " Redraw background
+
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
 
 " ------------
 " Mappings
