@@ -13,6 +13,7 @@ Bundle 'pathogen.vim'
 Bundle 'gmarik/vundle'
 " Explore the filesystem in a tree
 Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs' 
 " Browse tags in a split
 Bundle 'Tagbar'
 " Style the status line
@@ -20,9 +21,9 @@ Bundle 'bling/vim-airline'
 " Align text on = or : easily
 Bundle 'godlygeek/tabular'
 " Better completion
-Bundle 'neocomplcache'
+" Bundle 'neocomplcache'
 " Complete everything with tabs
-Bundle 'SuperTab'
+" Bundle 'SuperTab'
 " Fast filesystem nav for projects
 Bundle 'ctrlp.vim'
 " Show marks in the gutter
@@ -33,6 +34,8 @@ Bundle 'EasyMotion'
 Bundle 'chriskempson/vim-tomorrow-theme'
 " Semantic highlighting
 Bundle 'jaxbot/semantic-highlight.vim'
+" Debugger
+Bundle 'joonty/vdebug'
 
 " Basic Vim settings
 filetype plugin indent on
@@ -124,7 +127,7 @@ let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"  
 let g:airline#extensions#tabline#enabled=1                                      " Enable airline by default on new sessions
 set laststatus=2                                                                " see above
 
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeTabsToggle<CR>
 nnoremap <leader>t :TagbarToggle<CR>
 imap <leader>= :Tab /=<CR>
 nmap <leader>= :Tab /=<CR>
