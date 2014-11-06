@@ -20,9 +20,13 @@ set-option -g set-titles on
 # vi mode
 set -g status-keys vi
 set -g mode-keys vi
+
+# Copy/paste on OSX
 bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'c' copy-selection
-bind -t vi-copy 'y' copy-selection
+bind -t vi-copy 'y' copy-pipe "reattach-to-user-namespace pbcopy"
+
+unbind -t vi-copy Enter
+bind -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 
 # misc
 set -g history-limit 10000
