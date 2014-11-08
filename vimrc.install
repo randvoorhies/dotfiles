@@ -106,10 +106,6 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " Clear search highlights
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-" Maintain selection while indenting
-vnoremap < <gv
-vnoremap > >gv
-
 " Disable F1
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
