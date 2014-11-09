@@ -15,7 +15,7 @@ alias vim="vim -p"
 
 alias pid="ps -o pid --no-header -C"
 alias sprunge="curl -F \"sprunge=<-\" http://sprunge.us"
-alias please="sudo $(history -p !!)"
+alias please='sudo $(history -p !!)'
 alias datafart="curl --data-binary @- datafart.com"
 
 alias tl="tmux ls"
