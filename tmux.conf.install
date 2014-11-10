@@ -2,16 +2,16 @@
 set -g utf8
 set-window-option -g utf8 on
 
+# Use Ctrl-f for <prefix>
+unbind C-b
+set-option -g prefix C-f
+bind f send-prefix
+
 # colours
 set -g default-terminal "xterm-256color"
 
 # default shell (non-login)
 set -g default-command "bash"
-
-# Use Ctrl-f for <prefix>
-unbind C-b
-set-option -g prefix C-f
-bind f send-prefix
 
 # automatically set window titles
 set-window-option -g automatic-rename on
@@ -20,9 +20,14 @@ set-option -g set-titles on
 # vi mode
 set -g status-keys vi
 set -g mode-keys vi
+
 bind -t vi-copy 'v' begin-selection
-bind -t vi-copy 'c' copy-selection
-bind -t vi-copy 'y' copy-selection
+
+if-shell 'test "$(uname -s)" = "Darwin"' \
+  'bind-key y run-shell "tmux show-buffer | pbcopy" \; display-message "Copied tmux buffer to system clipboard"'
+
+if-shell 'test "$(uname -s)" = "Linux"' \
+  'bind-key y run-shell "tmux show-buffer | xclip -sel -clip -i" \; display-message "Copied tmux buffer to system clipboard"'
 
 # misc
 set -g history-limit 10000
@@ -61,7 +66,7 @@ bind -r K resize-pane -U 5
 bind -r L resize-pane -R 5
 
 # Zoom panes
-#bind | resize-pane -Z \; display-message "Zoom pane"
+bind m resize-pane -Z \; display-message "Zoom pane"
 
 # enable mouse usage
 setw -g mode-mouse on
