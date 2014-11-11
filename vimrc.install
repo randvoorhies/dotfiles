@@ -36,6 +36,8 @@ Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'jaxbot/semantic-highlight.vim'
 " Debugger
 Bundle 'joonty/vdebug'
+" Swift colors
+Bundle 'toyamarinyon/vim-swift'
 
 " Basic Vim settings
 filetype plugin indent on
