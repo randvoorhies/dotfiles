@@ -53,6 +53,12 @@ bind n new-window
 bind -r < previous-window
 bind -r > next-window
 
+# unbind arrow keys
+unbind Up
+unbind Down
+unbind Left
+unbind Right
+
 # move between panes with Vi movement keys
 bind -r h select-pane -L
 bind -r j select-pane -D
