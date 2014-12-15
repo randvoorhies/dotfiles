@@ -39,8 +39,8 @@ set -sg escape-time 0
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
 
 # <prefix>s splits horizontally, <prefix>v splits vertically
-bind s split-window -v
-bind v split-window -h
+bind s split-window -v -c "#{pane_current_path}"
+bind v split-window -h -c "#{pane_current_path}"
 
 # <prefix>( moves this window to the first spot
 bind ( swap-window -t 0

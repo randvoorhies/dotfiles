@@ -34,8 +34,8 @@ Bundle 'EasyMotion'
 Bundle 'chriskempson/vim-tomorrow-theme'
 " Semantic highlighting
 Bundle 'jaxbot/semantic-highlight.vim'
-" Debugger
-Bundle 'joonty/vdebug'
+" Git integration
+Bundle 'tpope/vim-fugitive'
 
 " Basic Vim settings
 filetype plugin indent on
@@ -80,6 +80,7 @@ set smartcase                                    " Do not ignore case when the s
 set magic                                        " Magic
 set tags=./tags,tags;/                           " Look for tag files recursively up to the root directory.
 set t_ut=                                        " Redraw background
+set nospell                                      " I don't want spell checking
 
 " Resize splits when the window is resized
 au VimResized * exe "normal! \<c-w>="
