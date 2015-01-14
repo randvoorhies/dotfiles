@@ -24,6 +24,7 @@ if exists("*vundle#rc")
   Plugin 'https://github.com/randvoorhies/vim-multimarkdown'
   Plugin 'bash-support.vim'
   Plugin 'https://github.com/jansenm/vim-cmake'
+  Plugin 'AutomaticLaTeXPlugin'
 
   " Syntax Plugins
   Plugin 'pyflakes.vim'
@@ -44,6 +45,7 @@ if exists("*vundle#rc")
   Plugin 'https://github.com/scrooloose/nerdtree'
   Plugin 'https://github.com/jistr/vim-nerdtree-tabs'
   Plugin 'scrooloose/nerdcommenter'
+  Plugin 'align'
 
   " Language Plugins
   Plugin 'slimv.vim'
@@ -88,6 +90,7 @@ set switchbuf=useopen,usetab,newtab
 set diffopt+=iwhite
 set nobackup "Backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup
+set modeline
 syntax on
 
 let g:nerdtree_tabs_open_on_gui_startup = 0
@@ -149,6 +152,7 @@ set wildignore+=*.pyc
 " set backupdir=~/.vim/tmp/backup//
 " set directory=~/.vim/tmp/swap//
 " set backup
+set noswapfile
 " }}}
 " Status Line -------------------- {{{
 

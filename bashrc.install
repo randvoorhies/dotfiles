@@ -51,17 +51,10 @@ if [ -f /etc/bash_completion ]; then
  . /etc/bash_completion
 fi
 
-# ROS setup
-if [ -f /opt/ros/electric/setup.bash ]
-then
-  source /opt/ros/electric/setup.bash 
-  export OGRE_RTT_MODE=FBO
-fi
-
 if [ -f /opt/ros/indigo/setup.bash ]
 then
   source /opt/ros/indigo/setup.bash 
-  export OGRE_RTT_MODE=FBO
+  #export OGRE_RTT_MODE=FBO
 fi
 
 source ~/.envrc
