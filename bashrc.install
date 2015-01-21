@@ -62,7 +62,6 @@ source ~/.aliasrc
 
 if [ -f ${HOME}/.pathrcc ];
 then
-  echo "Sourcing pathrcc"
   source ~/.pathrcc
 fi
 
