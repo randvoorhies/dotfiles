@@ -98,6 +98,3 @@ complete -F _ros_master_select ros_master_select
 #export ROS_MASTER_URI=http://IRIS1:11311
 
 # vim:syntax=sh
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"

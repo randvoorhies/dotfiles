@@ -28,13 +28,13 @@ if exists("*vundle#rc")
 
   " Syntax Plugins
   Plugin 'pyflakes.vim'
-  Plugin 'https://github.com/Valloric/YouCompleteMe'
+  "Plugin 'https://github.com/Valloric/YouCompleteMe'
   Plugin 'rhysd/vim-clang-format'
   "Plugin 'Syntastic'
 
   " Theme plugins
   Plugin 'flazz/vim-colorschemes'
-  Plugin 'bling/vim-airline'
+  "Plugin 'bling/vim-airline'
 
   " Miscellaneous Plugins
   Plugin 'matchit.zip'
@@ -157,8 +157,8 @@ set noswapfile
 " }}}
 " Status Line -------------------- {{{
 
-set guifont=Dejavu\ Sans\ Mono\ for\ Powerline
-let g:airline_powerline_fonts=1
+"set guifont=Dejavu\ Sans\ Mono\ for\ Powerline
+"let g:airline_powerline_fonts=1
 "set guifont=Dejavu\ Sans\ Mono\ for\ Powerline
 "let g:airline_powerline_fonts=1
 
