@@ -49,6 +49,7 @@ if exists("*vundle#rc")
 
   " Language Plugins
   Plugin 'slimv.vim'
+  Plugin 'csv.vim'
 
 endif
 filetype plugin indent on     " required! 
