@@ -1,144 +1,52 @@
-" #################### Vundle Plugins #################### {{{
 set nocompatible
 
-filetype on " Fix vim exiting with bad error code if filetype is already off (git commit problems)
-
-if has("user_commands")
-  set rtp+=~/.vim/bundle/vundle/
-  runtime autoload/vundle.vim
-endif
-if exists("*vundle#rc")
-  " $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-  filetype off " required!
-
-  call vundle#rc()
-
-  Plugin 'gmarik/vundle'
-
-  " Highlighting Plugins
-  Plugin 'Arduino-syntax-file'
-  Plugin 'matlab.vim'
-  Plugin 'groenewege/vim-less' 
-  Plugin 'html5.vim'
-  Plugin 'scons.vim'
-  Plugin 'https://github.com/randvoorhies/vim-multimarkdown'
-  Plugin 'bash-support.vim'
-  Plugin 'https://github.com/jansenm/vim-cmake'
-  Plugin 'AutomaticLaTeXPlugin'
-
-  " Syntax Plugins
-  Plugin 'pyflakes.vim'
-  "Plugin 'https://github.com/Valloric/YouCompleteMe'
-  Plugin 'rhysd/vim-clang-format'
-  "Plugin 'Syntastic'
-
-  " Theme plugins
-  Plugin 'flazz/vim-colorschemes'
-  "Plugin 'bling/vim-airline'
-
-  " Miscellaneous Plugins
-  Plugin 'matchit.zip'
-  Plugin 'junegunn/vim-easy-align'
-  "Plugin 'Tabular'
-  Plugin 'Gundo'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'https://github.com/scrooloose/nerdtree'
-  Plugin 'https://github.com/jistr/vim-nerdtree-tabs'
-  Plugin 'scrooloose/nerdcommenter'
-  Plugin 'align'
-
-  " Language Plugins
-  Plugin 'slimv.vim'
-  Plugin 'csv.vim'
-
-endif
-filetype plugin indent on     " required! 
-
-" }}}
-
-" #################### Miscellaneous Settings #################### {{{
-" Basic Settings ------------------------------ {{{
+" Load extra config files
+function! LoadConfigFile(configfile)
+  let filepath = $HOME . "/dotfiles/vimconfig/" . a:configfile
+  if filereadable(filepath)
+    execute 'source '.fnameescape(filepath)
+  endif
+endfunction
+call LoadConfigFile("plugins.vim")
 
 syntax on
 filetype on
 set t_Co=256                  " Let vim know we're using a 256 color terminal
 set tabpagemax=100            " Open up to 100 tabs
-set encoding=utf-8
-set autochdir
-set ruler
-set autoindent
-set smartindent
-set shiftwidth=2
-set tabstop=2
-set expandtab
-set showmatch
-set hlsearch                   "Highlight searches
-set guioptions-=T
-set showmode                   "Tell me when I'm in insert mode
-set ttyfast                    "We're on a fast connection, it's ok to send lots of bytes
-set showbreak=↪
-set fillchars=diff:⣿
-set autoread                   "Detect when open files have changed and reopen them
-set title
-set formatoptions=qn1          "See :help fo-table for options here
-set foldmethod=indent
-set foldnestmax=10
-set nofoldenable
-set foldlevel=10
-"set relativenumber
-set number
-set switchbuf=useopen,usetab,newtab
-set diffopt+=iwhite
-set nobackup "Backup off, since most stuff is in SVN, git et.c anyway...
-set nowritebackup
-set modeline
-syntax on
+set encoding=utf-8            " UTF-8 Encoding
+set autochdir                 " Automatically switch to the directory of an open file
+set ruler                     " Turn on the ruler in the bottom-right
+set autoindent                " Copy indent from current line when starting new one
+set shiftwidth=2              " Number of spaces for each level of indentation
+set tabstop=2                 " Number of spaces that a <Tab> in the file counts for
+set expandtab                 " Turn spaces into tabs
+set showmatch                 " When a bracket is inserted, briefly jump to the matching one.
+set hlsearch                  " Highlight searches
+set guioptions-=T             " Remove the toolbar from the GUI
+set showmode                  " Tell me when I'm in insert mode
+set ttyfast                   " We're on a fast connection, it's ok to send lots of bytes
+set showbreak=↪               " String to put at the start of lines that have been wrapped.
+set fillchars=diff:⣿          " Characters to fill the statuslines and vertical separators.
+set autoread                  " Detect when open files have changed and reopen them
+set title                     " Set the title of the window to the filename
+set formatoptions=qn1         " See :help fo-table for options here
+set foldmethod=indent         " Lines with equal indent form a fold.
+set foldnestmax=10            " Sets the maximum nesting of folds for the "indent" and "syntax".
+set nofoldenable              " When off, all folds are open.
+set foldlevel=10              " Sets the fold level: Folds with a higher level will be closed.
+set number                    " Precede each line with its line number
+set diffopt+=iwhite           " Option settings for diff mode.
+set nobackup                  " Backup off, since most stuff is in SVN, git et.c anyway...
+set nowritebackup             " Backup off when writing
+set modeline                  " Look for modelines at the beginning and end of files
+set showmatch                 " Show matching brackets
+set noswapfile                " Don't create swapfiles
+set lazyredraw                " Redraw only when we need to.
 
-let g:nerdtree_tabs_open_on_gui_startup = 0
+" Make sure you have to hit jk within a short window (100ms) to trigger normal mode
+set timeout timeoutlen=1000 ttimeoutlen=100
 
-let g:load_doxygen_syntax=1
-let g:doxygen_enhanced_color=1
-let g:doxygen_end_punctuation=1
-
-"let g:doxygen_my_rendering=0
-
-" open each buffer in its own tabpage
-"au BufNewFile,BufRead * nested
-"  \ if &buftype != "help" |
-"  \   tab sball |
-"  \ endif
-
-" Keybinds/remapping 
-" makes it so up and down work on wrapped lines 
-"nnoremap j gj 
-"nnoremap k gk 
-
-
-" Color Settings ------------------------------ {{{
-if has('gui_running')
-  colorscheme badwolf
-else
-  colorscheme badwolf
-  set background=light
-end
-"}}}
-
-
-"Resize splits when the window is resized
-au VimResized * exe "normal! \<c-w>=" 
-
-
-" IMPORTANT: grep will sometimes skip displaying the file name if you
-" search in a singe file. This will confuse Latex-Suite. Set your grep
-" program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
-set grepformat=%f:%l:%m
-
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" }}}
-" Wild Menu -------------------- {{{
+" Setup the wildmenu
 set wildmenu
 set wildmode=list:longest
 set wildignore+=*.git,*.svn
@@ -147,231 +55,63 @@ set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png,*.pdf
 set wildignore+=*.o
 set wildignore+=*.DS_Store
 set wildignore+=*.pyc
-" }}}
-" Temporary Directories -------------------- {{{
-" set undodir=~/.vim/tmp/undo//
-" set backupdir=~/.vim/tmp/backup//
-" set directory=~/.vim/tmp/swap//
-" set backup
-set noswapfile
-" }}}
-" Status Line -------------------- {{{
 
-"set guifont=Dejavu\ Sans\ Mono\ for\ Powerline
-"let g:airline_powerline_fonts=1
-"set guifont=Dejavu\ Sans\ Mono\ for\ Powerline
-"let g:airline_powerline_fonts=1
+" Try to load our favorite colorscheme. Fall back if necessary
+try 
+  colorscheme badwolf
+catch
+  silent! colorscheme solarized
+endtry
 
+"Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>=" 
 
-"set laststatus=2
-"set statusline=%f    " Path.
-"set statusline+=%m   " Modified flag.
-"set statusline+=%r   " Readonly flag.
-"set statusline+=%w   " Preview window flag.
-"set statusline+=\    " Space.
-"set statusline+=%=   " Right align.
-"" File format, encoding and type.  Ex: "(unix/utf-8/python)"
-"set statusline+=(
-"set statusline+=%{&ff}                        " Format (unix/DOS).
-"set statusline+=/
-"set statusline+=%{strlen(&fenc)?&fenc:&enc}   " Encoding (utf-8).
-"set statusline+=/
-"set statusline+=%{&ft}                        " Type (python).
-"set statusline+=)
-"
-"" Line and column position and counts.
-"set statusline+=\ (line\ %l\/%L,\ col\ %03c)
-" }}}
-" }}}
-
-" #################### Key Mappings #################### {{{
+" Comma is a more ergonomic mapleader than forwardslash
 let mapleader=","
 
-" -: Move current line down
-nnoremap - ddp
-
-" _: Move current line up
-nnoremap _ ddkP
-
 " Edit Vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :vsplit $HOME/.vimrc<cr>
 
 " Source Vimrc
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
-" Beginning of line
-nnoremap H 0
-
-" End of line
-nnoremap L $
+nnoremap <leader>sv :source $HOME/.vimrc<cr>
 
 " Always use jk to return to normal mode
 inoremap jk <esc>
 
-" Make sure you have to hit jk within a short window (100ms) to trigger normal mode
-"set timeout timeoutlen=100
-set timeout timeoutlen=1000 ttimeoutlen=100
+" turn off search highlight with ,<space>
+nnoremap <leader><space> :nohlsearch<CR>
 
-" Tabularize shortcuts
-"nnoremap <leader>a= :Tabularize /=<cr>
-"nnoremap <leader>a: :Tabularize /:<cr>
-"nnoremap <leader>a, :Tabularize /,\zs<cr>
-"nnoremap <leader>a; :Tabularize /;\zs<cr>
-"nnoremap <leader>a\ :Tabularize /\\<cr>
-"nnoremap <leader>a{ :Tabularize /{<cr>
-"nnoremap <leader>a} :Tabularize /}<cr>
-
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
-nmap <Leader>a <Plug>(EasyAlign)
-
-
-" Gundo shortcuts
-nnoremap <F5> :GundoToggle<CR>
-
-" }}}
-
-" #################### Clang Format Settings ####################  {{{
-let g:clang_format#style_options = {
-            \ "AccessModifierOffset" : -4,
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11",
-            \ "DerivePointerBinding" : "true",
-            \ "AllowShortIfStatementsOnASingleLine" : "true",
-            \ "AllowShortLoopsOnASingleLine" : "true",
-            \ "NamespaceIndentation" : "All",
-            \ "BreakBeforeBraces" : "Allman"}
-"}}}
-
-" #################### Powerline Settings ####################  {{{
-set laststatus=2
-"set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 12
-"let g:Powerline_symbols = 'fancy'
-"set guioptions=egmrt  " hide the gui menubar
-" }}}
-
-" #################### You Complete Me Settings ####################  {{{
-"let g:ycm_filetype_specific_completion_to_disable = {'html' : 0, 
-"                                                     'js' : 0,
-"                                                     'coffee' : 0}
-"let g:ycm_filetype_whitelist = {'cpp': 1}
-"let g:ycm_filetype_blacklist = {'cmake': 1}
-"
-"let g:ycm_autoclose_preview_window_after_completion = 1
-"let g:ycm_warning_symbol = '->'
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_confirm_extra_conf = 0
-
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-                                
-" }}}
-
-" #################### Filetype Settings ####################  {{{
-" Arduino file settings -------------------- {{{
-augroup filetype_pde
+" Filetype settings
+augroup filetypes
   autocmd!
-  " Set filetype for arduino files
+
   autocmd BufNewFile,BufRead *.pde setlocal ft=arduino
-augroup END
-" }}}
-" xacro file settings -------------------- {{{
-augroup filetype_xacro
-  autocmd!
-  " Set filetype for arduino files
+
   autocmd BufNewFile,BufRead *.xacro setlocal ft=xml
-augroup END
-" }}}
-" ROS Launchfile settings -------------------- {{{
-augroup filetype_launch
-  autocmd!
-  " Set filetype for ROS launch files
+
   autocmd BufNewFile,BufRead *.launch setlocal ft=xml
-augroup END
-" }}}
-" Makefile file settings -------------------- {{{
-augroup filetype_make
-  autocmd!
-  " Don't expand tabs when editing makefiles
-  autocmd! FileType make setlocal noexpandtab
-augroup END
-" }}}
-" Vimscript file settings -------------------- {{{
-augroup filetype_vim
-  autocmd!
+
+  autocmd FileType make setlocal noexpandtab
+
   autocmd FileType vim setlocal foldmethod=marker
   autocmd FileType vim set foldlevelstart=0
-augroup END
-" }}}
-" Latex file settings -------------------- {{{
-augroup filetype_latex
-  let g:tex_flavor='pdflatex'
-  let g:Tex_DefaultTargetFormat='pdf'
-  "let g:Tex_ViewRule_pdf='evince'
-augroup END
-" }}}
-" Text file settings -------------------- {{{
-augroup filetype_txt
+
   autocmd BufNewFile,BufRead *.txt setlocal ft=none
   autocmd BufNewFile,BufRead *.txt setlocal spell
   autocmd BufNewFile,BufRead *.txt setlocal foldmethod=marker
-augroup END
-" }}}
-" CMakeLists.txt file settings -------------------- {{{
-augroup filetype_cmake
+
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal nospell
   autocmd BufNewFile,BufRead CMakeLists.txt NeoComplCacheEnable
-augroup END
-" }}}
-" Python file settings -------------------- {{{
-augroup filetype_python
-  let g:jedi#popup_on_dot = 1
-augroup END
-" }}}
-" Handlebars file settings -------------------- {{{
-augroup filetype_python
-  autocmd BufNewFile,BufRead *.handlebars setlocal ft=handlebars
-augroup END
-"}}}
-" Coffescript file settings -------------------- {{{
-augroup filetype_coffee
-  let g:syntastic_coffee_coffeelint_args="--indentation=4"
-  au BufNewFile,BufReadPost *.coffee setl shiftwidth=4 expandtab
-augroup END
-"}}}
-" SConstruct file settings -------------------- {{{
-augroup filetype_scons
-  autocmd BufNewFile,BufRead SConstruct setlocal ft=scons
-augroup END
-"}}}
-" Markdown file settings -------------------- {{{
-augroup filetype_markdown
+
   autocmd BufNewFile,BufRead *.md setlocal ft=mmd
   autocmd BufNewFile,BufRead *.md nnoremap <leader>ll :!multimarkdown % > /tmp/%.html<cr>
   autocmd BufNewFile,BufRead *.md nnoremap <leader>lv :!google-chrome /tmp/%.html<cr>
-augroup END
-"}}}
-" Arduino file settings -------------------- {{{
-augroup filetype_arduino
+
   autocmd BufNewFile,BufRead *.ino setlocal ft=Arduino
 augroup END
-"}}}
-" C++ file settings -------------------- {{{
-augroup filetype_cpp
-  "autocmd BufNewFile,BufRead *.cpp setlocal ft=cpp11
-  "autocmd BufNewFile,BufRead *.hpp setlocal ft=cpp11
-  "autocmd BufNewFile,BufRead *.C setlocal ft=cpp11
-  "autocmd BufNewFile,BufRead *.H setlocal ft=cpp11
-augroup END
-" }}}
-" }}}
 
-" #################### Miscellaneous Functions ####################  {{{
-" OpenOther() ------------------------------ {{{
-" Type ",o" to switch between whatever/include/wherever/myfile.H
-" and whatever/src/wherever/myfile.C
+" Convenient "OpenOther function for NRT
 if has('python')
 function! OpenOther()
   if expand("%:e") == "C"
@@ -382,121 +122,5 @@ function! OpenOther()
 endfunction
 nmap ,o :call OpenOther()<CR>
 endif
-"}}}
-
-" Sprunge() ------------------------------ {{{
-"  type :Sprunge to send the selected lines to sprunge.us.
-"  The sprunge URL will end up in your clipboard
-let os = substitute(system('uname'), "\n", "", "")
-if os == "Darwin"
-  command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | pbcopy
-elseif os == "Linux"
-  command! -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us | xcopy 
-endif
-" }}}
-
-"}}}
-" SetMkfile() ------------------------------ {{{
-" ######################################################################
-" SetMkfile() - Recursively look down the directory tree to find a makefile
-fun! SetMkfile()
-  let filemk = "Makefile"
-  let pathmk = "./"
-  let depth = 1
-  while depth < 10
-    if filereadable(pathmk . filemk)
-      return pathmk
-    endif
-    let depth += 1
-    let pathmk = "../" . pathmk
-  endwhile
-  return "."
-endf
-command! -nargs=* Make | let $mkpath = SetMkfile() | make <args> -C $mkpath | cwindow 10
-"}}}
-
-" Functional Programming ------------------------------  {{{
-  function! Sorted(l)
-    let new_list = deepcopy(a:l)
-    call sort(new_list)
-    return new_list
-  endfunction
-
-  function! Reversed(l)
-    let new_list = deepcopy(a:l)
-    call reverse(new_list)
-    return new_list
-  endfunction
-
-  function! Append(l, val)
-    let new_list = deepcopy(a:l)
-    call add(new_list, a:val)
-    return new_list
-  endfunction
-
-  function! Assoc(l, i, val)
-    let new_list = deepcopy(a:l)
-    let new_list[a:i] = a:val
-    return new_list
-  endfunction
-
-  function! Pop(l, i)
-    let new_list = deepcopy(a:l)
-    call remove(new_list, a:i)
-    return new_list
-  endfunction
-
-  function! Mapped(fn, l)
-    let new_list = deepcopy(a:l)
-    call map(new_list, string(a:fn) . '(v:val)')
-    return new_list
-  endfunction
-
-  function! Filtered(fn, l)
-    let new_list = deepcopy(a:l)
-    call filter(new_list, string(a:fn) . '(v:val)')
-    return new_list
-  endfunction
-
-  function! Removed(fn, l)
-    let new_list = deepcopy(a:l)
-    call filter(new_list, '!' . string(a:fn) . '(v:val)')
-    return new_list
-  endfunction
-" }}}
-"}}}
-
-function! Wipeout()
-  " list of *all* buffer numbers
-  let l:buffers = range(1, bufnr('$'))
-
-  " what tab page are we in?
-  let l:currentTab = tabpagenr()
-  try
-    " go through all tab pages
-    let l:tab = 0
-    while l:tab < tabpagenr('$')
-      let l:tab += 1
-
-      " go through all windows
-      let l:win = 0
-      while l:win < winnr('$')
-        let l:win += 1
-        " whatever buffer is in this window in this tab, remove it from
-        " l:buffers list
-        let l:thisbuf = winbufnr(l:win)
-        call remove(l:buffers, index(l:buffers, l:thisbuf))
-      endwhile
-    endwhile
-
-    " if there are any buffers left, delete them
-    if len(l:buffers)
-      execute 'bwipeout' join(l:buffers)
-    endif
-  finally
-    " go back to our original tab page
-    execute 'tabnext' l:currentTab
-  endtry
-endfunction
 
 " vim:syntax=vim
