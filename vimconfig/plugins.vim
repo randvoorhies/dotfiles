@@ -26,13 +26,13 @@ endif
 filetype plugin indent on     " required! 
 
 " Tabularize shortcuts
-nnoremap <leader>a= :Tabularize /=<cr>
-nnoremap <leader>a: :Tabularize /:<cr>
-nnoremap <leader>a, :Tabularize /,\zs<cr>
-nnoremap <leader>a; :Tabularize /;\zs<cr>
-nnoremap <leader>a\ :Tabularize /\\<cr>
-nnoremap <leader>a{ :Tabularize /{<cr>
-nnoremap <leader>a} :Tabularize /}<cr>
+nnoremap <localleader>a= :Tabularize /=<cr>
+nnoremap <localleader>a: :Tabularize /:<cr>
+nnoremap <localleader>a, :Tabularize /,\zs<cr>
+nnoremap <localleader>a; :Tabularize /;\zs<cr>
+nnoremap <localleader>a\ :Tabularize /\\<cr>
+nnoremap <localleader>a{ :Tabularize /{<cr>
+nnoremap <localleader>a} :Tabularize /}<cr>
 
 " Latex Settings
 let g:tex_flavor='pdflatex'
