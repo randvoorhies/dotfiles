@@ -97,4 +97,9 @@ _ros_master_select()
 complete -F _ros_master_select ros_master_select
 #export ROS_MASTER_URI=http://IRIS1:11311
 
+ROSLAUNCH_SSH_UNKNOWN=1
+
 # vim:syntax=sh
+
+# added by travis gem
+[ -f /home/rand/.travis/travis.sh ] && source /home/rand/.travis/travis.sh

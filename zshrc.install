@@ -79,3 +79,6 @@ function nrtcdcompletion() {
 compctl -K nrtcdcompletion nrtcd
 
 # vim:syntax=zsh
+
+# added by travis gem
+[ -f /home/rand/.travis/travis.sh ] && source /home/rand/.travis/travis.sh

@@ -25,11 +25,12 @@ if exists("*vundle#rc")
   Plugin 'bash-support.vim'
   Plugin 'https://github.com/jansenm/vim-cmake'
   Plugin 'AutomaticLaTeXPlugin'
+  Plugin 'solarnz/thrift.vim'
 
   " Syntax Plugins
-  Plugin 'pyflakes.vim'
-  "Plugin 'https://github.com/Valloric/YouCompleteMe'
-  Plugin 'rhysd/vim-clang-format'
+  "Plugin 'pyflakes.vim'
+  Plugin 'https://github.com/Valloric/YouCompleteMe'
+  "Plugin 'rhysd/vim-clang-format'
   "Plugin 'Syntastic'
 
   " Theme plugins
@@ -270,10 +271,12 @@ nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " #################### Filetype Settings ####################  {{{
 " Arduino file settings -------------------- {{{
-augroup filetype_pde
+augroup filetype_arduino
   autocmd!
   " Set filetype for arduino files
   autocmd BufNewFile,BufRead *.pde setlocal ft=arduino
+  autocmd BufNewFile,BufRead *.ino setlocal ft=arduino
+  "autocmd BufNewFile,BufRead *.ino setlocal ft=cpp
 augroup END
 " }}}
 " xacro file settings -------------------- {{{
@@ -346,16 +349,16 @@ augroup filetype_scons
   autocmd BufNewFile,BufRead SConstruct setlocal ft=scons
 augroup END
 "}}}
+" Thrift file settings -------------------- {{{
+augroup filetype_thrift
+  autocmd BufNewFile,BufRead *.thrift setlocal ft=thrift
+augroup END
+"}}}
 " Markdown file settings -------------------- {{{
 augroup filetype_markdown
   autocmd BufNewFile,BufRead *.md setlocal ft=mmd
   autocmd BufNewFile,BufRead *.md nnoremap <leader>ll :!multimarkdown % > /tmp/%.html<cr>
   autocmd BufNewFile,BufRead *.md nnoremap <leader>lv :!google-chrome /tmp/%.html<cr>
-augroup END
-"}}}
-" Arduino file settings -------------------- {{{
-augroup filetype_arduino
-  autocmd BufNewFile,BufRead *.ino setlocal ft=Arduino
 augroup END
 "}}}
 " C++ file settings -------------------- {{{

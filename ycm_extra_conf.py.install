@@ -24,6 +24,7 @@ flags = [
 '-isystem', '/usr/lib/gcc/x86_64-linux-gnu/4.6/include/',
 '-isystem', '/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/',
 '-isystem', '/home/rand/workspace/ilab/nrt/trunk/nrt/include',
+'-isystem', '/opt/ros/indigo/include',
 ]
 
 
