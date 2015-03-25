@@ -109,6 +109,15 @@ augroup filetypes
   autocmd BufNewFile,BufRead *.md nnoremap <leader>lv :!google-chrome /tmp/%.html<cr>
 
   autocmd BufNewFile,BufRead *.ino setlocal ft=Arduino
+
+  " Python settings from http://svn.python.org/projects/python/trunk/Misc/Vim/vimrc
+  autocmd BufRead,BufNewFile *.py set tabstop=8
+  "autocmd BufRead,BufNewFile *.py set tabstop=8
+  autocmd BufRead,BufNewFile *.py set shiftwidth=4
+  autocmd BufRead,BufNewFile *.py set expandtab
+  autocmd BufRead,BufNewFile *.py set textwidth=79
+
+
 augroup END
 
 " Convenient "OpenOther function for NRT

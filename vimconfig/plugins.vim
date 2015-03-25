@@ -18,14 +18,16 @@ if exists("*vundle#rc")
   Plugin 'https://github.com/jansenm/vim-cmake'
   Plugin 'AutomaticLaTeXPlugin'
   Plugin 'tpope/vim-fugitive'
+  Plugin 'hynek/vim-python-pep8-indent'
 
   " Indent guides - particuarly useful for python.
   " Use <leader>ig to toggle them
   Plugin 'nathanaelkane/vim-indent-guides'
 
+
   "Plugin 'pyflakes.vim'
   "Plugin 'https://github.com/Valloric/YouCompleteMe'
-  "Plugin 'Syntastic'
+  Plugin 'Syntastic'
 
 endif
 filetype plugin indent on     " required! 
@@ -45,11 +47,15 @@ let g:Tex_DefaultTargetFormat='pdf'
 
 " Indent guides colors
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#222  ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#222 ctermbg=3
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333 ctermbg=4
-let g:indent_guides_guide_size = 2
-let g:indent_guides_start_level = 2
-"hi IndentGuidesOdd  ctermbg=black
-"hi IndentGuidesEven ctermbg=red
+let g:indent_guides_guide_size = 4
+let g:indent_guides_start_level = 1
+
+"Syntastic Settings
+let g:syntastic_html_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_args='--ignore=E501'
 
 " vim:syntax=vim
