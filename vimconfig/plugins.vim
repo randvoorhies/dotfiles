@@ -28,6 +28,9 @@ if exists("*vundle#rc")
   "Plugin 'pyflakes.vim'
   "Plugin 'https://github.com/Valloric/YouCompleteMe'
   Plugin 'Syntastic'
+  "
+  Plugin 'pangloss/vim-javascript'
+  Plugin 'indenthtml.vim'
 
 endif
 filetype plugin indent on     " required! 
@@ -57,5 +60,7 @@ let g:syntastic_html_checkers = ['jshint']
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501'
+
+let g:html_indent_inctags = "html,body,head,tbody"
 
 " vim:syntax=vim
