@@ -16,7 +16,8 @@ if exists("*vundle#rc")
   Plugin 'https://github.com/randvoorhies/vim-multimarkdown'
   Plugin 'bash-support.vim'
   Plugin 'https://github.com/jansenm/vim-cmake'
-  Plugin 'AutomaticLaTeXPlugin'
+  "Plugin 'AutomaticLaTeXPlugin'
+  Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
   Plugin 'tpope/vim-fugitive'
   Plugin 'hynek/vim-python-pep8-indent'
 

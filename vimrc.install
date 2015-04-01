@@ -108,7 +108,7 @@ augroup filetypes
   autocmd BufNewFile,BufRead *.md nnoremap <leader>ll :!multimarkdown % > /tmp/%.html<cr>
   autocmd BufNewFile,BufRead *.md nnoremap <leader>lv :!google-chrome /tmp/%.html<cr>
 
-  autocmd BufNewFile,BufRead *.ino setlocal ft=Arduino
+  autocmd BufNewFile,BufRead *.ino setlocal ft=arduino
 
   " Python settings from http://svn.python.org/projects/python/trunk/Misc/Vim/vimrc
   autocmd BufRead,BufNewFile *.py set tabstop=8
