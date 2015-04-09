@@ -20,6 +20,7 @@ if exists("*vundle#rc")
   Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
   Plugin 'tpope/vim-fugitive'
   Plugin 'hynek/vim-python-pep8-indent'
+  Plugin 'gregsexton/MatchTag'
 
   " Indent guides - particuarly useful for python.
   " Use <leader>ig to toggle them
@@ -27,7 +28,7 @@ if exists("*vundle#rc")
 
 
   "Plugin 'pyflakes.vim'
-  "Plugin 'https://github.com/Valloric/YouCompleteMe'
+  Plugin 'https://github.com/Valloric/YouCompleteMe'
   Plugin 'Syntastic'
   "
   Plugin 'pangloss/vim-javascript'
@@ -56,12 +57,15 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#333 ctermbg=4
 let g:indent_guides_guide_size = 4
 let g:indent_guides_start_level = 1
 
-"Syntastic Settings
+" Syntastic Settings
 let g:syntastic_html_checkers = ['jshint']
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501'
 
 let g:html_indent_inctags = "html,body,head,tbody"
+
+" YouCompleteMe Settings
+let g:ycm_confirm_extra_conf = 0
 
 " vim:syntax=vim
