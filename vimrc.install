@@ -120,8 +120,11 @@ augroup filetypes
   "autocmd BufRead,BufNewFile *.html set shiftwidth=4
   "autocmd BufRead,BufNewFile *.html set expandtab
 
-
 augroup END
+
+" Load up doxygen syntax highlighting
+let g:load_doxygen_syntax=1
+let g:doxygen_enhanced_color=1
 
 " Convenient "OpenOther function for NRT
 if has('python')
