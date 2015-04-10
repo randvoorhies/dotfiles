@@ -28,6 +28,16 @@ stty -ixon
 
 export GIT_PS1_SHOWDIRTYSTATE=1
 
+__is_remote() 
+{
+  if df -l . &> /dev/null
+  then
+    __git_ps1
+  else
+    echo " (remotefs)"
+  fi
+}
+
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 if [ "$(whoami)" = root ]; then
@@ -39,8 +49,8 @@ else
     else if (NF>3) print $1 "/" $2 "/.../" $NF;
     else print $1 "/.../" $NF; }
     else print $0;}'"'"')'
-  PS1='$(eval "echo ${MYPS}")$ '
-  PS1='${debian_chroot:+($debian_chroot)}\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]$(eval "echo ${MYPS}")\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+      PS1='$(eval "echo ${MYPS}")$ '
+   PS1='${debian_chroot:+($debian_chroot)}\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]$(eval "echo ${MYPS}")\[\033[31m\]$(__is_remote)\[\033[00m\]$ '
 fi
 
 export LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'

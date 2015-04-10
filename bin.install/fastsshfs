@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sshfs -o Ciphers=arcfour -o Compression=no "$@"
