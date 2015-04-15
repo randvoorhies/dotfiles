@@ -22,6 +22,12 @@ udev_info()
   udevadm info -a -p  $(udevadm info -q path -n ${1})
 }
 
+udev_restart()
+{
+  sudo udevadm control --reload-rules
+  sudo udevadm trigger --action=change
+}
+
 _pushd () {
   command pushd "$@" > /dev/null
 }
