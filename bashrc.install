@@ -109,6 +109,8 @@ complete -F _ros_master_select ros_master_select
 
 ROSLAUNCH_SSH_UNKNOWN=1
 
+export PATH=${PATH}:${HOME}/.bin
+
 # vim:syntax=sh
 
 # added by travis gem
