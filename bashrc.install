@@ -1,5 +1,23 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
+RESTORE='\033[0m'
+
+RED='\033[00;31m'
+GREEN='\033[00;32m'
+YELLOW='\033[00;33m'
+BLUE='\033[00;34m'
+PURPLE='\033[00;35m'
+CYAN='\033[00;36m'
+LIGHTGRAY='\033[00;37m'
+
+LRED='\033[01;31m'
+LGREEN='\033[01;32m'
+LYELLOW='\033[01;33m'
+LBLUE='\033[01;34m'
+LPURPLE='\033[01;35m'
+LCYAN='\033[01;36m'
+WHITE='\033[01;37m'
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -32,9 +50,11 @@ __is_remote()
 {
   if df -l . &> /dev/null
   then
+    echo -ne ${RED}
     __git_ps1
+    echo -ne ${RESTORE}
   else
-    echo " (remotefs)"
+    echo -e "${LPURPLE} (remotefs)${RESTORE}"
   fi
 }
 
@@ -50,7 +70,7 @@ else
     else print $1 "/.../" $NF; }
     else print $0;}'"'"')'
       PS1='$(eval "echo ${MYPS}")$ '
-   PS1='${debian_chroot:+($debian_chroot)}\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]$(eval "echo ${MYPS}")\[\033[31m\]$(__is_remote)\[\033[00m\]$ '
+   PS1='${debian_chroot:+($debian_chroot)}\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]$(eval "echo ${MYPS}")$(__is_remote)$ '
 fi
 
 export LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
