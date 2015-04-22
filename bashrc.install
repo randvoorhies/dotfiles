@@ -1,22 +1,40 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
-RESTORE='\033[0m'
 
-RED='\033[00;31m'
-GREEN='\033[00;32m'
-YELLOW='\033[00;33m'
-BLUE='\033[00;34m'
-PURPLE='\033[00;35m'
-CYAN='\033[00;36m'
-LIGHTGRAY='\033[00;37m'
+RESTORE='\[\e[0m\]'
 
-LRED='\033[01;31m'
-LGREEN='\033[01;32m'
-LYELLOW='\033[01;33m'
-LBLUE='\033[01;34m'
-LPURPLE='\033[01;35m'
-LCYAN='\033[01;36m'
-WHITE='\033[01;37m'
+RED='\[\e[00;31m\]'
+GREEN='\[\e[00;32m\]'
+YELLOW='\[\e[00;33m\]'
+BLUE='\[\e[00;34m\]'
+PURPLE='\[\e[00;35m\]'
+CYAN='\[\e[00;36m\]'
+LIGHTGRAY='\[\e[00;37m\]'
+
+LRED='\[\e[01;31m\]'
+LGREEN='\[\e[01;32m\]'
+LYELLOW='\[\e[01;33m\]'
+LBLUE='\[\e[01;34m\]'
+LPURPLE='\[\e[01;35m\]'
+LCYAN='\[\e[01;36m\]'
+WHITE='\[\e[01;37m\]'
+
+#RESTORE='\[\e[0m\]'
+#RED='\033[00;31m'
+#GREEN='\033[00;32m'
+#YELLOW='\033[00;33m'
+#BLUE='\033[00;34m'
+#PURPLE='\033[00;35m'
+#CYAN='\033[00;36m'
+#LIGHTGRAY='\033[00;37m'
+#
+#LRED='\033[01;31m'
+#LGREEN='\033[01;32m'
+#LYELLOW='\033[01;33m'
+#LBLUE='\033[01;34m'
+#LPURPLE='\033[01;35m'
+#LCYAN='\033[01;36m'
+#WHITE='\033[01;37m'
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -50,12 +68,11 @@ __is_remote()
 {
   if df -l . &> /dev/null
   then
-    echo -ne ${RED}
     __git_ps1
-    echo -ne ${RESTORE}
   else
-    echo -e "${LPURPLE} (remotefs)${RESTORE}"
+    echo -n " (::remotefs::)"
   fi
+  echo -ne ""
 }
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -63,14 +80,13 @@ __is_remote()
 if [ "$(whoami)" = root ]; then
   PS1='${debian_chroot:+($debian_chroot)}[\[\033[01;31m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]# '
 else
-  # Show the path, but replace the middle with ellipses if it is too long.
+  ## Show the path, but replace the middle with ellipses if it is too long.
   export MYPS='$(echo -n "${PWD/#$HOME/\~}" | awk -F "/" '"'"'{
   if (length($0) > 14) { if (NF>4) print $1 "/" $2 "/.../" $(NF-1) "/" $NF;
     else if (NF>3) print $1 "/" $2 "/.../" $NF;
     else print $1 "/.../" $NF; }
     else print $0;}'"'"')'
-      PS1='$(eval "echo ${MYPS}")$ '
-   PS1='${debian_chroot:+($debian_chroot)}\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]$(eval "echo ${MYPS}")$(__is_remote)$ '
+  PS1="${GREEN}\u@\h${RESTORE}:${BLUE}${MYPS}${RED}"'$(__is_remote)'"${RESTORE}$ "
 fi
 
 export LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
