@@ -20,6 +20,7 @@ if exists("*vundle#rc")
   Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
   Plugin 'tpope/vim-fugitive'
   Plugin 'hynek/vim-python-pep8-indent'
+  Plugin 'tell-k/vim-autopep8'
   Plugin 'gregsexton/MatchTag'
 
   " Indent guides - particuarly useful for python.

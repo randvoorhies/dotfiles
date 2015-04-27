@@ -82,44 +82,60 @@ inoremap jk <esc>
 nnoremap <leader><space> :nohlsearch<CR>
 
 " Filetype settings
-augroup filetypes
-  autocmd!
+"  autocmd!
 
+augroup arduino
   autocmd BufNewFile,BufRead *.pde setlocal ft=arduino
+  autocmd BufNewFile,BufRead *.ino setlocal ft=arduino
+augroup END
 
+augroup xacro
   autocmd BufNewFile,BufRead *.xacro setlocal ft=xml
+augroup END
 
+augroup launch
   autocmd BufNewFile,BufRead *.launch setlocal ft=xml
+augroup END
 
+augroup makefile
   autocmd FileType make setlocal noexpandtab
+augroup END
 
+augroup vimfiles
   autocmd FileType vim setlocal foldmethod=marker
   autocmd FileType vim set foldlevelstart=0
+augroup END
 
+augroup text
   autocmd BufNewFile,BufRead *.txt setlocal ft=none
   autocmd BufNewFile,BufRead *.txt setlocal spell
   autocmd BufNewFile,BufRead *.txt setlocal foldmethod=marker
+augroup END
 
+augroup cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal nospell
   autocmd BufNewFile,BufRead CMakeLists.txt NeoComplCacheEnable
+augroup END
 
+augroup markdown
   autocmd BufNewFile,BufRead *.md setlocal ft=mmd
   autocmd BufNewFile,BufRead *.md nnoremap <leader>ll :!multimarkdown % > /tmp/%.html<cr>
   autocmd BufNewFile,BufRead *.md nnoremap <leader>lv :!google-chrome /tmp/%.html<cr>
-
-  autocmd BufNewFile,BufRead *.ino setlocal ft=arduino
+augroup END
 
   " Python settings from http://svn.python.org/projects/python/trunk/Misc/Vim/vimrc
+augroup pythonfiles
   autocmd BufRead,BufNewFile *.py set tabstop=8
   autocmd BufRead,BufNewFile *.py set shiftwidth=4
   autocmd BufRead,BufNewFile *.py set expandtab
   autocmd BufRead,BufNewFile *.py set textwidth=79
+augroup END
 
+augroup html
   "autocmd BufRead,BufNewFile *.html set tabstop=8
   "autocmd BufRead,BufNewFile *.html set shiftwidth=4
   "autocmd BufRead,BufNewFile *.html set expandtab
-
 augroup END
 
 " Load up doxygen syntax highlighting
