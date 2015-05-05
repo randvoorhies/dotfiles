@@ -84,55 +84,61 @@ nnoremap <leader><space> :nohlsearch<CR>
 " Filetype settings
 "  autocmd!
 
-augroup arduino
+augroup filetype_arduino
   autocmd BufNewFile,BufRead *.pde setlocal ft=arduino
   autocmd BufNewFile,BufRead *.ino setlocal ft=arduino
 augroup END
 
-augroup xacro
+augroup filetype_xacro
   autocmd BufNewFile,BufRead *.xacro setlocal ft=xml
 augroup END
 
-augroup launch
+augroup filetype_launch
   autocmd BufNewFile,BufRead *.launch setlocal ft=xml
 augroup END
 
-augroup makefile
+augroup filtype_makefile
   autocmd FileType make setlocal noexpandtab
 augroup END
 
-augroup vimfiles
+augroup filetype_vim
   autocmd FileType vim setlocal foldmethod=marker
-  autocmd FileType vim set foldlevelstart=0
+  autocmd FileType vim setlocal foldlevelstart=0
 augroup END
 
-augroup text
+augroup filetype_text
   autocmd BufNewFile,BufRead *.txt setlocal ft=none
   autocmd BufNewFile,BufRead *.txt setlocal spell
   autocmd BufNewFile,BufRead *.txt setlocal foldmethod=marker
 augroup END
 
-augroup cmake
+augroup filetype_cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal ft=cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal nospell
   autocmd BufNewFile,BufRead CMakeLists.txt NeoComplCacheEnable
 augroup END
 
-augroup markdown
+augroup filetype_markdown
   autocmd BufNewFile,BufRead *.md setlocal ft=mmd
   autocmd BufNewFile,BufRead *.md nnoremap <leader>ll :!multimarkdown % > /tmp/%.html<cr>
   autocmd BufNewFile,BufRead *.md nnoremap <leader>lv :!google-chrome /tmp/%.html<cr>
 augroup END
 
   " Python settings from http://svn.python.org/projects/python/trunk/Misc/Vim/vimrc
-augroup pythonfiles
-  autocmd BufRead,BufNewFile *.py set tabstop=8
-  autocmd BufRead,BufNewFile *.py set shiftwidth=4
-  autocmd BufRead,BufNewFile *.py set expandtab
-  autocmd BufRead,BufNewFile *.py set textwidth=79
+augroup filetype_python
+  autocmd BufRead,BufNewFile *.py setlocal tabstop=8
+  autocmd BufRead,BufNewFile *.py setlocal shiftwidth=4
+  autocmd BufRead,BufNewFile *.py setlocal expandtab
+  autocmd BufRead,BufNewFile *.py setlocal textwidth=79
+augroup END
+
+augroup filetype_cpp
+  autocmd BufRead,BufNewFile *.py setlocal tabstop=2
+  autocmd BufRead,BufNewFile *.py setlocal shiftwidth=2
 augroup END
 
 augroup html
+  autocmd FileType cpp set tabstop=8
   "autocmd BufRead,BufNewFile *.html set tabstop=8
   "autocmd BufRead,BufNewFile *.html set shiftwidth=4
   "autocmd BufRead,BufNewFile *.html set expandtab
