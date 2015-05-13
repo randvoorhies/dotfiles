@@ -126,15 +126,19 @@ augroup END
 
   " Python settings from http://svn.python.org/projects/python/trunk/Misc/Vim/vimrc
 augroup filetype_python
-  autocmd BufRead,BufNewFile *.py setlocal tabstop=8
-  autocmd BufRead,BufNewFile *.py setlocal shiftwidth=4
-  autocmd BufRead,BufNewFile *.py setlocal expandtab
-  autocmd BufRead,BufNewFile *.py setlocal textwidth=79
+   autocmd Filetype python setlocal tabstop=8
+   autocmd Filetype python setlocal shiftwidth=4
+   autocmd Filetype python setlocal expandtab
+   autocmd Filetype python setlocal textwidth=79
+  " autocmd BufRead,BufNewFile *.py setlocal tabstop=8
+  " autocmd BufRead,BufNewFile *.py setlocal shiftwidth=4
+  " autocmd BufRead,BufNewFile *.py setlocal expandtab
+  " autocmd BufRead,BufNewFile *.py setlocal textwidth=79
 augroup END
 
 augroup filetype_cpp
-  autocmd BufRead,BufNewFile *.py setlocal tabstop=2
-  autocmd BufRead,BufNewFile *.py setlocal shiftwidth=2
+  autocmd BufRead,BufNewFile *.cpp setlocal tabstop=2
+  autocmd BufRead,BufNewFile *.cpp setlocal shiftwidth=2
 augroup END
 
 augroup html
