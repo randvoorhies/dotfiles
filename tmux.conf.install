@@ -23,11 +23,7 @@ set -g mode-keys vi
 
 bind -t vi-copy 'v' begin-selection
 
-if-shell 'test "$(uname -s)" = "Darwin"' \
-  'bind-key y run-shell "tmux show-buffer | pbcopy" \; display-message "Copied tmux buffer to system clipboard"'
-
-if-shell 'test "$(uname -s)" = "Linux"' \
-  'bind-key y run-shell "tmux show-buffer | xclip -sel -clip -i" \; display-message "Copied tmux buffer to system clipboard"'
+bind y run-shell "tmux show-buffer | xclip -sel -clip -i" \; display-message "Copied tmux buffer to system clipboard"
 
 # misc
 set -g history-limit 10000
@@ -90,38 +86,32 @@ set -g status-justify left
 setw -g monitor-activity on
 set -g monitor-activity on
 
-# colours
-# pane colours
-set-option -g pane-border-fg colour235
-set-option -g pane-active-border-fg colour46
-
-# message text
-set-option -g message-bg yellow
-set-option -g message-fg black
-
-# pane number display
-set-option -g display-panes-active-colour colour20
-set-option -g display-panes-colour colour196
-
-# status colours
-set-option -g status-bg black
-set-option -g status-fg white
-set-option -g status-attr dim
-
-# window list colours
-set-window-option -g window-status-fg colour12
-set-window-option -g window-status-bg default
-set-window-option -g window-status-attr dim
-
-# active window tab colours
-set-window-option -g window-status-current-fg black
-set-window-option -g window-status-current-bg white
-set-window-option -g window-status-current-attr bright
-
-# show hostname on left side of status bar
-set -g status-left-length 70
-set -g status-left "#[fg=colour3][%H:%M] #[fg=white]"
-
-# show session name, window & pane number, date and time on right side of status bar
-set -g status-right-length 60
-set -g status-right "#[fg=white] [#[fg=colour13]\#S\ #[fg=colour2]:#P#[fg=white]]"
+# colours and status bar config
+# This tmux statusbar config was created by tmuxline.vim
+# on Tue, 19 May 2015
+set -g status-bg "colour237"
+set -g message-command-fg "colour250"
+set -g status-justify "left"
+set -g status-left-length "100"
+set -g status "on"
+set -g pane-active-border-fg "colour65"
+set -g message-bg "colour235"
+set -g status-right-length "100"
+set -g status-right-attr "none"
+set -g message-fg "colour250"
+set -g message-command-bg "colour235"
+set -g status-attr "none"
+set -g status-utf8 "on"
+set -g pane-border-fg "colour235"
+set -g status-left-attr "none"
+setw -g window-status-fg "colour250"
+setw -g window-status-attr "none"
+setw -g window-status-activity-bg "colour237"
+setw -g window-status-activity-attr "none"
+setw -g window-status-activity-fg "colour65"
+setw -g window-status-separator ""
+setw -g window-status-bg "colour237"
+set -g status-left "#[fg=colour193,bg=colour65] #S #[fg=colour65,bg=colour237,nobold,nounderscore,noitalics]"
+set -g status-right "#[fg=colour235,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour250,bg=colour235] %Y-%m-%d | %H:%M #[fg=colour65,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour193,bg=colour65] #h "
+setw -g window-status-format "#[fg=colour250,bg=colour237] #I |#[fg=colour250,bg=colour237] #W "
+setw -g window-status-current-format "#[fg=colour237,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour250,bg=colour235] #I |#[fg=colour250,bg=colour235] #W #[fg=colour235,bg=colour237,nobold,nounderscore,noitalics]"

@@ -119,3 +119,8 @@ source $HOME/.git-prompt.sh
 
 source $HOME/.envrc
 source $HOME/.aliasrc
+
+# source hostname specific configs (this is where the MOTD lives)
+if [ -f "$HOME/.$(hostname)" ]; then
+  source "$HOME/.$(hostname)"
+fi

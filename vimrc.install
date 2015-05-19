@@ -13,6 +13,7 @@ Bundle 'pathogen.vim'
 Bundle 'gmarik/vundle'
 " Explore the filesystem in a tree
 Bundle 'scrooloose/nerdtree'
+" Persist the NERD tree across tabs
 Bundle 'jistr/vim-nerdtree-tabs' 
 " Browse tags in a split
 Bundle 'Tagbar'
@@ -20,10 +21,6 @@ Bundle 'Tagbar'
 Bundle 'bling/vim-airline'
 " Align text on = or : easily
 Bundle 'godlygeek/tabular'
-" Better completion
-" Bundle 'neocomplcache'
-" Complete everything with tabs
-" Bundle 'SuperTab'
 " Fast filesystem nav for projects
 Bundle 'ctrlp.vim'
 " Show marks in the gutter
@@ -32,8 +29,7 @@ Bundle 'ShowMarks7'
 Bundle 'EasyMotion'
 " Color theme
 Bundle 'chriskempson/vim-tomorrow-theme'
-" Semantic highlighting
-Bundle 'jaxbot/semantic-highlight.vim'
+Bundle 'w0ng/vim-hybrid'
 " Git integration
 Bundle 'tpope/vim-fugitive'
 
@@ -41,7 +37,7 @@ Bundle 'tpope/vim-fugitive'
 filetype plugin indent on
 syntax on                                        " syntax highlighting
 let mapleader=","                                " Maps <leader> to ,
-colorscheme Tomorrow-Night-Bright                " Nice theme
+colorscheme hybrid
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' " Highlight VCS conflict markers
 set nocompatible                                 " I don't need Vim to be Vi compatible
 set mouse=a                                      " Mouse support in terminal Vim
