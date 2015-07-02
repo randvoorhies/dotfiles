@@ -31,7 +31,10 @@ Bundle 'EasyMotion'
 Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'w0ng/vim-hybrid'
 " Git integration
-Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
+
+let NERDTreeIgnore=['\.o$', '\~$', '\.pyc$']
+nnoremap <leader>G :GitGutterLineHighlightsToggle<CR>
 
 " Basic Vim settings
 filetype plugin indent on
