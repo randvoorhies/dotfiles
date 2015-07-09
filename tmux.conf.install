@@ -22,8 +22,7 @@ set -g status-keys vi
 set -g mode-keys vi
 
 bind -t vi-copy 'v' begin-selection
-
-bind y run-shell "tmux show-buffer | xclip -sel -clip -i" \; display-message "Copied tmux buffer to system clipboard"
+bind -t vi-copy y copy-pipe "xclip"
 
 # misc
 set -g history-limit 10000

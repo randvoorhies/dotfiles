@@ -9,3 +9,6 @@ export PYTHONSTARTUP="${HOME}/.pythonrc"
 
 # Here it goes
 export TERM=xterm-256color
+
+export PANEL_FIFO="/tmp/panel-fifo"
+export PATH=$PATH:/home/spandya/workspace/bspwm/examples/panel

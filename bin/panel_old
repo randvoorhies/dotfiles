@@ -1,0 +1,41 @@
+#!/bin/bash
+readonly PANEL_HEIGHT=32
+readonly PANEL_FONT_FAMILY="-*-terminus-*-*-*-*-18-*-*-*-*-*-*-*"
+
+panel_volume()
+{
+  volStatus=$(amixer get Master | tail -n 1 | cut -d '[' -f 3 | sed 's/].*//g')
+  volLevel=$(amixer get Master | tail -n 1 | cut -d '[' -f 2 | sed 's/%.*//g')
+  # is alsa muted or not muted?
+  if [ "$volStatus" == "on" ]; then
+    echo "%{Fyellowgreen} $volLevel %{F-}"
+  else
+    # If it is muted, make the font red
+    echo "%{Findianred} $volLevel %{F-}"
+  fi
+}
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+bspc config top_padding $PANEL_HEIGHT
+bspc control --subscribe > "$PANEL_FIFO" &
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+
+while true; do
+echo "S" "$(panel_volume) $(clock -f 'S%a %H:%M')" > "$PANEL_FIFO"
+  sleep 1s
+done &
+
+. panel_colors
+
+cat "$PANEL_FIFO" | panel_bar | lemonbar -p -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+
+wait

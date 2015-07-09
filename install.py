@@ -3,6 +3,8 @@ import os
 
 special = {}
 special["notes.vim"] = os.path.abspath(os.path.join(os.environ["HOME"], ".vim/syntax/notes.vim"))
+special["bspwmrc"] = os.path.abspath(os.path.join(os.environ["HOME"], ".config/bspwm/bspwmrc"))
+special["sxhkdrc"] = os.path.abspath(os.path.join(os.environ["HOME"], ".config/sxhkd/sxhkdrc"))
 
 def remove(dry_run, what):
   print "rm %s" % what
