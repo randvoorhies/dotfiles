@@ -63,6 +63,26 @@ gcc_select()
     _popd
 }
 
+# Auto complete for run primitive command
+_run_primitive()
+{
+
+  local cur prev opts base
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+
+    # Get a list of all primitive names
+    local primitives=$(for x in `find ${MERCURY_DIR}/software/primitives -name "*.py" -not -name "__init__.py" | sed -r "s|$MERCURY_DIR/software/primitives/(.*)\.py|\1|g" | tr / .`; do echo ${x}; done )
+
+    # The list of all other options
+    opts="--state_name --error_data --robot_config --shelf_map --verbose --simulate"
+
+    COMPREPLY=( $(compgen -W "${primitives} ${opts}" -- ${cur}) )
+
+    return 0
+}
+complete -F _run_primitive run_primitive
+
 # Auto Complete for schroot command
 _schroot()
 {
