@@ -147,7 +147,7 @@ ROSLAUNCH_SSH_UNKNOWN=1
 
 export PATH=${PATH}:${HOME}/.bin
 
-# vim:syntax=sh
-
 # added by travis gem
 [ -f /home/rand/.travis/travis.sh ] && source /home/rand/.travis/travis.sh
+
+# vim:syntax=sh
