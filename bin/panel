@@ -3,6 +3,7 @@
 readonly PANEL_FIFO=/tmp/panel-fifo
 readonly PANEL_HEIGHT=46
 readonly PANEL_FONT_FAMILY="UbuntuMono:size=12"
+readonly PANEL_BOLD_FONT_FAMILY="UbuntuMono:bold:size=12"
 readonly ICON_FONT="FontAwesome:size=11"
 readonly ICON_FONT2="fontcustom:size=11"
 
@@ -16,61 +17,75 @@ trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 
+# Make room for the panel and subscribe to window events
 bspc config top_padding $PANEL_HEIGHT
 bspc control --subscribe > "$PANEL_FIFO" &
+
+# Grab the title of the active window and pipe it into the FIFO
 xtitle -sf 'T%s' > "$PANEL_FIFO" &
 
-# clock
-#while true;
-#	do 
-#		echo -e 'C\uf017' $(date +"%l:%M %p");
-#	sleep 5;
-#done > "$PANEL_FIFO" &
-
-while true;
-	do 
-  TIME=$(date "+%A %b %d %I:%M");
-  echo -e "S%{F#FFffffff}%{F-} ${TIME}";
-	sleep 5;
+# Pipe the date into the FIFO also
+while true; do 
+  echo -e 'C%{F#FFffffff}\uF017%{F-}' $(date "+%A %b %d %I:%M %p");
+  sleep 5;
 done > "$PANEL_FIFO" &
 
-# date
-while true;
-do echo -e 'D\uf073' $(date +'%b %d')
-	sleep 5
+# weather info
+while true; do
+  TEMP=$(weather kabq --headers=temperature --imperial | tail -1 | awk -F: '{print $2}' | tr -d ' F')
+  CONDITIONS=$(weather  kabq --headers=sky\ conditions | tail -1 | awk -F: '{print $2}' | sed 's/^\s//g')
+
+  echo -en "K%{F#FFffffff}"
+  if [ "$CONDITIONS" != "cloudy" ]; then
+    echo -en "\uF185"
+  else
+    echo -en "\uF0C2"
+  fi
+  echo "%{F-} $TEMP °F $CONDITIONS"
+
+  sleep 3600;
+done > "$PANEL_FIFO" &
+
+#while true; do
+#  echo -ne "M\uF120 "
+#  for session in $(tmux ls -F "#{session_name};#{session_attached}"); do
+#    arr=(${session//;/ })
+#    name=${arr[0]}
+#    attached=${arr[1]}
+#
+#    if [ "$attached" == "1" ]; then
+#      echo -n "%{T4}$name*%{T1} "
+#    else
+#      echo -n "$name "
+#    fi
+#  done
+#  echo
+#  sleep 0.5
+#done > "$PANEL_FIFO" &
+
+# Volume info
+while true; do
+  ALSA_VOLUME=$(amixer get Master | grep 'Right: Playback' | grep -o '...%' | sed 's/\[//' | sed 's/%//' | sed 's/ //')
+  ALSA_STATE=$(amixer get Master | grep 'Right: Playback' | grep -o '\[on]')
+
+  if [ $ALSA_STATE ]; then
+    echo -n "V%{F#FFffffff}"
+    if [ $ALSA_VOLUME -ge 70 ]; then
+      echo -en '\uf028'
+    elif [ $ALSA_VOLUME -gt 0 -a $ALSA_VOLUME -lt 70 ]; then
+      echo -en '\uf027'
+    elif [ $ALSA_VOLUME -eq 0 ]; then
+      echo -en '\uf026' $ALSA_VOLUME
+    else
+      echo -en '\uf026'
+    fi
+    echo "%{F-} "$ALSA_VOLUME"%"
+  fi
+  sleep 0.1
 done > $PANEL_FIFO &
 
-# alsa volume
-while true;
-do
-ALSA_VOLUME=$(amixer get Master | grep 'Right: Playback' | grep -o '...%' | sed 's/\[//' | sed 's/%//' | sed 's/ //')
-ALSA_STATE=$(amixer get Master | grep 'Right: Playback' | grep -o '\[on]')
+source panel_colors
 
-if [ $ALSA_STATE ]
-then
-	if [ $ALSA_VOLUME -ge 70 ]
-	then
-		echo -e V'\uf028' $ALSA_VOLUME
-	fi
-	if [ $ALSA_VOLUME -gt 0 -a $ALSA_VOLUME -lt 70 ]
-	then
-		echo -e V'\uf027' $ALSA_VOLUME
-	fi
-	if [ $ALSA_VOLUME -eq 0 ]
-	then
-		echo -e V'\uf026' $ALSA_VOLUME
-	fi
-	else
-		echo -e V'\uf026' $ALSA_VOLUME
-	fi
-	sleep 0.1
-done > $PANEL_FIFO &
-
-# power 
-echo -e P'\uf011' > $PANEL_FIFO &
-
-. panel_colors
-
-cat "$PANEL_FIFO" | panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -f "$ICON_FONT" -f "$ICON_FONT2" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" -u 2 | bash &
+cat "$PANEL_FIFO" | panel_bar | lemonbar -g 3840x$PANEL_HEIGHT+1920 -f "$PANEL_FONT_FAMILY" -f "$ICON_FONT" -f "$ICON_FONT2" -f "$PANEL_BOLD_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" -u 2 | bash &
 
 wait

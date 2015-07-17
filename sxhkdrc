@@ -84,7 +84,7 @@ super + Return
 	gnome-terminal
 
 super + space
-  dmenu_run -l 30 -fn "UbuntuMono:32" -p "Command" | bash
+  dmenu_run -l 1 -fn "UbuntuMono:32" -p "               $ " -nb "#34322E" -nf "#A3A6AB" -sb "#34322E" -sf "#A3A6AB" | bash
 
 ctrl + alt + l
   /home/spandya/workspace/bspwm/examples/lock.sh

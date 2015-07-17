@@ -1,6 +1,4 @@
-#! /bin/sh
-#
-# Example panel for LemonBoy's bar
+#!/bin/bash
 
 . panel_colors
 
@@ -13,19 +11,11 @@ while read -r line ; do
 			# date output
 			date="$PADDING${line#?}$PADDING"
 			;;
-		R*)
-			# music info
-			music="%{B$COLOR_FOCUSED_OCCUPIED_BG}%{F$COLOR_FOCUSED_OCCUPIED_FG}$PADDING${line#?}$PADDING%{F-}%{B-}"
-			;;
 		C*)
 			# clock output
 			clock="$PADDING${line#?}$PADDING"
 			;;
 
-		B*)
-			# battery percent output
-			battery="%{A:bat.sh:}$PADDING${line#?}$PADDING%{A}"
-			;;
 		T*)
 			# xtitle output
 			title="${line#?}$PADDING$PADDING"
@@ -33,16 +23,18 @@ while read -r line ; do
 
 		V*)
 			# alsa volume
-			volume="$PADDING${line#?}$PADDING"
+			volume="$PADDING${line#?}"
 			;;
-		L*)
-			# wifi link
-			wifi="$PADDING${line#?}$PADDING"
-			;;
-		P*)
-			# power
-			power="%{A2:sudo poweroff:}%{A3:sudo reboot:}$PADDING${line#?}$PADDING%{A}%{A}"
-			;;
+
+    M*)
+      # tmux info
+      tmux_info="$PADDING${line#?}$PADDING"
+      ;;
+
+    K*)
+      # Weather
+      weather="$PADDING${line#?}"
+      ;;
 
 		W*)
 			# bspwm internal state
@@ -94,5 +86,6 @@ while read -r line ; do
 			done
 			;;
 	esac
-	printf "%s\n" "%{l}${wm_infos}${music}%{r}${title}${wifi}${volume}${battery}${date}${clock}${power}"
+
+	printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${weather}${volume}${date}${clock}"
 done

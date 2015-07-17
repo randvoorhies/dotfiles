@@ -1,23 +1,27 @@
 #! /bin/sh
 
-bspc config border_width        0
-bspc config window_gap         20
+bspc config border_width        3
+bspc config window_gap         30
 
-bspc config split_ratio         0.52
+bspc config split_ratio         0.50
 bspc config borderless_monocle  true
-bspc config gapless_monocle     true
+bspc config gapless_monocle     false
 bspc config focus_by_distance   true
 
-bspc monitor DP-2 -d 4 5 6
-bspc monitor DP-3 -d 1 2 3
+# monitor setup
+bspc monitor DP-3    -n "Scratch" -d 1 2 3
+bspc monitor DP-2    -n "VM"      -d 4 5 6
+bspc monitor DVI-I-1 -n "TV"      -d 7 8 9
 
-bspc rule -a Chromium desktop=^2
-bspc rule -a Remmina monitor=DP-2 fullscreen
+bspc rule -a Remmina monitor="VM" fullscreen
+bspc rule -a VirtualBox monitor="VM" fullscreen
 bspc rule -a nautilus floating
 
 xrandr --output DP-3 --auto --primary
 xrandr --output DP-2 --auto --right-of DP-3
+xrandr --output DVI-I-1 --auto --left-of DP-3
+
 feh --bg-scale ~/Pictures/diagonal.jpg &
-compton -c &
+compton -cz --backend glx --vsync opengl-swc -b &
 gnome-settings-daemon &
 panel &
