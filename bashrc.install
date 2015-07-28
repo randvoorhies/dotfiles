@@ -86,7 +86,14 @@ else
     else if (NF>3) print $1 "/" $2 "/.../" $NF;
     else print $1 "/.../" $NF; }
     else print $0;}'"'"')'
-  PS1="${GREEN}\u@\h${RESTORE}:${BLUE}${MYPS}${RED}"'$(__is_remote)'"${RESTORE}$ "
+
+      case ${HOSTNAME} in
+        "mercury")  HOSTCOLOR=${YELLOW};;
+        "mercury2") HOSTCOLOR=${RED};;
+        *)          HOSTCOLOR=${GREEN};;
+      esac
+
+  PS1="${HOSTCOLOR}\u@\h${RESTORE}:${BLUE}${MYPS}${RED}"'$(__is_remote)'"${RESTORE}$ "
 fi
 
 export LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
