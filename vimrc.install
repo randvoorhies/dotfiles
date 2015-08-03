@@ -17,8 +17,8 @@ set encoding=utf-8            " UTF-8 Encoding
 set autochdir                 " Automatically switch to the directory of an open file
 set ruler                     " Turn on the ruler in the bottom-right
 set autoindent                " Copy indent from current line when starting new one
-set shiftwidth=2              " Number of spaces for each level of indentation
-set tabstop=2                 " Number of spaces that a <Tab> in the file counts for
+set shiftwidth=4              " Number of spaces for each level of indentation
+set tabstop=4                 " Number of spaces that a <Tab> in the file counts for
 set expandtab                 " Turn spaces into tabs
 set showmatch                 " When a bracket is inserted, briefly jump to the matching one.
 set hlsearch                  " Highlight searches
@@ -142,7 +142,6 @@ augroup filetype_cpp
 augroup END
 
 augroup html
-  autocmd FileType cpp set tabstop=8
   "autocmd BufRead,BufNewFile *.html set tabstop=8
   "autocmd BufRead,BufNewFile *.html set shiftwidth=4
   "autocmd BufRead,BufNewFile *.html set expandtab
