@@ -23,7 +23,10 @@ while read -r line ; do
 
 		V*)
 			# alsa volume
-			volume="$PADDING${line#?}"
+      vup_command="amixer -q set Master 1%+"
+      vdown_command="amixer -q set Master 1%-"
+      vmute_command="amixer -q set Master toggle"
+      volume="$PADDING%{A1:$vmute_command:}%{A4:$vup_command:}%{A5:$vdown_command:}${line#?}%{A}%{A}%{A}"
 			;;
 
     M*)

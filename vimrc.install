@@ -30,6 +30,7 @@ Bundle 'EasyMotion'
 " Color theme
 Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'w0ng/vim-hybrid'
+Bundle 'chriskempson/base16-vim'
 " Git integration
 Bundle 'airblade/vim-gitgutter'
 
