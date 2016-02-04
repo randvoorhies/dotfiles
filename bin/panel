@@ -1,11 +1,11 @@
 #!/bin/bash
 
 readonly PANEL_FIFO=/tmp/panel-fifo
-readonly PANEL_HEIGHT=46
-readonly PANEL_FONT_FAMILY="UbuntuMono:size=12"
-readonly PANEL_BOLD_FONT_FAMILY="UbuntuMono:bold:size=12"
-readonly ICON_FONT="FontAwesome:size=11"
-readonly ICON_FONT2="fontcustom:size=11"
+readonly PANEL_HEIGHT=48
+readonly PANEL_FONT_FAMILY="UbuntuMono:size=10"
+readonly PANEL_BOLD_FONT_FAMILY="UbuntuMono:bold:size=10"
+readonly ICON_FONT="FontAwesome:size=10"
+readonly ICON_FONT2="fontcustom:size=10"
 
 if [ $(pgrep -cx panel) -gt 1 ] ; then
 	printf "%s\n" "The panel is already running." >&2
@@ -46,46 +46,31 @@ while true; do
   sleep 3600;
 done > "$PANEL_FIFO" &
 
-#while true; do
-#  echo -ne "M\uF120 "
-#  for session in $(tmux ls -F "#{session_name};#{session_attached}"); do
-#    arr=(${session//;/ })
-#    name=${arr[0]}
-#    attached=${arr[1]}
-#
-#    if [ "$attached" == "1" ]; then
-#      echo -n "%{T4}$name*%{T1} "
-#    else
-#      echo -n "$name "
-#    fi
-#  done
-#  echo
-#  sleep 0.5
-#done > "$PANEL_FIFO" &
-
 # Volume info
 while true; do
   ALSA_VOLUME=$(amixer get Master | grep 'Right: Playback' | grep -o '...%' | sed 's/\[//' | sed 's/%//' | sed 's/ //')
   ALSA_STATE=$(amixer get Master | grep 'Right: Playback' | grep -o '\[on]')
 
-  if [ $ALSA_STATE ]; then
-    echo -n "V%{F#FFffffff}"
+  echo -n "V%{F#FFffffff}"
+  if [ "$ALSA_STATE" == "[on]" ]; then
     if [ $ALSA_VOLUME -ge 70 ]; then
       echo -en '\uf028'
     elif [ $ALSA_VOLUME -gt 0 -a $ALSA_VOLUME -lt 70 ]; then
       echo -en '\uf027'
     elif [ $ALSA_VOLUME -eq 0 ]; then
-      echo -en '\uf026' $ALSA_VOLUME
+      echo -en '\uf026'
     else
       echo -en '\uf026'
     fi
-    echo "%{F-} "$ALSA_VOLUME"%"
+  else
+    echo -en '\uf026'
   fi
+  echo "%{F-} "$ALSA_VOLUME"%"
   sleep 0.1
 done > $PANEL_FIFO &
 
 source panel_colors
 
-cat "$PANEL_FIFO" | panel_bar | lemonbar -g 3840x$PANEL_HEIGHT+1920 -f "$PANEL_FONT_FAMILY" -f "$ICON_FONT" -f "$ICON_FONT2" -f "$PANEL_BOLD_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" -u 2 | bash &
+cat "$PANEL_FIFO" | panel_bar | lemonbar -g 3840x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -f "$ICON_FONT" -f "$ICON_FONT2" -f "$PANEL_BOLD_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" -u 2 | bash &
 
 wait
