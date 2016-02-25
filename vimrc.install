@@ -42,6 +42,7 @@ set modeline                  " Look for modelines at the beginning and end of f
 set showmatch                 " Show matching brackets
 set noswapfile                " Don't create swapfiles
 set lazyredraw                " Redraw only when we need to.
+set mouse=a                   " Always use the mouse
 
 " Make sure you have to hit jk within a short window (100ms) to trigger normal mode
 set timeout timeoutlen=1000 ttimeoutlen=100
