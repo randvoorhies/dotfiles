@@ -58,7 +58,10 @@ set wildignore+=*.pyc
 
 " Try to load our favorite colorscheme. Fall back if necessary
 try 
-  colorscheme badwolf
+  "colorscheme badwolf
+  colorscheme hybrid
+  " Redraw the background
+  set t_ut=
 catch
   silent! colorscheme solarized
 endtry

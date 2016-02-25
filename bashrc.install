@@ -1,5 +1,6 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
+TERM=xterm-256color
 
 RESTORE='\[\e[0m\]'
 
@@ -97,7 +98,7 @@ else
 fi
 
 export LS_COLORS='di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
-export CLICOLOR=1
+# export CLICOLOR=1
 
 # Turn on bash completion
 if [ -f /etc/bash_completion ]; then

@@ -17,11 +17,14 @@ if exists("*vundle#rc")
   Plugin 'bash-support.vim'
   Plugin 'https://github.com/jansenm/vim-cmake'
   "Plugin 'AutomaticLaTeXPlugin'
-  Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
+  "Plugin 'LaTeX-Suite-aka-Vim-LaTeX'
   Plugin 'tpope/vim-fugitive'
   Plugin 'hynek/vim-python-pep8-indent'
   Plugin 'tell-k/vim-autopep8'
   Plugin 'gregsexton/MatchTag'
+  Plugin 'easymotion/vim-easymotion'
+  Plugin 'w0ng/vim-hybrid'
+  
 
   " Indent guides - particuarly useful for python.
   " Use <leader>ig to toggle them
@@ -61,7 +64,7 @@ let g:indent_guides_start_level = 1
 " Syntastic Settings
 let g:syntastic_html_checkers = ['jshint']
 let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_python_checkers=['flake8']
+" let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501,E402,E241'
 
 let g:html_indent_inctags = "html,body,head,tbody"

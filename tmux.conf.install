@@ -1,0 +1,116 @@
+# UTF8
+set -g utf8
+set-window-option -g utf8 on
+
+# Use Ctrl-f for <prefix>
+unbind C-b
+set-option -g prefix C-f
+bind f send-prefix
+
+# colours
+set -g default-terminal "xterm-256color"
+
+# default shell (non-login)
+set -g default-command "bash"
+
+# automatically set window titles
+set-window-option -g automatic-rename on
+set-option -g set-titles on
+
+# vi mode
+set -g status-keys vi
+set -g mode-keys vi
+
+bind -t vi-copy 'v' begin-selection
+bind -t vi-copy y copy-pipe "xclip"
+
+# misc
+set -g history-limit 10000
+
+# shorten command delay
+set -sg escape-time 0
+
+# reload the config with <prefix>r
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+# <prefix>s splits horizontally, <prefix>v splits vertically
+bind s split-window -v -c "#{pane_current_path}"
+bind v split-window -h -c "#{pane_current_path}"
+
+# <prefix>( moves this window to the first spot
+bind ( swap-window -t 0
+
+# <prefix>T tiles all the panes
+bind T select-layout tiled
+
+# Window navigation
+bind n new-window
+bind -r < previous-window
+bind -r > next-window
+
+# unbind arrow keys
+unbind Up
+unbind Down
+unbind Left
+unbind Right
+
+# move between panes with Vi movement keys
+bind -r h select-pane -L
+bind -r j select-pane -D
+bind -r k select-pane -U
+bind -r l select-pane -R
+
+# resize panes using H, J, K, L
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+# Zoom panes
+bind m resize-pane -Z \; display-message "Zoom pane"
+
+# enable mouse usage
+setw -g mode-mouse on
+set -g mouse-select-pane on
+set -g mouse-resize-pane on
+set -g mouse-select-window on
+
+# status bar
+set-option -g status on
+set -g status-utf8 on
+set -g status-interval 5
+set -g status-justify left
+
+# visual notifications of other activity
+setw -g monitor-activity on
+set -g monitor-activity on
+
+# colours and status bar config
+# This tmux statusbar config was created by tmuxline.vim
+# on Tue, 19 May 2015
+set -g status-bg "colour237"
+set -g message-command-fg "colour250"
+set -g status-justify "left"
+set -g status-left-length "100"
+set -g status "on"
+set -g pane-active-border-fg "colour65"
+set -g message-bg "colour235"
+set -g status-right-length "100"
+set -g status-right-attr "none"
+set -g message-fg "colour250"
+set -g message-command-bg "colour235"
+set -g status-attr "none"
+set -g status-utf8 "on"
+set -g pane-border-fg "colour235"
+set -g status-left-attr "none"
+setw -g window-status-fg "colour250"
+setw -g window-status-attr "none"
+setw -g window-status-activity-bg "colour237"
+setw -g window-status-activity-attr "none"
+setw -g window-status-activity-fg "colour65"
+setw -g window-status-separator ""
+setw -g window-status-bg "colour237"
+set -g status-left "#[fg=colour193,bg=colour65] #S #[fg=colour65,bg=colour237,nobold,nounderscore,noitalics]"
+set -g status-right "#[fg=colour235,bg=colour237,nobold,nounderscore,noitalics]#[fg=colour250,bg=colour235] %Y-%m-%d | %H:%M #[fg=colour65,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour193,bg=colour65] #h "
+setw -g window-status-format "#[fg=colour250,bg=colour237] #I |#[fg=colour250,bg=colour237] #W "
+setw -g window-status-current-format "#[fg=colour237,bg=colour235,nobold,nounderscore,noitalics]#[fg=colour250,bg=colour235] #I |#[fg=colour250,bg=colour235] #W #[fg=colour235,bg=colour237,nobold,nounderscore,noitalics]"
