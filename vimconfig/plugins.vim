@@ -21,9 +21,14 @@ if exists("*vundle#rc")
   Plugin 'tpope/vim-fugitive'
   Plugin 'hynek/vim-python-pep8-indent'
   Plugin 'tell-k/vim-autopep8'
-  Plugin 'gregsexton/MatchTag'
+  " Plugin 'gregsexton/MatchTag'
+  " Plugin 'Valloric/MatchTagAlways'
   Plugin 'easymotion/vim-easymotion'
   Plugin 'w0ng/vim-hybrid'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'Xuyuanp/nerdtree-git-plugin'
+  Plugin 'ap/vim-buftabline'
+
   
 
   " Indent guides - particuarly useful for python.
@@ -71,5 +76,13 @@ let g:html_indent_inctags = "html,body,head,tbody"
 
 " YouCompleteMe Settings
 let g:ycm_confirm_extra_conf = 0
+
+" MatchTagAlways 
+nnoremap <leader>% :MtaJumpToOtherTag<cr>
+
+" NERDTree Settings
+" Open NERDTree with CTRL+m
+map <C-m> :NERDTreeToggle<CR>
+
 
 " vim:syntax=vim

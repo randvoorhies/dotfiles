@@ -20,7 +20,7 @@ set autoindent                " Copy indent from current line when starting new 
 set shiftwidth=4              " Number of spaces for each level of indentation
 set tabstop=4                 " Number of spaces that a <Tab> in the file counts for
 set expandtab                 " Turn spaces into tabs
-set showmatch                 " When a bracket is inserted, briefly jump to the matching one.
+set noshowmatch               " When a bracket is inserted, briefly jump to the matching one.
 set hlsearch                  " Highlight searches
 set guioptions-=T             " Remove the toolbar from the GUI
 set showmode                  " Tell me when I'm in insert mode
@@ -39,7 +39,6 @@ set diffopt+=iwhite           " Option settings for diff mode.
 set nobackup                  " Backup off, since most stuff is in SVN, git et.c anyway...
 set nowritebackup             " Backup off when writing
 set modeline                  " Look for modelines at the beginning and end of files
-set showmatch                 " Show matching brackets
 set noswapfile                " Don't create swapfiles
 set lazyredraw                " Redraw only when we need to.
 set mouse=a                   " Always use the mouse
@@ -84,6 +83,15 @@ inoremap jk <esc>
 
 " turn off search highlight with ,<space>
 nnoremap <leader><space> :nohlsearch<CR>
+
+" Type Q to switch to the last open buffer
+nnoremap Q :b#<CR>
+
+" Buffers
+set hidden
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
+
 
 " Filetype settings
 "  autocmd!

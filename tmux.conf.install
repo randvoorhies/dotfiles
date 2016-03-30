@@ -37,6 +37,9 @@ bind r source-file ~/.tmux.conf \; display "Reloaded!"
 bind s split-window -v -c "#{pane_current_path}"
 bind v split-window -h -c "#{pane_current_path}"
 
+# <prefix>c opens a new window
+bind c new-window -c "#{pane_current_path}"
+
 # <prefix>( moves this window to the first spot
 bind ( swap-window -t 0
 
