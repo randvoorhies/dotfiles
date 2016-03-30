@@ -1,10 +1,23 @@
-if [[ `uname` == 'Linux' ]]; then
-  alias ls='ls --color'
+if [ "$(uname)" = "Darwin" ]; then 
+  alias ls='ls -FG'
+else
+  alias ls='ls -F --color'
 fi
 
-alias axel='axel -a'
-alias sprunge='curl -F "sprunge=<-" http://sprunge.us'
-alias cgrep='grep --color -n'
+alias axel="axel -a"
+alias diff="diff -y --suppress-common-lines"
+alias find="LC_ALL=\"C\" find"
+alias grep="LC_ALL=\"C\" grep --color"
+alias gvim="gvim -p"
+alias mkdir="mkdir -p"
+alias tmux="tmux -2"
+alias vim="vim -p"
 
-alias matlab='matlab -nodesktop'
-# vim:syntax=sh
+alias pid="ps -o pid --no-header -C"
+alias sprunge="curl -F \"sprunge=<-\" http://sprunge.us"
+alias please='sudo $(history -p !!)'
+alias datafart="curl --data-binary @- datafart.com"
+
+alias tl="tmux ls"
+alias ta="tmux attach -t"
+alias tc="tmux new-session -s"

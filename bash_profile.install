@@ -1,5 +1,5 @@
-if [ -f ~/.bashrc ]; then
-  . ~/.bashrc
+# source my bashrc
+if [ -f "$HOME/.bashrc" ];
+then
+  source "$HOME/.bashrc"
 fi
-
-# vim:syntax=sh

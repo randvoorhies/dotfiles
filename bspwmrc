@@ -1,0 +1,45 @@
+#! /bin/sh
+
+COMPUTER_ICON=""
+XML_ICON=""
+PROMPT_ICON=""
+FOLDER_ICON=""
+GLOBE_ICON=""
+FLASK_ICON=""
+WINDOWS_ICON=""
+DOTS_ICON=""
+
+bspc config window_gap 40
+bspc config border_width 6
+bspc config split_ratio 0.5
+
+bspc config borderless_monocle true
+bspc config gapless_monocle true
+bspc config focus_by_distance true
+bspc config focus_follows_pointer true
+
+bspc config normal_border_color "#454444"
+bspc config urgent_border_color "#454444"
+bspc config focused_border_color "#676361"
+bspc config presel_border_color "#8d8987"
+
+# bspc config border_width         3
+# bspc config window_gap          20
+# bspc config split_ratio         0.50
+# bspc config borderless_monocle  true
+# bspc config gapless_monocle     false
+# bspc config focus_by_distance   true
+
+# monitor setup
+bspc monitor DP-2 -n "Right" -d $WINDOWS_ICON $DOTS_ICON
+bspc monitor DP-3 -n "Left"  -d $GLOBE_ICON $PROMPT_ICON $XML_ICON
+
+bspc rule -a nautilus floating
+
+xrandr --output DP-3 --auto --primary
+xrandr --output DP-2 --auto --right-of DP-3
+
+gnome-settings-daemon &
+feh --bg-scale ~/Pictures/Wallpapers/OORYUaN.jpg &
+compton -cz --backend glx --vsync opengl-swc -b &
+panel &
