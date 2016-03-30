@@ -1,0 +1,76 @@
+#!/bin/bash
+
+readonly PANEL_FIFO=/tmp/panel-fifo
+readonly PANEL_HEIGHT=48
+readonly PANEL_FONT_FAMILY="UbuntuMono:size=10"
+readonly PANEL_BOLD_FONT_FAMILY="UbuntuMono:bold:size=10"
+readonly ICON_FONT="FontAwesome:size=10"
+readonly ICON_FONT2="fontcustom:size=10"
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+# Make room for the panel and subscribe to window events
+bspc config top_padding $PANEL_HEIGHT
+bspc control --subscribe > "$PANEL_FIFO" &
+
+# Grab the title of the active window and pipe it into the FIFO
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+
+# Pipe the date into the FIFO also
+while true; do 
+  echo -e 'C%{F#FFffffff}\uF017%{F-}' $(date "+%A %b %d %I:%M %p");
+  sleep 5;
+done > "$PANEL_FIFO" &
+
+# weather info
+while true; do
+  TEMP=$(weather kabq --headers=temperature --imperial | tail -1 | awk -F: '{print $2}' | tr -d ' F')
+  CONDITIONS=$(weather  kabq --headers=sky\ conditions | tail -1 | awk -F: '{print $2}' | sed 's/^\s//g')
+
+  echo -en "K%{F#FFffffff}"
+  if [ "$CONDITIONS" != "cloudy" ]; then
+    echo -en "\uF185"
+  else
+    echo -en "\uF0C2"
+  fi
+  echo "%{F-} $TEMP °F $CONDITIONS"
+
+  sleep 3600;
+done > "$PANEL_FIFO" &
+
+# Volume info
+while true; do
+  ALSA_VOLUME=$(amixer get Master | grep 'Right: Playback' | grep -o '...%' | sed 's/\[//' | sed 's/%//' | sed 's/ //')
+  ALSA_STATE=$(amixer get Master | grep 'Right: Playback' | grep -o '\[on]')
+
+  echo -n "V%{F#FFffffff}"
+  if [ "$ALSA_STATE" == "[on]" ]; then
+    if [ $ALSA_VOLUME -ge 70 ]; then
+      echo -en '\uf028'
+    elif [ $ALSA_VOLUME -gt 0 -a $ALSA_VOLUME -lt 70 ]; then
+      echo -en '\uf027'
+    elif [ $ALSA_VOLUME -eq 0 ]; then
+      echo -en '\uf026'
+    else
+      echo -en '\uf026'
+    fi
+  else
+    echo -en '\uf026'
+  fi
+  echo "%{F-} "$ALSA_VOLUME"%"
+  sleep 0.1
+done > $PANEL_FIFO &
+
+source panel_colors
+
+cat "$PANEL_FIFO" | panel_bar | lemonbar -g 3840x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -f "$ICON_FONT" -f "$ICON_FONT2" -f "$PANEL_BOLD_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" -u 2 | bash &
+
+wait
