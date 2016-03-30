@@ -2,41 +2,6 @@
 
 TERM=xterm-256color
 
-RESTORE='\[\e[0m\]'
-
-RED='\[\e[00;31m\]'
-GREEN='\[\e[00;32m\]'
-YELLOW='\[\e[00;33m\]'
-BLUE='\[\e[00;34m\]'
-PURPLE='\[\e[00;35m\]'
-CYAN='\[\e[00;36m\]'
-LIGHTGRAY='\[\e[00;37m\]'
-
-LRED='\[\e[01;31m\]'
-LGREEN='\[\e[01;32m\]'
-LYELLOW='\[\e[01;33m\]'
-LBLUE='\[\e[01;34m\]'
-LPURPLE='\[\e[01;35m\]'
-LCYAN='\[\e[01;36m\]'
-WHITE='\[\e[01;37m\]'
-
-#RESTORE='\[\e[0m\]'
-#RED='\033[00;31m'
-#GREEN='\033[00;32m'
-#YELLOW='\033[00;33m'
-#BLUE='\033[00;34m'
-#PURPLE='\033[00;35m'
-#CYAN='\033[00;36m'
-#LIGHTGRAY='\033[00;37m'
-#
-#LRED='\033[01;31m'
-#LGREEN='\033[01;32m'
-#LYELLOW='\033[01;33m'
-#LBLUE='\033[01;34m'
-#LPURPLE='\033[01;35m'
-#LCYAN='\033[01;36m'
-#WHITE='\033[01;37m'
-
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -143,7 +108,7 @@ On_IWhite='\[\033[0;107m\]'   # White
 if [ "$(whoami)" = root ]; then
 	PS1='\[\033[01;31m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]# '
 else
-	PS1="${BGreen}\h${Color_Off}:${BIBlue}\w${Color_Off}${Yellow}"'$(__git_ps1 "(%s)")'"${Color_Off}$ "
+	PS1="${Green}\u${Color_Off}@${BGreen}\h${Color_Off}:${BIBlue}\w${Color_Off}${Yellow}"'$(__git_ps1 "(%s)")'"${Color_Off}$ "
 fi		
 
 # If this is an xterm set the title to user@host:dir
