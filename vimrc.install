@@ -6,6 +6,10 @@ function! LoadConfigFile(configfile)
   if filereadable(filepath)
     execute 'source '.fnameescape(filepath)
   endif
+  let filepath = $HOME . "/workspace/dotfiles/vimconfig/" . a:configfile
+  if filereadable(filepath)
+    execute 'source '.fnameescape(filepath)
+  endif
 endfunction
 call LoadConfigFile("plugins.vim")
 
@@ -42,6 +46,7 @@ set modeline                  " Look for modelines at the beginning and end of f
 set noswapfile                " Don't create swapfiles
 set lazyredraw                " Redraw only when we need to.
 set mouse=a                   " Always use the mouse
+set background=dark           " We're always in a dark background
 
 " Make sure you have to hit jk within a short window (100ms) to trigger normal mode
 set timeout timeoutlen=1000 ttimeoutlen=100
@@ -60,6 +65,12 @@ set wildignore+=*.pyc
 try 
   "colorscheme badwolf
   colorscheme hybrid
+
+  " The doxygen brief highlighting is annoying. Make it stand out less
+  hi doxygenBrief cterm=bold,italic ctermfg=255 ctermbg=None
+  hi doxygenBody cterm=None ctermfg=253 ctermbg=None
+  hi doxygenParamName cterm=italic ctermfg=230 gui=bold,italic guifg=230
+
   " Redraw the background
   set t_ut=
 catch
