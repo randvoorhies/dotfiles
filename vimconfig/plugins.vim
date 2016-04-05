@@ -37,7 +37,7 @@ if exists("*vundle#rc")
 
 
   "Plugin 'pyflakes.vim'
-  Plugin 'https://github.com/Valloric/YouCompleteMe'
+  " Plugin 'https://github.com/Valloric/YouCompleteMe'
   Plugin 'Syntastic'
   "
   Plugin 'pangloss/vim-javascript'
