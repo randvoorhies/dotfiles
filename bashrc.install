@@ -135,3 +135,7 @@ source $HOME/.aliasrc
 if [ -f "$HOME/.$(hostname)" ]; then
   source "$HOME/.$(hostname)"
 fi
+
+if [ -f "$HOME/.bashfunctions" ]; then
+    source  ~/.bashfunctions
+fi
